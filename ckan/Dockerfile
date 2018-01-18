@@ -11,7 +11,7 @@ ENV GIT_URL=https://github.com/ckan/ckan.git
 ENV GIT_BRANCH=ckan-2.7.2
 ENV CKAN_SITE_URL=http://localhost:5000
 ENV CKAN_STORAGE_PATH=/var/lib/ckan
-ENV CKAN__PLUGINS image_view text_view recline_view datastore datapusher harvest ckan_harvester envvars
+ENV CKAN__PLUGINS image_view text_view recline_view datastore datapusher envvars
 
 WORKDIR ${APP_DIR}
 
@@ -67,8 +67,6 @@ RUN pip install -e git+${GIT_URL}@${GIT_BRANCH}#egg=ckan && \
     pip install -r requirements.txt && \
     # Install CKAN envvars to support loading config from environment variables
     pip install -e git+https://github.com/okfn/ckanext-envvars.git#egg=ckanext-envvars && \
-    pip install -e git+https://github.com/ckan/ckanext-harvest.git@v1.0.0#egg=ckanext-harvest && \
-    pip install -r https://raw.githubusercontent.com/ckan/ckanext-harvest/v1.0.0/pip-requirements.txt && \
     # Create and update CKAN config
     paster --plugin=ckan make-config ckan ${CKAN_INI} && \
     paster --plugin=ckan config-tool ${CKAN_INI} "ckan.plugins = ${CKAN__PLUGINS}" && \
@@ -83,9 +81,7 @@ RUN mkdir -p $CKAN_STORAGE_PATH && \
     chown -R ckan:ckan $CKAN_STORAGE_PATH
 
 COPY setup ${APP_DIR}
-COPY setup/supervisor.harvest.conf /etc/supervisord.d/harvest.conf
 COPY setup/supervisor.worker.conf /etc/supervisord.d/worker.conf
-COPY setup/prerun_harvest.py ${APP_DIR}/prerun_harvest.py
 COPY setup/uwsgi.conf /srv/app/uwsgi.conf
 
 RUN chown ckan -R /srv/app
