@@ -17,8 +17,7 @@ services:
       - "0.0.0.0:${CKAN_PORT}:5000"
     volumes:
       - ckan_storage:/var/lib/ckan
-        #      - ckan_config:/etc/ckan
-        #      - ckan_home:/usr/lib/ckan
+      - ./src:/srv/app/src_extensions
 
   datapusher:
     container_name: datapusher

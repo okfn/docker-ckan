@@ -28,3 +28,16 @@ To build the images:
 To start the containers:
 
 	docker-compose up
+
+## Development mode
+
+To develop local extensions set `DEVELOPMENT_MODE=true`. This means:
+
+* Any extension cloned on the `src` folder will be installed in the CKAN container when booting up Docker Compose (`docker-compose up`). This includes installing any requirements listed in a `requirements.txt` (or `pip-requirements.txt`) file and running `python setup.py develop`
+* CKAN will be started running on the paster development server, with the `--reload` option to watch changes in the extension files.
+* Make sure to add the local plugins to the `CKAN__PLUGINS` env var in the `.env` file.
+
+When running in production mode (`DEVELOPMENT_MODE=false`):
+
+* Only extensions included in the CKAN image (eg in `ckan/Dockerfile`) will be included
+* CKAN will be started running on uWSGI.
