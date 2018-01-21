@@ -21,6 +21,8 @@ It includes the following images, all based on [Alpine Linux](https://alpinelinu
 
 The site is configured via env vars (the CKAN image loads [ckanext-envvars](https://github.com/okfn/ckanext-envvars)), that you can set in the `.env` file.
 
+You can boot it without changing anything and you'll get a working CKAN instance. There is a sysadmin user created by default with the values defined in `CKAN_SYSADMIN_NAME` and `CKAN_SYSADMIN_PASSWORD`(`ckan_admin` and `test` by default). I shouldn't be telling you this but obviously don't run any public CKAN instance with the default settings.
+
 To build the images:
 
 	docker-compose build
