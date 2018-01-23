@@ -26,6 +26,12 @@ do
             echo "Found setup.py file in $i"
             cd $APP_DIR
         fi
+
+        # Point `use` in test.ini to location of `test-core.ini`
+        if [ -f $i/test.ini ];
+        then
+            paster --plugin=ckan config-tool $i/test.ini "use = config:../../src/ckan/test-core.ini"
+        fi
     fi
 done
 
