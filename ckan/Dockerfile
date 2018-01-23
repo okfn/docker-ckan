@@ -28,6 +28,7 @@ RUN apk add --no-cache git \
         postgresql-client \
         python \
         apache2-utils \
+        libffi-dev \
         libxml2 \
         libxslt \
         musl-dev \
