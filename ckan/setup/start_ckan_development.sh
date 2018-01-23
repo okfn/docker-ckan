@@ -19,6 +19,11 @@ do
             pip install -r $i/requirements.txt
             echo "Found requirements file in $i"
         fi
+        if [ -f $i/dev-requirements.txt ];
+        then
+            pip install -r $i/dev-requirements.txt
+            echo "Found dev-requirements file in $i"
+        fi
         if [ -f $i/setup.py ];
         then
             cd $i
