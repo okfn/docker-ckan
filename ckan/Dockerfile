@@ -1,4 +1,4 @@
-FROM keitaro/base:0.4
+FROM alpine:3.7
 
 # Modified from keitaro/ckan
 MAINTAINER Open Knowledge International <info@okfn.org>
@@ -38,6 +38,7 @@ RUN apk add --no-cache git \
         py2-gevent \
         uwsgi-gevent \
         libmagic \
+        curl \
         sudo && \
     # Packages to build CKAN requirements and plugins
     apk add --no-cache --virtual .build-deps \
@@ -71,7 +72,9 @@ COPY setup/supervisord.conf /etc
 RUN pip install -e git+${GIT_URL}@${GIT_BRANCH}#egg=ckan && \
     cd ${SRC_DIR}/ckan && \
     cp who.ini ${APP_DIR} && \
-    pip install -r requirements.txt && \
+    # Workaround to solve https://github.com/psycopg/psycopg2/issues/594 in Alpine 3.7
+	sed -i -e "s/psycopg2==2.4.5/psycopg2==2.7.3.2/g" requirements.txt && \
+    pip install --no-binary :all: -r requirements.txt && \
     # Install CKAN envvars to support loading config from environment variables
     pip install -e git+https://github.com/okfn/ckanext-envvars.git#egg=ckanext-envvars && \
     # Create and update CKAN config
