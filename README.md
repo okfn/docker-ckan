@@ -49,30 +49,30 @@ See [CKAN Images](#ckan-images) for more details of what happens when using deve
 ## CKAN images
 
 ```
-    +-----------+                +----------+
-    |           |                |          |
-    | ckan-base +---------------->   ckan   | (production)
-    |           |                |          |
-    +-----+-----+                +----------+
-          |
-          |
-    +-----v----+                 +----------+
-    |          |                 |          |
-    | ckan-dev +----------------->   ckan   | (development)
-    |          |                 |          |
-    +----------+                 +----------+
+    +-------------------------+                +----------+
+    |                         |                |          |
+    | openknowledge/ckan-base +---------------->   ckan   | (production)
+    |                         |                |          |
+    +-----------+-------------+                +----------+
+                |
+                |
+    +-----------v------------+                 +----------+
+    |                        |                 |          |
+    | openknowledge/ckan-dev +----------------->   ckan   | (development)
+    |                        |                 |          |
+    +------------------------+                 +----------+
     
     
 ```
 
 The Docker images used to build your CKAN project are located in the `ckan/` folder. There are two Docker files:
 
-* `Dockerfile`: this is based on `ckan-base`, an image with CKAN with all its dependencies, properly configured and running on [uWSGI](https://uwsgi-docs.readthedocs.io/en/latest/) (production setup)
-* `Dockerfile.dev`: this is based on `ckan-dev`, wich extends `ckan-base` to include:
+* `Dockerfile`: this is based on `openknowledge/ckan-base` (with the `Dockerfile` on the `ckan-base/` folder), an image with CKAN with all its dependencies, properly configured and running on [uWSGI](https://uwsgi-docs.readthedocs.io/en/latest/) (production setup)
+* `Dockerfile.dev`: this is based on `openknowledge/ckan-dev` (with the `Dockerfile` on the `ckan-dev/` folder), wich extends `openknowledge/ckan-base` to include:
 
- * Any extension cloned on the `src` folder will be installed in the CKAN container when booting up Docker Compose (`docker-compose up`). This includes installing any requirements listed in a `requirements.txt` (or `pip-requirements.txt`) file and running `python setup.py develop`.
- * The CKAN image used will development requirements needed to run the tests .
- * CKAN will be started running on the paster development server, with the `--reload` option to watch changes in the extension files.
- * Make sure to add the local plugins to the `CKAN__PLUGINS` env var in the `.env` file.
+  * Any extension cloned on the `src` folder will be installed in the CKAN container when booting up Docker Compose (`docker-compose up`). This includes installing any requirements listed in a `requirements.txt` (or `pip-requirements.txt`) file and running `python setup.py develop`.
+  * The CKAN image used will development requirements needed to run the tests .
+  * CKAN will be started running on the paster development server, with the `--reload` option to watch changes in the extension files.
+  * Make sure to add the local plugins to the `CKAN__PLUGINS` env var in the `.env` file.
 
 From these two base images you can build your own customized image tailored to your project, installing any extensions and extra requirements needed.
