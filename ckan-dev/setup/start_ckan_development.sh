@@ -29,12 +29,14 @@ do
     fi
 done
 
+
+# Run the prerun script to init CKAN and create the default admin user
+python prerun.py
+
 # Update the plugins setting in the ini file with the values defined in the env var
 echo "Loading the following plugins: $CKAN__PLUGINS"
 paster --plugin=ckan config-tool $CKAN_INI "ckan.plugins = $CKAN__PLUGINS"
 
-# Run the prerun script to init CKAN and create the default admin user
-python prerun.py
 
 # Start the development server with automatic reload
 paster serve --reload $CKAN_INI

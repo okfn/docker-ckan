@@ -1,11 +1,10 @@
 version: "3"
 
 services:
-
-  ckan:
-    container_name: ckan
+  ckan-dev:
     build:
       context: ckan/
+      dockerfile: Dockerfile.dev
     env_file:
       - .env
     links:
@@ -16,6 +15,7 @@ services:
     ports:
       - "0.0.0.0:${CKAN_PORT}:5000"
     volumes:
+      - ./src:/srv/app/src_extensions
       - ckan_storage:/var/lib/ckan
 
   datapusher:
