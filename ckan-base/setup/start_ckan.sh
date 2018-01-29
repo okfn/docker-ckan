@@ -1,5 +1,12 @@
 #!/bin/bash
 
+# Update the plugins setting in the ini file with the values defined in the env var
+echo "Loading the following plugins: $CKAN__PLUGINS"
+paster --plugin=ckan config-tool $CKAN_INI "ckan.plugins = $CKAN__PLUGINS"
+
+# Run the prerun script to init CKAN and create the default admin user
+python prerun.py
+
 # Set the common uwsgi options
 UWSGI_OPTS="--plugins http,python,gevent --socket /tmp/uwsgi.sock --uid 92 --gid 92 --http :5000 --master --enable-threads --paste config:/srv/app/production.ini --lazy-apps --gevent 2000 -p 2 -L"
 
