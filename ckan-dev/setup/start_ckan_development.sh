@@ -35,6 +35,7 @@ do
         # Point `use` in test.ini to location of `test-core.ini`
         if [ -f $i/test.ini ];
         then
+            echo "Updating \`test.ini\` reference to \`test-core.ini\` for plugin $i"
             paster --plugin=ckan config-tool $i/test.ini "use = config:../../src/ckan/test-core.ini"
         fi
     fi
@@ -50,9 +51,12 @@ paster --plugin=ckan config-tool $CKAN_INI "ckan.plugins = $CKAN__PLUGINS"
 
 # Update test-core.ini DB, SOLR & Redis settings
 echo "Loading test settings into test-core.ini"
-paster --plugin=ckan config-tool $SRC_DIR/ckan/test-core.ini "sqlalchemy.url = postgresql://ckan:ckan@db/ckan_test"
-paster --plugin=ckan config-tool $SRC_DIR/ckan/test-core.ini "ckan.datstore.write_url = postgresql://ckan:ckan@db/datastore_test"
-paster --plugin=ckan config-tool $SRC_DIR/ckan/test-core.ini "ckan.datstore.read_url = postgresql://datastore_ro:datastore@db/datastore_test"
+paster --plugin=ckan config-tool \
+    $SRC_DIR/ckan/test-core.ini "sqlalchemy.url = $TEST_CKAN_SQLALCHEMY_URL"
+paster --plugin=ckan config-tool \
+    $SRC_DIR/ckan/test-core.ini "ckan.datstore.write_url = $TEST_CKAN_DATASTORE_WRITE_URL"
+paster --plugin=ckan config-tool \
+    $SRC_DIR/ckan/test-core.ini "ckan.datstore.read_url = $TEST_CKAN_DATASTORE_READ_URL"
 
 paster --plugin=ckan config-tool $SRC_DIR/ckan/test-core.ini "solr_url = http://solr:8983/solr/ckan"
 paster --plugin=ckan config-tool $SRC_DIR/ckan/test-core.ini "ckan.redis_url = redis://redis:6379/1"
