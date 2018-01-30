@@ -19,6 +19,11 @@ do
             pip install -r $i/requirements.txt
             echo "Found requirements file in $i"
         fi
+        if [ -f $i/dev-requirements.txt ];
+        then
+            pip install -r $i/dev-requirements.txt
+            echo "Found dev-requirements file in $i"
+        fi
         if [ -f $i/setup.py ];
         then
             cd $i
@@ -26,17 +31,31 @@ do
             echo "Found setup.py file in $i"
             cd $APP_DIR
         fi
+
+        # Point `use` in test.ini to location of `test-core.ini`
+        if [ -f $i/test.ini ];
+        then
+            echo "Updating \`test.ini\` reference to \`test-core.ini\` for plugin $i"
+            paster --plugin=ckan config-tool $i/test.ini "use = config:../../src/ckan/test-core.ini"
+        fi
     fi
 done
-
-
-# Run the prerun script to init CKAN and create the default admin user
-python prerun.py
 
 # Update the plugins setting in the ini file with the values defined in the env var
 echo "Loading the following plugins: $CKAN__PLUGINS"
 paster --plugin=ckan config-tool $CKAN_INI "ckan.plugins = $CKAN__PLUGINS"
 
+# Update test-core.ini DB, SOLR & Redis settings
+echo "Loading test settings into test-core.ini"
+paster --plugin=ckan config-tool $SRC_DIR/ckan/test-core.ini \
+    "sqlalchemy.url = $TEST_CKAN_SQLALCHEMY_URL" \
+    "ckan.datstore.write_url = $TEST_CKAN_DATASTORE_WRITE_URL" \
+    "ckan.datstore.read_url = $TEST_CKAN_DATASTORE_READ_URL" \
+    "solr_url = $TEST_CKAN_SOLR_URL" \
+    "ckan.redis_url = $TEST_CKAN_REDIS_URL"
+
+# Run the prerun script to init CKAN and create the default admin user
+python prerun.py
 
 # Start the development server with automatic reload
 paster serve --reload $CKAN_INI
