@@ -78,3 +78,38 @@ The Docker images used to build your CKAN project are located in the `ckan/` fol
   * Make sure to add the local plugins to the `CKAN__PLUGINS` env var in the `.env` file.
 
 From these two base images you can build your own customized image tailored to your project, installing any extensions and extra requirements needed.
+
+### Extending the base images
+
+To perform extra initialization steps you can add scripts to your custom images and copy them to the `/docker-entrypoint.d` folder (The folder should be created for you when you build the image). Any `*.sh` and `*.py` file in that folder will be executed just after the main initialization script ([`prerun.py`](https://github.com/okfn/docker-ckan/blob/master/ckan-base/setup/prerun.py)) is executed and just before the web server and supervisor processes are started.
+
+For instance, consider the following custom image:
+
+```
+ckan
+├── docker-entrypoint.d
+│   └── setup_validation.sh
+├── Dockerfile
+└── Dockerfile.dev
+
+```
+
+We want to install an extension like [ckanext-validation](https://github.com/frictionlessdata/ckanext-validation) that needs to create database tables on startup time. We create a `setup_validation.sh` script in a `docker-entrypoint.d` folder with the necessary commands:
+
+```bash
+#!/bin/bash
+
+# Create DB tables if not there
+paster --plugin=ckanext-validation validation init-db -c $CKAN_INI
+```
+
+And then in our `Dockerfile` we install the extension and copy the initialization scripts:
+
+```Dockerfile
+FROM openknowledge/ckan-dev:2.7
+
+RUN pip install -e git+https://github.com/frictionlessdata/ckanext-validation.git#egg=ckanext-validation && \
+    pip install -r https://raw.githubusercontent.com/frictionlessdata/ckanext-validation/master/requirements.txt
+
+COPY docker-entrypoint.d/* /docker-entrypoint.d/
+```

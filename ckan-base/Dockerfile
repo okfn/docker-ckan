@@ -87,6 +87,9 @@ COPY setup ${APP_DIR}
 COPY setup/supervisor.worker.conf /etc/supervisord.d/worker.conf
 COPY setup/uwsgi.conf /srv/app/uwsgi.conf
 
+# Create entrypoint directory for children image scripts
+ONBUILD RUN mkdir /docker-entrypoint.d
+
 RUN chown ckan -R /srv/app
 
 EXPOSE 5000
