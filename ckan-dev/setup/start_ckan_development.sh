@@ -57,6 +57,8 @@ paster --plugin=ckan config-tool $SRC_DIR/ckan/test-core.ini \
 # Run the prerun script to init CKAN and create the default admin user
 python prerun.py
 
+# Start supervisord
+supervisord --configuration /etc/supervisord.conf &
+
 # Start the development server with automatic reload
 paster serve --reload $CKAN_INI
-
