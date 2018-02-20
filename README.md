@@ -48,6 +48,15 @@ To start the containers:
 See [CKAN Images](#ckan-images) for more details of what happens when using development mode.
 
 
+### Running the debugger (pdb / ipdb)
+
+To run a container and be able to add a breakpoint with `pdb` or `ipdb`, run the `ckan-dev` container with the `--service-ports` option:
+
+    docker-compose -f docker-compose.dev.yml run --service-ports ckan-dev
+
+This will start a new container, displaying the standard output in your terminal. If you add a breakpoint in a source file in the `src` folder (`import pdb; pdb.set_trace()`) you will be able to inspect it in this terminal next time the code is executed.
+
+
 ## CKAN images
 
 ```
@@ -63,8 +72,8 @@ See [CKAN Images](#ckan-images) for more details of what happens when using deve
     | openknowledge/ckan-dev +----------------->   ckan   | (development)
     |                        |                 |          |
     +------------------------+                 +----------+
-    
-    
+
+
 ```
 
 The Docker images used to build your CKAN project are located in the `ckan/` folder. There are two Docker files:
