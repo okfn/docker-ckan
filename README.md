@@ -15,7 +15,7 @@ It includes the following images, all based on [Alpine Linux](https://alpinelinu
 
 * CKAN: modified from keitaro/ckan (see [CKAN Images](#ckan-images)) for more details)
 * DataPusher: modified from keitaro/datapusher
-* PostgresSQL: mdillon's PostGIS image
+* PostgreSQL: Official PostgreSQL image
 * Solr: official Solr image with CKAN's schema
 * Redis: standard Redis image
 
