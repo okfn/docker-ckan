@@ -24,6 +24,8 @@ services:
       context: datapusher/
     ports:
       - "8800:8800"
+    extra_hosts:
+    - "ckan:192.168.65.2"
 
   db:
     container_name: db
