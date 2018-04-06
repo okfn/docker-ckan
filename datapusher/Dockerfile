@@ -14,6 +14,7 @@ RUN apk add --no-cache python \
     py-gunicorn \
     libffi-dev \
     libressl-dev \
+    libmagic \
     libxslt && \
     # Temporary packages to build CKAN requirements
     apk add --no-cache --virtual .build-deps \
