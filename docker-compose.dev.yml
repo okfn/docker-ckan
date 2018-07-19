@@ -27,14 +27,10 @@ services:
 
   db:
     container_name: db
+    env_file:
+      - .env
     build:
       context: postgresql/
-      args:
-        - DATASTORE_READONLY_PASSWORD=${DATASTORE_READONLY_PASSWORD}
-        - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-    environment:
-      - DATASTORE_READONLY_PASSWORD=${DATASTORE_READONLY_PASSWORD}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     volumes:
       - pg_data:/var/lib/postgresql/data
 
