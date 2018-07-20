@@ -48,6 +48,13 @@ To start the containers:
 See [CKAN Images](#ckan-images) for more details of what happens when using development mode.
 
 
+### Create an extension
+
+You can use the paster template in much the same way as a source install, only executing the command inside the CKAN container:
+
+    docker-compose -f docker-compose.dev.yml exec ckan-dev /bin/bash -c "paster --plugin=ckan create -t ckanext ckanext-myext"
+
+
 ### Running the debugger (pdb / ipdb)
 
 To run a container and be able to add a breakpoint with `pdb` or `ipdb`, run the `ckan-dev` container with the `--service-ports` option:
