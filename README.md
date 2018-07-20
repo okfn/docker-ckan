@@ -50,11 +50,11 @@ See [CKAN Images](#ckan-images) for more details of what happens when using deve
 
 ### Create an extension
 
-You can use the paster template in much the same way as a source install, only executing the command inside the CKAN container:
+You can use the paster template in much the same way as a source install, only executing the command inside the CKAN container and setting the mounted `src/` folder as output:
 
-    docker-compose -f docker-compose.dev.yml exec ckan-dev /bin/bash -c "paster --plugin=ckan create -t ckanext ckanext-myext"
+    docker-compose -f docker-compose.dev.yml exec ckan-dev /bin/bash -c "paster --plugin=ckan create -t ckanext ckanext-myext -o /srv/app/src_extensions"
 
-The new extension will be created in the `src/` folder.
+The new extension will be created in the `src/` folder. You might need to change the owner of its folder to have the appropiate permissions.
 
 
 ### Running the debugger (pdb / ipdb)
