@@ -54,6 +54,8 @@ You can use the paster template in much the same way as a source install, only e
 
     docker-compose -f docker-compose.dev.yml exec ckan-dev /bin/bash -c "paster --plugin=ckan create -t ckanext ckanext-myext"
 
+The new extension will be created in the `src/` folder.
+
 
 ### Running the debugger (pdb / ipdb)
 
