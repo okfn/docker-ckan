@@ -1,8 +1,5 @@
 # Docker Compose setup for CKAN
 
-**Note**: :warning: This is a work in progress. There is likely to be issues so use with caution :warning:
-
-
 This is a set of Docker images and configuration files to run a CKAN site
 
 It is largely based on two existing projects:
@@ -131,3 +128,8 @@ RUN pip install -e git+https://github.com/frictionlessdata/ckanext-validation.gi
 
 COPY docker-entrypoint.d/* /docker-entrypoint.d/
 ```
+
+
+## Known Issues
+
+* Running the tests: Running the tests for CKAN or an extension inside the container will delete your current database. We need to patch CKAN core in our image to work around that.
