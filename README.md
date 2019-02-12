@@ -1,5 +1,18 @@
 # Docker Compose setup for CKAN
 
+* [Overview](#overview)
+* [Quick start](#quick-start)
+* [Development mode](#development-mode)
+   * [Create an extension](#create-an-extension)
+   * [Running the debugger (pdb / ipdb)](#running-the-debugger-pdb--ipdb)
+* [CKAN images](#ckan-images)
+   * [Extending the base images](#extending-the-base-images)
+   * [Applying patches](#applying-patches)
+* [Known Issues](#known-issues)
+
+
+## Overview
+
 This is a set of Docker images and configuration files to run a CKAN site
 
 It is largely based on two existing projects:
@@ -17,6 +30,8 @@ It includes the following images, all based on [Alpine Linux](https://alpinelinu
 * Redis: standard Redis image
 
 The site is configured via env vars (the base CKAN image loads [ckanext-envvars](https://github.com/okfn/ckanext-envvars)), that you can set in the `.env` file.
+
+## Quick start
 
 Copy the included `.env.example` and rename it to `.env` to modify it depending on your own needs.
 
