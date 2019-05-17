@@ -6,12 +6,21 @@ import urllib2
 import time
 import re
 
-
 ckan_ini = os.environ.get('CKAN_INI', '/srv/app/production.ini')
 
 RETRY = 5
 
+def update_plugins():
 
+    plugins = os.environ.get('CKAN__PLUGINS', '')
+    print('[prerun] Setting the following plugins in {}:'.format(ckan_ini))
+    print(plugins)
+    cmd = ['paster', '--plugin=ckan', 'config-tool',
+           ckan_ini, 'ckan.plugins = {}'.format(plugins)]
+    subprocess.check_output(cmd, stderr=subprocess.STDOUT)
+    print '[prerun] Plugins set.'
+
+    
 def check_main_db_connection(retry=None):
 
     conn_str = os.environ.get('CKAN_SQLALCHEMY_URL')
@@ -47,7 +56,7 @@ def check_db_connection(conn_str, retry=None):
     else:
         connection.close()
 
-
+        
 def check_solr_connection(retry=None):
 
     if retry is None:
@@ -180,8 +189,9 @@ if __name__ == '__main__':
         print '[prerun] Maintenance mode, skipping setup...'
     else:
         check_main_db_connection()
-        check_datastore_db_connection()
-        check_solr_connection()
         init_db()
+        update_plugins()
+        check_datastore_db_connection()
         init_datastore_db()
+        check_solr_connection()
         create_sysadmin()
