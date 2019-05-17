@@ -38,6 +38,8 @@ services:
     container_name: solr
     build:
       context: solr/
+    ports:
+      - "8983:8983"
 
   redis:
     container_name: redis
