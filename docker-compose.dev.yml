@@ -5,6 +5,8 @@ services:
     build:
       context: ckan/
       dockerfile: Dockerfile.dev
+      args:
+        - TZ=${TZ}
     env_file:
       - .env
     links:
@@ -17,6 +19,7 @@ services:
     volumes:
       - ./src:/srv/app/src_extensions
       - ckan_storage:/var/lib/ckan
+    
 
   datapusher:
     container_name: datapusher

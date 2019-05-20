@@ -16,7 +16,8 @@ ENV CKAN__PLUGINS image_view text_view recline_view datastore datapusher envvars
 WORKDIR ${APP_DIR}
 
 # Install necessary packages to run CKAN
-RUN apk add --no-cache git \
+RUN apk add --no-cache tzdata \
+        git \
         gettext \
         postgresql-client \
         python \
