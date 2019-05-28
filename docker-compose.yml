@@ -6,6 +6,9 @@ services:
     container_name: ckan
     build:
       context: ckan/
+      dockerfile: Dockerfile
+      args:
+        - TZ=${TZ}
     env_file:
       - .env
     links:
