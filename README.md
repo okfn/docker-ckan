@@ -23,10 +23,10 @@ It is largely based on two existing projects:
 
 It includes the following images, all based on [Alpine Linux](https://alpinelinux.org/):
 
-* CKAN: modified from keitaro/ckan (see [CKAN Images](#ckan-images)) for more details)
+* CKAN: modified from keitaro/ckan (see [CKAN Images](#ckan-images)) for more details). File uploads are stored in a named volume.
 * DataPusher: modified from keitaro/datapusher
-* PostgreSQL: Official PostgreSQL image
-* Solr: official Solr image with CKAN's schema
+* PostgreSQL: Official PostgreSQL image. Database files are stored in a named volume.
+* Solr: official Solr image with CKAN's schema. Index data is stored in a named volume.
 * Redis: standard Redis image
 
 The site is configured via env vars (the base CKAN image loads [ckanext-envvars](https://github.com/okfn/ckanext-envvars)), that you can set in the `.env` file.
