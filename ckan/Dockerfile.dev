@@ -1,4 +1,4 @@
-FROM openknowledge/ckan-dev:2.8
+FROM openknowledge/ckan-dev:2.7
 
 MAINTAINER Your Name Here <you@example.com>
 
@@ -9,13 +9,26 @@ RUN echo $TZ > /etc/timezone
 
 # Install any extensions needed by your CKAN instance
 # (Make sure to add the plugins to CKAN__PLUGINS in the .env file)
-# For instance:
-#RUN pip install -e git+https://github.com/ckan/ckanext-pages.git#egg=ckanext-pages && \
-#    pip install -e git+https://github.com/ckan/ckanext-dcat.git@v0.0.6#egg=ckanext-dcat && \
-#    pip install -r https://raw.githubusercontent.com/ckan/ckanext-dcat/v0.0.6/requirements.txt
+
+RUN which python && \
+    pip install --upgrade setuptools && \
+    # install numpy outside of requirements.txt as was complaining of python 3.5 requirement
+    pip install numpy==1.16.4 && \
+    pip install -e git+https://github.com/alphagov/ckanext-dcat.git@6253f296c6d1200465a3223710d076cd24e37834#egg=ckanext-dcat && \
+    pip install -r https://raw.githubusercontent.com/alphagov/ckanext-dcat/6253f296c6d1200465a3223710d076cd24e37834/requirements.txt && \
+    pip install -e git+https://github.com/alphagov/ckanext-harvest.git@5671bdf93269c9b80369a0b40a166bce76ea40ee#egg=ckanext-harvest && \
+    pip install -r https://raw.githubusercontent.com/alphagov/ckanext-harvest/5671bdf93269c9b80369a0b40a166bce76ea40ee/pip-requirements.txt && \
+    pip install -e git+https://github.com/alphagov/ckanext-spatial.git@7bdc8c5ff63c91cd7996cd461505bcba9c39a34d#egg=ckanext-spatial && \
+    pip install -r https://raw.githubusercontent.com/alphagov/ckanext-spatial/7bdc8c5ff63c91cd7996cd461505bcba9c39a34d/pip-requirements.txt && \
+    pip install -e git+https://github.com/alphagov/ckanext-s3-resources.git@81eb36fb51da5e216e9405a7ad64c4096881ca85#egg=ckanext-s3-resources && \
+    pip install -r https://raw.githubusercontent.com/alphagov/ckanext-s3-resources/81eb36fb51da5e216e9405a7ad64c4096881ca85/requirements.txt && \
+#    pip install -e git://github.com/alphagov/ckanext-datagovuk.git@release_122#egg=ckanext-datagovuk && \
+    pip install -r https://raw.githubusercontent.com/alphagov/ckanext-datagovuk/release_122/requirements.txt
 
 # Clone the extension(s) your are writing for your own project in the `src` folder
 # to get them mounted in this image at runtime
+
+COPY docker-entrypoint.d/* /docker-entrypoint.d/
 
 # Apply any patches needed to CKAN core or any of the built extensions (not the
 # runtime mounted ones)
