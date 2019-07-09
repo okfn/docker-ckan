@@ -58,7 +58,7 @@ RUN apk add --no-cache tzdata \
     rm -rf ${SRC_DIR}/get-pip.py
 
 RUN echo "@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories && \
-    apk add --update --no-cache geos@testing geos-dev@testing py-geos@testing
+    apk add --update --no-cache geos@testing geos-dev@testing
 
 COPY setup/supervisord.conf /etc
 
