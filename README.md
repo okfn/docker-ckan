@@ -1,5 +1,8 @@
 # Docker Compose setup for CKAN
 
+![CKAN Versions](https://img.shields.io/badge/CKAN%20Versions-2.7.6%20|%202.8.3-success.svg) ![Docker Pulls](https://img.shields.io/docker/pulls/openknowledge/ckan-base.svg)
+
+
 * [Overview](#overview)
 * [Quick start](#quick-start)
 * [Development mode](#development-mode)
@@ -13,7 +16,7 @@
 
 ## Overview
 
-This is a set of Docker images and configuration files to run a CKAN site
+This is a set of Docker images and configuration files to run a CKAN site.
 
 It is largely based on two existing projects:
 
@@ -23,10 +26,10 @@ It is largely based on two existing projects:
 
 It includes the following images, all based on [Alpine Linux](https://alpinelinux.org/):
 
-* CKAN: modified from keitaro/ckan (see [CKAN Images](#ckan-images)) for more details)
+* CKAN: modified from keitaro/ckan (see [CKAN Images](#ckan-images)) for more details). File uploads are stored in a named volume.
 * DataPusher: modified from keitaro/datapusher
-* PostgreSQL: Official PostgreSQL image
-* Solr: official Solr image with CKAN's schema
+* PostgreSQL: Official PostgreSQL image. Database files are stored in a named volume.
+* Solr: official Solr image with CKAN's schema. Index data is stored in a named volume.
 * Redis: standard Redis image
 
 The site is configured via env vars (the base CKAN image loads [ckanext-envvars](https://github.com/okfn/ckanext-envvars)), that you can set in the `.env` file.

@@ -8,7 +8,7 @@ ENV PIP_SRC=${SRC_DIR}
 ENV CKAN_STORAGE_PATH=/var/lib/ckan
 ENV GIT_URL=https://github.com/ckan/ckan.git
 # CKAN version to build
-ENV GIT_BRANCH=ckan-2.8.2
+ENV GIT_BRANCH=ckan-2.8.3
 # Customize these on the .env file if needed
 ENV CKAN_SITE_URL=http://localhost:5000
 ENV CKAN__PLUGINS image_view text_view recline_view datastore datapusher envvars
@@ -16,7 +16,8 @@ ENV CKAN__PLUGINS image_view text_view recline_view datastore datapusher envvars
 WORKDIR ${APP_DIR}
 
 # Install necessary packages to run CKAN
-RUN apk add --no-cache git \
+RUN apk add --no-cache tzdata \
+        git \
         gettext \
         postgresql-client \
         python \
@@ -57,7 +58,7 @@ RUN apk add --no-cache git \
     rm -rf ${SRC_DIR}/get-pip.py
 
 RUN echo "@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories && \
-    apk add --update --no-cache geos@testing geos-dev@testing py-geos@testing
+    apk add --update --no-cache geos@testing geos-dev@testing
 
 COPY setup/supervisord.conf /etc
 
@@ -65,8 +66,6 @@ COPY setup/supervisord.conf /etc
 RUN pip install -e git+${GIT_URL}@${GIT_BRANCH}#egg=ckan && \
     cd ${SRC_DIR}/ckan && \
     cp who.ini ${APP_DIR} && \
-    # Workaround to solve https://github.com/psycopg/psycopg2/issues/594 in Alpine 3.7
-	sed -i -e "s/psycopg2==2.4.5/psycopg2==2.7.3.2/g" requirements.txt && \
     pip install --no-binary :all: -r requirements.txt && \
     # Install CKAN envvars to support loading config from environment variables
     pip install -e git+https://github.com/okfn/ckanext-envvars.git#egg=ckanext-envvars && \
