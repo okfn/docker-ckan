@@ -9,7 +9,7 @@ services:
         - TZ=${TZ}
     env_file:
       - .env
-    links:
+    depends_on:
       - db
       - solr
       - redis
@@ -34,6 +34,8 @@ services:
       - .env
     build:
       context: postgresql/
+      args:
+        - BASE_IMAGE=${DB_BASE_IMAGE}
     volumes:
       - pg_data:/var/lib/postgresql/data
 

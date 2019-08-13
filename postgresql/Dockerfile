@@ -1,4 +1,5 @@
-FROM postgres:9.6-alpine
+ARG BASE_IMAGE
+FROM ${BASE_IMAGE}
 MAINTAINER Open Knowledge International
 
 # Allow connections; we don't map out any ports so only linked docker containers can connect
