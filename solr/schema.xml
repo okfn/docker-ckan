@@ -83,8 +83,17 @@ schema. In this case the version should be set to the next CKAN version number.
             <filter class="solr.LowerCaseFilterFactory"/>
         </analyzer>
     </fieldType>
-</types>
 
+    <!-- Field Type for using ckanext-spatial solr-spatial-field backend -->
+    <fieldType name="location_rpt" class="solr.SpatialRecursivePrefixTreeFieldType"
+               spatialContextFactory="JTS"
+	       format="WKT"
+               autoIndex="true"
+               distErrPct="0.05"
+               maxDistErr="0.0001"
+               distanceUnits="degrees" />
+
+</types>
 
 <fields>
     <field name="index_id" type="string" indexed="true" stored="true" required="true" />
@@ -112,6 +121,9 @@ schema. In this case the version should be set to the next CKAN version number.
     <field name="tags" type="string" indexed="true" stored="true" multiValued="true"/>
     <field name="groups" type="string" indexed="true" stored="true" multiValued="true"/>
     <field name="organization" type="string" indexed="true" stored="true" multiValued="false"/>
+
+    <!-- field for spatial geometry -->
+    <field name="spatial_geom"  type="location_rpt" indexed="true" stored="true" multiValued="true" />
 
     <field name="capacity" type="string" indexed="true" stored="true" multiValued="false"/>
     <field name="permission_labels" type="string" indexed="true" stored="false" multiValued="true"/>
@@ -163,6 +175,8 @@ schema. In this case the version should be set to the next CKAN version number.
 </fields>
 
 <uniqueKey>index_id</uniqueKey>
+
+<!-- Now set in solrconfig.xml -->
 <!-- <defaultSearchField>text</defaultSearchField> -->
 <!-- <solrQueryParser defaultOperator="AND"/> -->
 
