@@ -96,6 +96,15 @@ def init_db():
         else:
             print e.output
             raise e
+    else:
+        storage_path = os.environ['CKAN_STORAGE_PATH']
+        try:
+            subprocess.check_output(['chown', '-R', 'ckan:ckan', storage_path],
+                                    stderr=subprocess.STDOUT)
+            print('[prerun] Changed permissions of {}').format(storage_path)
+        except Exception as e:
+            print(e)
+            raise e
 
 
 def init_datastore_db():
