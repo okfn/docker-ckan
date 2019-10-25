@@ -10,7 +10,7 @@ ENV GIT_URL=https://github.com/ckan/ckan.git
 # CKAN version to build
 ENV GIT_BRANCH=ckan-2.8.3
 # Customize these on the .env file if needed
-ENV CKAN_SITE_URL=http://localhost:5000
+ENV CKAN_SITE_URL=http://localhost:5555
 ENV CKAN__PLUGINS image_view text_view recline_view datastore datapusher envvars
 
 WORKDIR ${APP_DIR}
@@ -33,6 +33,7 @@ RUN apk add --no-cache tzdata \
         uwsgi-gevent \
         libmagic \
         curl \
+        vim \
         sudo && \
     # Packages to build CKAN requirements and plugins
     apk add --no-cache --virtual .build-deps \
@@ -91,8 +92,8 @@ ONBUILD RUN mkdir /docker-entrypoint.d
 
 RUN chown ckan -R /srv/app
 
-EXPOSE 5000
+EXPOSE 5555
 
-HEALTHCHECK --interval=10s --timeout=5s --retries=5 CMD curl --fail http://localhost:5000/api/3/action/status_show || exit 1
+HEALTHCHECK --interval=10s --timeout=5s --retries=5 CMD curl --fail http://localhost:5555/api/3/action/status_show || exit 1
 
 CMD ["/srv/app/start_ckan.sh"]
