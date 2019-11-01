@@ -10,7 +10,7 @@ services:
     env_file:
       - .env
     links:
-      - db
+      - ckan_db
       - solr
       - redis
       # - datapusher
@@ -19,6 +19,8 @@ services:
     volumes:
       - ./src:/srv/app/src_extensions
       - ckan_storage:/var/lib/ckan
+    depends_on: 
+      - ckan_db
     
 
   # datapusher:
@@ -28,8 +30,8 @@ services:
   #   ports:
   #     - "8800:8800"
 
-  db:
-    container_name: db
+  ckan_db:
+    container_name: ckan_db
     env_file:
       - .env
     build:
