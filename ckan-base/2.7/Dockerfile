@@ -1,4 +1,5 @@
-FROM alpine:3.7
+# FROM alpine:3.7
+FROM alpine-geos
 
 # Internals, you probably don't need to change these
 ENV APP_DIR=/srv/app
@@ -43,13 +44,6 @@ RUN apk add --no-cache tzdata \
         g++ \
         autoconf \
         automake \
-    # apk add --no-cache --virtual .build-deps-edge \
-    #     --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing \    
-    #     --repository http://dl-cdn.alpinelinux.org/alpine/edge/main \
-    #     gdal-dev \
-    #     geos-dev \
-    #     proj4-dev \
-    #     protobuf-c-dev \
 	libtool \
         python-dev \
         libxml2-dev \
@@ -65,11 +59,10 @@ RUN apk add --no-cache tzdata \
     #pip wheel --wheel-dir=/wheels uwsgi gevent && \
     rm -rf ${SRC_DIR}/get-pip.py
 
-RUN python --version
-
-RUN echo "@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories && \
-    apk add --update --no-cache geos@testing geos-dev@testing 
-    # py-geos@testing
+# RUN apk add --virtual .build-deps --no-cache --upgrade $PACKAGES \
+#       && echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" > /etc/apk/repositories \
+#       && echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories  \
+#       && apk add geos-dev geos
 
 COPY setup/supervisord.conf /etc
 
@@ -86,10 +79,6 @@ RUN pip install -e git+${GIT_URL}@${GIT_BRANCH}#egg=ckan && \
     paster --plugin=ckan make-config ckan ${CKAN_INI} && \
     paster --plugin=ckan config-tool ${CKAN_INI} "ckan.plugins = ${CKAN__PLUGINS}" && \
     paster --plugin=ckan config-tool ${CKAN_INI} "ckan.site_url = ${CKAN__SITE_URL}"
-    # && \
-    # cd ${APP_DIR}/ckanext-datagovuk && \
-    # paster --plugin=ckan db upgrade ${CKAN_INI}
-
 
 # Create a local user and group to run the app
 RUN addgroup -g 92 -S ckan && \
