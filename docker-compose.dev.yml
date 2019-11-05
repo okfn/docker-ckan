@@ -13,22 +13,17 @@ services:
       - ckan_db
       - solr
       - redis
-      # - datapusher
     ports:
       - "0.0.0.0:${CKAN_PORT}:5000"
     volumes:
       - ./src:/srv/app/src_extensions
       - ckan_storage:/var/lib/ckan
+      - ./logs:/var/log/ckan
     depends_on: 
       - ckan_db
-    
+      - solr
+      - redis
 
-  # datapusher:
-  #   container_name: datapusher
-  #   build:
-  #     context: datapusher/
-  #   ports:
-  #     - "8800:8800"
 
   ckan_db:
     container_name: ckan_db
