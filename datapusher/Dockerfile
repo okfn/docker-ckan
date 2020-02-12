@@ -36,4 +36,4 @@ RUN apk add --no-cache python \
 COPY setup ${APP_DIR}
 
 EXPOSE 8800
-5CMD ["gunicorn", "--bind=0.0.0.0:8800", "--log-file=-", "wsgi"]
+CMD ["gunicorn", "--bind=0.0.0.0:8800", "--log-file=-", "wsgi"]
