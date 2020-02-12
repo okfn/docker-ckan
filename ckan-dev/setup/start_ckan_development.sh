@@ -78,4 +78,4 @@ fi
 supervisord --configuration /etc/supervisord.conf &
 
 # Start the development server with automatic reload
-paster serve --reload $CKAN_INI
+sudo -u ckan -EH paster serve --reload $CKAN_INI
