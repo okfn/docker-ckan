@@ -81,7 +81,7 @@ def check_solr_connection(retry=None):
 
 def init_db():
 
-    db_command = ['paster', '--plugin=ckan', 'db',
+    db_command = ['sudo', '-u', 'ckan', 'paster', '--plugin=ckan', 'db',
                   'init', '-c', ckan_ini]
     print '[prerun] Initializing or upgrading db - start'
     try:
