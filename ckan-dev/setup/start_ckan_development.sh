@@ -53,10 +53,10 @@ paster --plugin=ckan config-tool $CKAN_INI "ckan.plugins = $CKAN__PLUGINS"
 echo "Loading test settings into test-core.ini"
 paster --plugin=ckan config-tool $SRC_DIR/ckan/test-core.ini \
     "sqlalchemy.url = $TEST_CKAN_SQLALCHEMY_URL" \
-    "ckan.datstore.write_url = $TEST_CKAN_DATASTORE_WRITE_URL" \
-    "ckan.datstore.read_url = $TEST_CKAN_DATASTORE_READ_URL" \
+    "ckan.datastore.write_url = $TEST_CKAN_DATASTORE_WRITE_URL" \
+    "ckan.datastore.read_url = $TEST_CKAN_DATASTORE_READ_URL" \
     "solr_url = $TEST_CKAN_SOLR_URL" \
-    "ckan.redis_url = $TEST_CKAN_REDIS_URL"
+    "ckan.redis.url = $TEST_CKAN_REDIS_URL"
 
 # Run the prerun script to init CKAN and create the default admin user
 sudo -u ckan -EH python prerun.py
