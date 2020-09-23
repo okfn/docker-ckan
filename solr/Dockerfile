@@ -1,29 +1,28 @@
-FROM solr:6.2-alpine
-MAINTAINER Open Knowledge
+FROM solr:6.6-slim
 
-# Enviroment
-ENV SOLR_CORE ckan
-ENV CKAN_VERSION dev-v2.7
+MAINTAINER Open Knowledge International <info@okfn.org>
 
-# User
-USER root
+# Environment
+ARG SOLR_CORE=ckan
+ENV SOLR_HOME=/opt/solr/server/solr
 
-# Create Directories
-RUN mkdir -p /opt/solr/server/solr/$SOLR_CORE/conf
-RUN mkdir -p /opt/solr/server/solr/$SOLR_CORE/data
+# Install JTS Topology Suite
+ADD --chown=solr:solr https://repo1.maven.org/maven2/com/vividsolutions/jts-core/1.14.0/jts-core-1.14.0.jar \
+    /opt/solr/server/solr-webapp/webapp/WEB-INF/lib
 
-# Adding Files
+WORKDIR $SOLR_HOME
+# Create core and deafult config
+RUN precreate-core $SOLR_CORE $SOLR_HOME/configsets/basic_configs && \
+    rm $SOLR_CORE/conf/managed-schema && \
+    mkdir $SOLR_CORE/data
+
+# Add CKAN custom config
 ADD solrconfig.xml \
-https://raw.githubusercontent.com/ckan/ckan/$CKAN_VERSION/ckan/config/solr/schema.xml \
-https://raw.githubusercontent.com/apache/lucene-solr/releases/lucene-solr/6.0.0/solr/server/solr/configsets/basic_configs/conf/currency.xml \
-https://raw.githubusercontent.com/apache/lucene-solr/releases/lucene-solr/6.0.0/solr/server/solr/configsets/basic_configs/conf/synonyms.txt \
-https://raw.githubusercontent.com/apache/lucene-solr/releases/lucene-solr/6.0.0/solr/server/solr/configsets/basic_configs/conf/stopwords.txt \
-https://raw.githubusercontent.com/apache/lucene-solr/releases/lucene-solr/6.0.0/solr/server/solr/configsets/basic_configs/conf/protwords.txt \
-https://raw.githubusercontent.com/apache/lucene-solr/releases/lucene-solr/6.0.0/solr/server/solr/configsets/data_driven_schema_configs/conf/elevate.xml \
-/opt/solr/server/solr/$SOLR_CORE/conf/
+    schema.xml \
+    $SOLR_CORE/conf/
+    
+# Give ownership to Solr
+USER root
+RUN chown -R $SOLR_USER:$SOLR_USER $SOLR_CORE
 
-# Create Core.properties
-RUN echo name=$SOLR_CORE > /opt/solr/server/solr/$SOLR_CORE/core.properties
-
-# Giving ownership to Solr
-RUN chown -R $SOLR_USER:$SOLR_USER /opt/solr/server/solr/$SOLR_CORE
+USER $SOLR_USER:$SOLR_USER

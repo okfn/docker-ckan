@@ -3,7 +3,7 @@
 <!--solrconfig.xml documentation [https://wiki.apache.org/solr/SolrConfigXml]-->
 <config>
  
-	<luceneMatchVersion>6.0.0</luceneMatchVersion>
+	<luceneMatchVersion>6.6.6</luceneMatchVersion>
 	
 	<lib dir="${solr.install.dir:../../../..}/contrib/extraction/lib" regex=".*\.jar" />
 	<lib dir="${solr.install.dir:../../../..}/dist/" regex="solr-cell-\d.*\.jar" />
@@ -80,6 +80,8 @@
 		<lst name="defaults">
 			<str name="echoParams">explicit</str>
 			<int name="rows">10</int>
+			<str name="df">text</str>
+			<str name="q.op">AND</str>
 		</lst>
 		
 	</requestHandler>
@@ -90,6 +92,8 @@
 			<str name="echoParams">explicit</str>
 			<str name="wt">json</str>
 			<str name="indent">true</str>
+			<str name="df">text</str>
+			<str name="q.op">AND</str>
 		</lst>
 		
 	</requestHandler>
@@ -110,6 +114,7 @@
 		
 	</initParams>
 	
+  <!-- This enabled schemaless mode 
 	<initParams path="/update/**">
 	 
 		<lst name="defaults">
@@ -117,6 +122,7 @@
 		</lst>
 		
 	</initParams>
+  -->
 	
 	<requestHandler name="/update/extract" startup="lazy" class="solr.extraction.ExtractingRequestHandler">
 	 
