@@ -11,7 +11,7 @@ services:
         - TZ=${TZ}
     env_file:
       - .env
-    links:
+    depends_on:
       - db
       - solr
       - redis
@@ -33,6 +33,7 @@ services:
     build:
       context: postgresql/
       args:
+        - BASE_IMAGE=${DB_BASE_IMAGE}
         - DATASTORE_READONLY_PASSWORD=${DATASTORE_READONLY_PASSWORD}
         - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     environment:
