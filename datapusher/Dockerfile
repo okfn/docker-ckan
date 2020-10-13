@@ -39,6 +39,7 @@ RUN mkdir ${APP_DIR}/src && cd ${APP_DIR}/src && \
 RUN apk del .build-deps && \
     cp ${APP_DIR}/src/datapusher/deployment/*.* ${APP_DIR} && \
     # Remove default values in ini file
+    sed -i '/http/d' ${APP_DIR}/datapusher-uwsgi.ini && \
     sed -i '/wsgi-file/d' ${APP_DIR}/datapusher-uwsgi.ini && \
     sed -i '/virtualenv/d' ${APP_DIR}/datapusher-uwsgi.ini && \
     rm -rf ${APP_DIR}/src
@@ -48,5 +49,6 @@ RUN addgroup -g 92 -S www-data && \
     adduser -u 92 -h /srv/app -H -D -S -G www-data www-data
 
 EXPOSE 8800
+
 CMD ["sh", "-c", \
-    "uwsgi --plugins=python --socket=/tmp/uwsgi.sock --ini=`echo ${APP_DIR}`/datapusher-uwsgi.ini --wsgi-file=`echo ${APP_DIR}`/datapusher.wsgi"]
+    "uwsgi --plugins=http,python --http=0.0.0.0:8800 --socket=/tmp/uwsgi.sock --ini=`echo ${APP_DIR}`/datapusher-uwsgi.ini --wsgi-file=`echo ${APP_DIR}`/datapusher.wsgi"]
