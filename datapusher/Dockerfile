@@ -27,7 +27,8 @@ RUN apk add --no-cache \
     musl-dev \
     python3-dev \
     libxml2-dev \
-    libxslt-dev
+    libxslt-dev \
+    libmagic
 
 RUN mkdir ${APP_DIR}/src && cd ${APP_DIR}/src && \
     git clone -b ${GIT_BRANCH} --depth=1 --single-branch ${GIT_URL} && \
