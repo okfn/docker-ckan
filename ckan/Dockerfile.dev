@@ -1,4 +1,4 @@
-FROM openknowledge/ckan-dev:2.8
+FROM openknowledge/ckan-dev:2.9
 
 MAINTAINER Your Name Here <you@example.com>
 

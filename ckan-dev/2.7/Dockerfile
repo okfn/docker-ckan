@@ -14,7 +14,7 @@ RUN pip install --no-binary :all: -r https://raw.githubusercontent.com/ckan/ckan
 # Create folder for local extensions sources
 RUN mkdir $SRC_EXTENSIONS_DIR
 
-COPY setup/start_ckan_development.sh ${APP_DIR}
+COPY 2.7/setup/start_ckan_development.sh ${APP_DIR}
 
 
 CMD ["/srv/app/start_ckan_development.sh"]
