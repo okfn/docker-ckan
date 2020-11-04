@@ -57,7 +57,7 @@ RUN apk add --no-cache tzdata \
     #pip wheel --wheel-dir=/wheels uwsgi gevent && \
     rm -rf ${SRC_DIR}/get-pip.py
 
-COPY setup/supervisord.conf /etc
+COPY common/supervisord.conf /etc
 
 # Install CKAN
 RUN pip install -e git+${GIT_URL}@${GIT_BRANCH}#egg=ckan && \
@@ -81,9 +81,9 @@ RUN addgroup -g 92 -S ckan && \
 RUN mkdir -p $CKAN_STORAGE_PATH && \
     chown -R ckan:ckan $CKAN_STORAGE_PATH
 
-COPY setup ${APP_DIR}
-COPY setup/supervisor.worker.conf /etc/supervisord.d/worker.conf
-COPY setup/uwsgi.conf /srv/app/uwsgi.conf
+COPY 2.7/setup/prerun.py ${APP_DIR}
+COPY 2.7/setup/supervisor.worker.conf /etc/supervisord.d/worker.conf
+COPY 2.7/setup/start_ckan.sh ${APP_DIR}
 
 # Create entrypoint directory for children image scripts
 ONBUILD RUN mkdir /docker-entrypoint.d
