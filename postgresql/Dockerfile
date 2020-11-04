@@ -1,4 +1,4 @@
-FROM postgres:9.6-alpine
+FROM postgres:12-alpine
 MAINTAINER Open Knowledge International
 
 # Allow connections; we don't map out any ports so only linked docker containers can connect
