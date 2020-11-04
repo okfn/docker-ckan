@@ -1,6 +1,6 @@
 # Docker Compose setup for CKAN
 
-![CKAN Versions](https://img.shields.io/badge/CKAN%20Versions-2.7.9%20|%202.8.6-success.svg) ![Docker Pulls](https://img.shields.io/docker/pulls/openknowledge/ckan-base.svg)
+![CKAN Versions](https://img.shields.io/badge/CKAN%20Versions-2.7.9%20|%202.8.6%202.9.1%20-success.svg) ![Docker Pulls](https://img.shields.io/docker/pulls/openknowledge/ckan-base.svg)
 
 
 * [Overview](#overview)
@@ -139,7 +139,7 @@ paster --plugin=ckanext-validation validation init-db -c $CKAN_INI
 And then in our `Dockerfile` we install the extension and copy the initialization scripts:
 
 ```Dockerfile
-FROM openknowledge/ckan-dev:2.7
+FROM openknowledge/ckan-dev:2.9
 
 RUN pip install -e git+https://github.com/frictionlessdata/ckanext-validation.git#egg=ckanext-validation && \
     pip install -r https://raw.githubusercontent.com/frictionlessdata/ckanext-validation/master/requirements.txt
