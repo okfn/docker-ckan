@@ -91,6 +91,6 @@ RUN chown ckan -R /srv/app
 
 EXPOSE 5000
 
-HEALTHCHECK --interval=10s --timeout=5s --retries=5 CMD curl --fail http://localhost:5000/api/3/action/status_show || exit 1
+HEALTHCHECK --interval=60s --timeout=5s --retries=5 CMD curl --fail http://localhost:5000/api/3/action/status_show || exit 1
 
 CMD ["/srv/app/start_ckan.sh"]
