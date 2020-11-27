@@ -34,6 +34,7 @@ def check_datastore_db_connection(retry=None):
     conn_str = os.environ.get('CKAN_DATASTORE_WRITE_URL')
     if not conn_str:
         print '[prerun] CKAN_DATASTORE_WRITE_URL not defined, not checking db'
+        return
     return check_db_connection(conn_str, retry)
 
 
