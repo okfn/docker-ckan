@@ -1,4 +1,4 @@
-FROM alpine:3.7
+FROM alpine:3.12
 
 # Internals, you probably don't need to change these
 ENV APP_DIR=/srv/app
@@ -20,17 +20,11 @@ RUN apk add --no-cache tzdata \
         git \
         gettext \
         postgresql-client \
-        python \
+        python2 \
         apache2-utils \
         libxml2 \
         libxslt \
         musl-dev \
-        uwsgi \
-        uwsgi-http \
-        uwsgi-corerouter \
-        uwsgi-python \
-        py2-gevent \
-        uwsgi-gevent \
         libmagic \
         curl \
         sudo && \
@@ -43,7 +37,7 @@ RUN apk add --no-cache tzdata \
         autoconf \
         automake \
 	libtool \
-        python-dev \
+        python2-dev \
         libxml2-dev \
         libxslt-dev \
         linux-headers && \
@@ -52,7 +46,7 @@ RUN apk add --no-cache tzdata \
     # Install pip, supervisord and uwsgi
     curl -o ${SRC_DIR}/get-pip.py https://bootstrap.pypa.io/get-pip.py && \
     python ${SRC_DIR}/get-pip.py && \
-    pip install supervisor && \
+    pip install supervisor uwsgi && \
     mkdir /etc/supervisord.d && \
     #pip wheel --wheel-dir=/wheels uwsgi gevent && \
     rm -rf ${SRC_DIR}/get-pip.py
