@@ -12,6 +12,7 @@
    * [Extending the base images](#extending-the-base-images)
    * [Applying patches](#applying-patches)
 * [Known Issues](#known-issues)
+* [License](#license)
 
 
 ## Overview
@@ -174,3 +175,10 @@ ckan
 ## Known Issues
 
 * Running the tests: Running the tests for CKAN or an extension inside the container will delete your current database. We need to patch CKAN core in our image to work around that.
+
+
+# License
+
+This material is open and licensed under the GNU Affero General Public License (AGPL) v3.0 whose full text may be found at:
+
+http://www.fsf.org/licensing/licenses/agpl-3.0.html
