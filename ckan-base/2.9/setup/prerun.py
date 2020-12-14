@@ -2,11 +2,17 @@ import os
 import sys
 import subprocess
 import psycopg2
-import urllib.request, urllib.error, urllib.parse
+try:
+    from urllib.request import urlopen
+    from urllib.error import URLError
+except ImportError:
+    from urllib2 import urlopen
+    from urllib2 import URLError
+
 import time
 import re
 
-ckan_ini = os.environ.get("CKAN_INI", "/srv/app/production.ini")
+ckan_ini = os.environ.get("CKAN_INI", "/srv/app/ckan.ini")
 
 RETRY = 5
 
@@ -69,8 +75,8 @@ def check_solr_connection(retry=None):
     search_url = "{url}/select/?q=*&wt=json".format(url=url)
 
     try:
-        connection = urllib.request.urlopen(search_url)
-    except urllib.error.URLError as e:
+        connection = urlopen(search_url)
+    except URLError as e:
         print(str(e))
         print("[prerun] Unable to connect to solr, waiting...")
         time.sleep(10)
@@ -153,7 +159,7 @@ def create_sysadmin():
     if name and password and email:
 
         # Check if user exists
-        command = ["ckan", "-c", ckan_ini, "user", name]
+        command = ["ckan", "-c", ckan_ini, "user", "show", name]
 
         out = subprocess.check_output(command)
         if "User:None" not in re.sub(r"\s", "", out):
