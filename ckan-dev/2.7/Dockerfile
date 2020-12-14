@@ -1,4 +1,4 @@
-FROM openknowledge/ckan-base:2.7-alpine-3.7
+FROM openknowledge/ckan-base:2.7
 
 MAINTAINER Open Knowledge Foundation <info@okfn.org>
 
