@@ -162,7 +162,7 @@ def create_sysadmin():
         command = ["ckan", "-c", ckan_ini, "user", "show", name]
 
         out = subprocess.check_output(command)
-        if b"User:None" not in re.sub(r"\s", b"", out):
+        if b"User:None" not in re.sub(b"\s", b"", out):
             print("[prerun] Sysadmin user exists, skipping creation")
             return
 
