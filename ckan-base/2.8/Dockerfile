@@ -46,7 +46,7 @@ RUN apk add --no-cache tzdata \
     mkdir -p ${SRC_DIR} && \
     # Install pip, supervisord and uwsgi
     curl -o ${SRC_DIR}/get-pip.py https://bootstrap.pypa.io/2.7/get-pip.py && \
-    python ${SRC_DIR}/get-pip.py && \
+    python ${SRC_DIR}/get-pip.py 'pip==20.3.3' && \
     pip install supervisor uwsgi && \
     mkdir /etc/supervisord.d && \
     #pip wheel --wheel-dir=/wheels uwsgi gevent && \
