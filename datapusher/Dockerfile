@@ -1,4 +1,4 @@
-FROM alpine:3.12
+FROM alpine:3.13
 
 MAINTAINER Open Knowledge Foundation
 
@@ -21,14 +21,16 @@ RUN apk add --no-cache \
     uwsgi-corerouter \
     uwsgi-python \
     # Temporary packages to build DataPusher requirements
-     && apk add --no-cache --virtual .build-deps \
+    && apk add --no-cache --virtual .build-deps \
     gcc \
     git \
     musl-dev \
     python3-dev \
     libxml2-dev \
     libxslt-dev \
-    libmagic
+    libmagic \
+    openssl-dev \
+    cargo
 
 RUN mkdir ${APP_DIR}/src && cd ${APP_DIR}/src && \
     git clone -b ${GIT_BRANCH} --depth=1 --single-branch ${GIT_URL} && \
