@@ -1,4 +1,4 @@
-FROM alpine:3.12
+FROM alpine:3.13
 
 # Internals, you probably don't need to change these
 ENV APP_DIR=/srv/app
@@ -46,7 +46,10 @@ RUN apk add --no-cache tzdata \
         python3-dev \
         libxml2-dev \
         libxslt-dev \
-        linux-headers && \
+        linux-headers \
+        openssl-dev \
+        libffi-dev \
+        cargo && \
     # Create SRC_DIR
     mkdir -p ${SRC_DIR} && \
     # Install pip, supervisord and uwsgi
