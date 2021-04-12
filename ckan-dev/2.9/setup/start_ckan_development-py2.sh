@@ -8,15 +8,18 @@ for i in $SRC_EXTENSIONS_DIR/*
 do
     if [ -d $i ];
     then
-
+        if [ -f $i/requirements-py2.txt ];
+        then
+            pip2 install -r $i/requirements-py2.txt
+            echo "Found requirements file in $i"
+        elif [ -f $i/requirements.txt ];
+        then
+            pip2 install -r $i/requirements.txt
+            echo "Found requirements file in $i"
+        fi
         if [ -f $i/pip-requirements.txt ];
         then
             pip2 install -r $i/pip-requirements.txt
-            echo "Found requirements file in $i"
-        fi
-        if [ -f $i/requirements.txt ];
-        then
-            pip2 install -r $i/requirements.txt
             echo "Found requirements file in $i"
         fi
         if [ -f $i/dev-requirements.txt ];
