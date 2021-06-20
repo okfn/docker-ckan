@@ -1,5 +1,20 @@
 #!/bin/bash
 
+# Run any startup scripts provided by images extending this one
+function entrypoint {
+    if [[ -d "$1/docker-entrypoint.d" ]]
+    then
+        for f in $1/docker-entrypoint.d/*; do
+            case "$f" in
+                *.sh)     echo "$0: Running init file $f"; . "$f" ;;
+                *.py)     echo "$0: Running init file $f"; python "$f"; echo ;;
+                *)        echo "$0: Ignoring $f (not an sh or py file)" ;;
+            esac
+            echo
+        done
+    fi
+}
+
 # Install any local extensions in the src_extensions volume
 echo "Looking for local extensions to install..."
 echo "Extension dir contents:"
@@ -29,6 +44,13 @@ do
             cd $i
             python $i/setup.py develop
             echo "Found setup.py file in $i"
+            cd $APP_DIR
+        fi
+
+        if [ -d $i/docker-entrypoint.d ];
+        then
+            entrypoint $i
+            echo "Found entrypoint folder $i"
             cd $APP_DIR
         fi
 
@@ -62,17 +84,7 @@ paster --plugin=ckan config-tool $SRC_DIR/ckan/test-core.ini \
 sudo -u ckan -EH python prerun.py
 
 # Run any startup scripts provided by images extending this one
-if [[ -d "/docker-entrypoint.d" ]]
-then
-    for f in /docker-entrypoint.d/*; do
-        case "$f" in
-            *.sh)     echo "$0: Running init file $f"; . "$f" ;;
-            *.py)     echo "$0: Running init file $f"; python "$f"; echo ;;
-            *)        echo "$0: Ignoring $f (not an sh or py file)" ;;
-        esac
-        echo
-    done
-fi
+entrypoint /
 
 # Start supervisord
 supervisord --configuration /etc/supervisord.conf &
