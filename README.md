@@ -1,6 +1,7 @@
 # Docker Compose setup for CKAN
 
-![CKAN Versions](https://img.shields.io/badge/CKAN%20Versions-2.7.11%20|%202.8.8%20|%202.9.3%20-success.svg) ![Docker Pulls](https://img.shields.io/docker/pulls/openknowledge/ckan-base.svg)
+[![CKAN Versions](https://img.shields.io/badge/CKAN%20Versions-2.7.11%20|%202.8.8%20|%202.9.3%20-success.svg)](https://docs.ckan.org/en/latest/changelog.html)
+[![Docker Pulls](https://img.shields.io/docker/pulls/openknowledge/ckan-base.svg)](https://hub.docker.com/r/openknowledge/ckan-base)
 
 
 * [Overview](#overview)
