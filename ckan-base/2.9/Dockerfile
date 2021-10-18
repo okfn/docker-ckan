@@ -13,7 +13,7 @@ ENV GIT_BRANCH=ckan-2.9.4
 ENV CKAN_SITE_URL=http://localhost:5000
 ENV CKAN__PLUGINS image_view text_view recline_view datastore datapusher envvars
 
-# UWSGI OPTION
+# UWSGI options
 ENV UWSGI_HARAKIRI=50
 
 WORKDIR ${APP_DIR}
