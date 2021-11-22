@@ -1,6 +1,6 @@
 FROM openknowledge/ckan-base:2.9
 
-MAINTAINER Your Name Here <you@example.com>
+MAINTAINER Laurence Watson <laurence@subak.org>
 
 # Set timezone
 ARG TZ
@@ -10,9 +10,11 @@ RUN cp /usr/share/zoneinfo/$TZ /etc/localtime
 # Install any extensions needed by your CKAN instance
 # (Make sure to add the plugins to CKAN__PLUGINS in the .env file)
 # For instance:
-#RUN pip install -e git+https://github.com/ckan/ckanext-pages.git#egg=ckanext-pages && \
-#    pip install -e git+https://github.com/ckan/ckanext-dcat.git@v0.0.6#egg=ckanext-dcat && \
-#    pip install -r https://raw.githubusercontent.com/ckan/ckanext-dcat/v0.0.6/requirements.txt
+RUN pip install -e git+https://github.com/ckan/ckanext-pages.git#egg=ckanext-pages && \
+    pip install -e git+https://github.com/ckan/ckanext-dcat.git@v1.1.3#egg=ckanext-dcat && \
+    pip install -r https://raw.githubusercontent.com/ckan/ckanext-dcat/v1.1.3/requirements.txt && \
+    pip install -e git+https://github.com/ckan/ckanext-harvest.git#egg=ckanext-harvest && \
+    pip install -r https://raw.githubusercontent.com/ckan/ckanext-harvest/master/pip-requirements.txt
 
 # Install the extension(s) you wrote for your own project
 # RUN pip install -e git+https://github.com/your-org/ckanext-your-extension.git@v1.0.0#egg=ckanext-your-extension
