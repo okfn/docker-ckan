@@ -34,7 +34,7 @@ Basic tasks have been done in the `prerun.py` file and other commands can be add
 
 ## Basic customisation
 Make basic changes with the UI at "http://<my-ckan-url>/ckan-admin/config/"  
-Site Title: Subak Data Catalog  
+Site Title: Subak Data Catalogue  
 Style: Default  
 Site Tag Line: Share the data, save the planet  
 Site logo: https://images.squarespace-cdn.com/content/v1/5fbe3c75a5bc066edf9513f2/1606745984909-KHIUHFOBXP5NTTNVMG5B/SUBAK_LOGO.png  
