@@ -1,11 +1,11 @@
-FROM openknowledge/ckan-base:2.9
+FROM openknowledge/ckan-base:2.9-py2
 
-MAINTAINER Laurence Watson <laurence@subak.org>
+LABEL maintainer="Laurence Watson <laurence@subak.org>"
 
 # Set timezone
 ARG TZ
-RUN echo $TZ > /etc/timezone
 RUN cp /usr/share/zoneinfo/$TZ /etc/localtime
+RUN echo $TZ > /etc/timezone
 
 # Install any extensions needed by your CKAN instance
 # (Make sure to add the plugins to CKAN__PLUGINS in the .env file)
@@ -15,7 +15,11 @@ RUN pip install -e git+https://github.com/ckan/ckanext-pages.git#egg=ckanext-pag
     pip install -r https://raw.githubusercontent.com/ckan/ckanext-dcat/v1.1.3/requirements.txt && \
     pip install -e git+https://github.com/ckan/ckanext-harvest.git#egg=ckanext-harvest && \
     pip install -r https://raw.githubusercontent.com/ckan/ckanext-harvest/master/pip-requirements.txt && \
-    pip install -e git+https://github.com/ckan/ckanext-scheming.git#egg=ckanext-scheming
+    pip install -e git+https://github.com/ckan/ckanext-scheming.git#egg=ckanext-scheming && \
+    pip install -e git+https://github.com/climatesubak/ckanext-subakdc.git#egg=ckanext-subakdc && \
+    pip install -r https://raw.githubusercontent.com/climatesubak/ckanext-subakdc/main/requirements.txt && \
+    pip install -e git+https://github.com/alexkreidler/ckanext-datapackager.git#egg=ckanext-datapackager && \
+    pip install -r https://raw.githubusercontent.com/alexkreidler/ckanext-datapackager/main/requirements.txt
 
 # Install the extension(s) you wrote for your own project
 # RUN pip install -e git+https://github.com/your-org/ckanext-your-extension.git@v1.0.0#egg=ckanext-your-extension
