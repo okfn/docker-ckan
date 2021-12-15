@@ -16,6 +16,18 @@ Deploy to prod: XXX
 For staging and production:  
 environment variables will be set in EKS.
 
+## Deploying to ECS
+Following [this tutorial](https://aws.amazon.com/blogs/containers/deploy-applications-on-amazon-ecs-using-docker-compose/).  
+
+Images can be hosted in our private container registry on AWS: `848094190915.dkr.ecr.us-east-1.amazonaws.com/subak-datacatalogue`. 
+Log in with docker to our registry:   
+`aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 848094190915.dkr.ecr.us-east-1.amazonaws.com`
+
+Tag and push our images to the registry - ckan, db, datapusher, solr (redis is standard image) using script `ecs_push_images.sh`
+Only new image layers will be pushed.  
+
+Now we can use the `docker-compose.ecs.yml` file to deploy to the `subakecscontext` Docker context, which points to the image repository.
+
 ## Adding plugins
 Update the CKAN Dockerfile with the plugins desired and add to the CKAN_PLUGINS section in the `.env` file. Extra config like db updates may need to be done in a docker entryfile or similar.
 
@@ -29,7 +41,7 @@ Basic tasks have been done in the `prerun.py` file and other commands can be add
 
 ### Executing CKAN commands
 `docker-compose -f docker-compose.yml exec ckan /bin/bash -c "ckan <YOUR COMMAND>"`  
-
+`docker-compose -f docker-compose.yml exec ckan /bin/bash -c "ckan sysadmin add ckan_admin"`
 
 
 ## Basic customisation
