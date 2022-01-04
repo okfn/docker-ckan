@@ -50,7 +50,7 @@ Site Title: Subak Data Catalogue
 Style: Default  
 Site Tag Line: Share the data, save the planet  
 Site logo: https://images.squarespace-cdn.com/content/v1/5fbe3c75a5bc066edf9513f2/1606745984909-KHIUHFOBXP5NTTNVMG5B/SUBAK_LOGO.png  
- About:  
+ About: ABOUT.md 
  Intro Text:  
  Custom CSS:  
  Homepage: Search, introductory area and stats  
