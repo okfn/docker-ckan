@@ -61,4 +61,3 @@ Some customisation of the CKAN web UI is not controlled within the theme, but in
 **Intro Text**: \
 **Custom CSS**: \
 **Homepage**: Search, introductory area and stats  
- 
