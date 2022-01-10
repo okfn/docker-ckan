@@ -19,7 +19,9 @@ RUN pip install -e git+https://github.com/ckan/ckanext-pages.git#egg=ckanext-pag
     pip install -e git+https://github.com/climatesubak/ckanext-subakdc.git#egg=ckanext-subakdc && \
     pip install -r https://raw.githubusercontent.com/climatesubak/ckanext-subakdc/main/requirements.txt && \
     pip install -e git+https://github.com/alexkreidler/ckanext-datapackager.git#egg=ckanext-datapackager && \
-    pip install -r https://raw.githubusercontent.com/alexkreidler/ckanext-datapackager/main/requirements.txt
+    pip install -r https://raw.githubusercontent.com/alexkreidler/ckanext-datapackager/main/requirements.txt && \
+    pip install -e git+https://github.com/ckan/ckanext-googleanalytics.git#egg=ckanext-googleanalytics && \
+    pip install -r https://raw.githubusercontent.com/ckan/ckanext-googleanalytics/master/requirements.txt
 
 # Install the extension(s) you wrote for your own project
 # RUN pip install -e git+https://github.com/your-org/ckanext-your-extension.git@v1.0.0#egg=ckanext-your-extension
