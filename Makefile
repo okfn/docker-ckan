@@ -30,3 +30,6 @@ down:
 
 logs:
 	docker-compose -f $(COMPOSE_FILE_PATH) logs -f
+
+ps: 
+	docker-compose -f $(COMPOSE_FILE_PATH) ps
