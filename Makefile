@@ -12,7 +12,7 @@ build.all:
 	docker-compose -f $(COMPOSE_FILE_PATH) build --no-cache
 
 build.ckan:
-	docker-compose -f $(COMPOSE_FILE_PATH) build ckan --no-cache
+	docker-compose -f $(COMPOSE_FILE_PATH) build --no-cache ckan
 
 rebuild.ckan:
 	docker-compose -f $(COMPOSE_FILE_PATH) up -d --no-deps --build ckan
@@ -30,3 +30,7 @@ down:
 
 logs:
 	docker-compose -f $(COMPOSE_FILE_PATH) logs -f
+
+# WIP currently having issues running this locally
+test.plugins:
+	docker-compose -f $(COMPOSE_FILE_PATH) exec -it -w "/srv/app/src_extensions/ckanext-subakdc-plugins" ckan /bin/bash -c "pip install pytest-ckan requests_mock && pytest --ckan-ini=test.ini"
