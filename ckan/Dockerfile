@@ -16,15 +16,18 @@ RUN pip install -e git+https://github.com/ckan/ckanext-pages.git#egg=ckanext-pag
     pip install -e git+https://github.com/ckan/ckanext-harvest.git#egg=ckanext-harvest && \
     pip install -r https://raw.githubusercontent.com/ckan/ckanext-harvest/master/pip-requirements.txt && \
     pip install -e git+https://github.com/ckan/ckanext-scheming.git#egg=ckanext-scheming && \
-    pip install -e git+https://github.com/climatesubak/ckanext-subakdc.git#egg=ckanext-subakdc && \
-    pip install -r https://raw.githubusercontent.com/climatesubak/ckanext-subakdc/main/requirements.txt && \
     pip install -e git+https://github.com/alexkreidler/ckanext-datapackager.git#egg=ckanext-datapackager && \
     pip install -r https://raw.githubusercontent.com/alexkreidler/ckanext-datapackager/main/requirements.txt && \
     pip install -e git+https://github.com/ckan/ckanext-googleanalytics.git#egg=ckanext-googleanalytics && \
     pip install -r https://raw.githubusercontent.com/ckan/ckanext-googleanalytics/master/requirements.txt
 
-# Install the extension(s) you wrote for your own project
-# RUN pip install -e git+https://github.com/your-org/ckanext-your-extension.git@v1.0.0#egg=ckanext-your-extension
+# subakdc plugins
+RUN pip install -e git+https://github.com/climatesubak/ckanext-subakdc-plugins.git#egg=ckanext-subakdc-plugins && \
+    pip install -r https://raw.githubusercontent.com/climatesubak/ckanext-subakdc-plugins/main/requirements.txt
+
+# subakdc theme
+RUN pip install -e git+https://github.com/climatesubak/ckanext-subakdc.git#egg=ckanext-subakdc && \
+    pip install -r https://raw.githubusercontent.com/climatesubak/ckanext-subakdc/main/requirements.txt
 
 # Apply any patches needed to CKAN core or any of the built extensions (not the
 # runtime mounted ones)
