@@ -1,6 +1,6 @@
 include $(PWD)/.env
 
-ifeq ($(ENV), dev)
+ifeq ($(ENVIRONMENT), dev)
 all:
 COMPOSE_FILE_PATH := docker-compose.dev.yml
 else
