@@ -31,7 +31,7 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
           source: "*"
-          target: "docker-ckan-ci"
+          target: "docker-ckan"
         
       - name: Run restart script via ssh
         uses: appleboy/ssh-action@master
@@ -42,5 +42,5 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
           script: |
-            cd ./docker-ckan-ci
+            cd ./docker-ckan
             make rebuild.ckan
