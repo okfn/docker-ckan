@@ -1,0 +1,46 @@
+name: Staging deploy
+
+on: 
+  # Trigger workflow on push (and pull request merge) on develop branch
+  push:
+    branches: [develop]
+
+    # Trigger workflow manually via API request or Github UI
+  workflow_dispatch:
+
+jobs:
+  build_and_push:
+    runs-on: ubuntu-latest
+    environment: staging
+    steps:
+      - name: Checkout the repo
+        uses: actions/checkout@v2
+        
+      - name: Create env file
+        run: |
+          touch .env
+          echo "${{ secrets.ENV_VARS }}" > .env
+          cat .env
+          
+      - name: copy files via ssh 
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          port: ${{ secrets.SSH_PORT }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}
+          source: "*"
+          target: "docker-ckan"
+        
+      - name: Run restart script via ssh
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          port: ${{ secrets.SSH_PORT }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}
+          script: |
+            cd ./docker-ckan
+            make rebuild.ckan
