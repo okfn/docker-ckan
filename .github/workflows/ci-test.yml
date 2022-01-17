@@ -21,12 +21,10 @@ jobs:
           token: ${{ secrets.GH_PAT }} # `GH_PAT` is a secret that contains your PAT
           path: secrets
 
-      - name: Switch to secrets directory
-        run: cd secrets
-
       - name: Unlock secrets
-        uses: sliteteam/github-action-git-crypt-unlock@1.2.0
+        uses: confusedmatrix/github-action-git-crypt-unlock
         env:
+          RUN_DIR: secrets
           GIT_CRYPT_KEY: ${{ secrets.GIT_CRYPT_KEY }}
 
       - name: Copy .env
