@@ -22,7 +22,7 @@ jobs:
           path: secrets
 
       - name: Unlock secrets
-        uses: confusedmatrix/github-action-git-crypt-unlock
+        uses: confusedmatrix/github-action-git-crypt-unlock@b9b3fb32902d359c16fe86d143ee2e7f7e2e373b
         env:
           RUN_DIR: secrets
           GIT_CRYPT_KEY: ${{ secrets.GIT_CRYPT_KEY }}
