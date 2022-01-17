@@ -11,3 +11,4 @@ src/*
 .Trashes
 
 node_modules
+stop_local_dev.sh
