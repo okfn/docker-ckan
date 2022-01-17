@@ -15,12 +15,24 @@ jobs:
     steps:
       - name: Checkout the repo
         uses: actions/checkout@v2
-        
-      - name: Create env file
-        run: |
-          touch .env
-          echo "${{ secrets.ENV_VARS }}" > .env
-          cat .env
+        with:
+          path: main
+      
+      - name: Checkout subak secrets
+        uses: actions/checkout@v2
+        with:
+          repository: climatesubak/subak-secrets
+          token: ${{ secrets.GH_PAT }} # `GH_PAT` is a secret that contains your GH Personal Access Token
+          path: secrets
+
+      - name: Unlock secrets
+        uses: confusedmatrix/github-action-git-crypt-unlock@b9b3fb32902d359c16fe86d143ee2e7f7e2e373b
+        env:
+          RUN_DIR: secrets
+          GIT_CRYPT_KEY: ${{ secrets.GIT_CRYPT_KEY }}
+
+      - name: Copy .env
+        run: cp secrets/secrets/subakdc/staging/.env main/.env
           
       - name: copy files via ssh 
         uses: appleboy/scp-action@master
