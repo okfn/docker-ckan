@@ -48,7 +48,7 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
           rm: true
-          source: "*,!.git"
+          source: "main/*,!.git"
           target: "docker-ckan"
         
       - name: Run restart script via ssh
