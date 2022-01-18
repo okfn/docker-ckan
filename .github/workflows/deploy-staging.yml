@@ -50,6 +50,7 @@ jobs:
           rm: true
           source: "main/*,!.git"
           target: "docker-ckan"
+          strip_components: 1
         
       - name: Run restart script via ssh
         uses: appleboy/ssh-action@master
