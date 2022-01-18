@@ -5,8 +5,12 @@ on:
   push:
     branches: [develop]
 
-    # Trigger workflow manually via API request or Github UI
+  # Trigger workflow manually via API request or Github UI
   workflow_dispatch:
+
+  # Trigger workflow when it receives a repository dispatch API request (e.g. from subakdc theme or plugins repo)
+  repository_dispatch:
+    types: [trigger-staging-deploy]
 
 jobs:
   build_and_push:
@@ -15,32 +19,51 @@ jobs:
     steps:
       - name: Checkout the repo
         uses: actions/checkout@v2
-        
-      - name: Create env file
+        with:
+          ref: develop
+          path: main
+      
+      - name: Checkout subak secrets
+        uses: actions/checkout@v2
+        with:
+          repository: climatesubak/subak-secrets
+          token: ${{ secrets.GH_PAT }} # `GH_PAT` is a secret that contains your GH Personal Access Token
+          path: secrets
+
+      - name: Unlock secrets
+        uses: confusedmatrix/github-action-git-crypt-unlock@b9b3fb32902d359c16fe86d143ee2e7f7e2e373b
+        env:
+          RUN_DIR: secrets
+          GIT_CRYPT_KEY: ${{ secrets.GIT_CRYPT_KEY }}
+
+      - name: Copy .env
+        run: cp secrets/secrets/subakdc/staging/.env main/.env
+
+      - name: Test output
         run: |
-          touch .env
-          echo "${{ secrets.ENV_VARS }}" > .env
-          cat .env
+          ls -la main
+          cat main/.env
           
-      - name: copy files via ssh 
-        uses: appleboy/scp-action@master
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          port: ${{ secrets.SSH_PORT }}
-          username: ${{ secrets.SSH_USERNAME }}
-          key: ${{ secrets.SSH_KEY }}
-          passphrase: ${{ secrets.SSH_PASSPHRASE }}
-          source: "*"
-          target: "docker-ckan"
+      # - name: copy files via ssh 
+      #   uses: appleboy/scp-action@master
+      #   with:
+      #     host: ${{ secrets.SSH_HOST }}
+      #     port: ${{ secrets.SSH_PORT }}
+      #     username: ${{ secrets.SSH_USERNAME }}
+      #     key: ${{ secrets.SSH_KEY }}
+      #     passphrase: ${{ secrets.SSH_PASSPHRASE }}
+      #     rm: true
+      #     source: "*,!.git"
+      #     target: "docker-ckan"
         
-      - name: Run restart script via ssh
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          port: ${{ secrets.SSH_PORT }}
-          username: ${{ secrets.SSH_USERNAME }}
-          key: ${{ secrets.SSH_KEY }}
-          passphrase: ${{ secrets.SSH_PASSPHRASE }}
-          script: |
-            cd ./docker-ckan
-            make rebuild.ckan
+      # - name: Run restart script via ssh
+      #   uses: appleboy/ssh-action@master
+      #   with:
+      #     host: ${{ secrets.SSH_HOST }}
+      #     port: ${{ secrets.SSH_PORT }}
+      #     username: ${{ secrets.SSH_USERNAME }}
+      #     key: ${{ secrets.SSH_KEY }}
+      #     passphrase: ${{ secrets.SSH_PASSPHRASE }}
+      #     script: |
+      #       cd ./docker-ckan
+      #       make rebuild.ckan

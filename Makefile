@@ -1,11 +1,9 @@
 include $(PWD)/.env
 
 ifeq ($(ENVIRONMENT), dev)
-all:
-COMPOSE_FILE_PATH := docker-compose.dev.yml
-else
-all:
-COMPOSE_FILE_PATH := docker-compose.yml
+	COMPOSE_FILE_PATH := docker-compose.dev.yml
+else ifeq ($(ENVIRONMENT), staging)
+	COMPOSE_FILE_PATH := docker-compose.yml
 endif
 
 build.all:

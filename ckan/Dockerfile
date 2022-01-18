@@ -23,13 +23,14 @@ RUN pip install -e git+https://github.com/ckan/ckanext-pages.git#egg=ckanext-pag
     pip install -e git+https://github.com/climatesubak/ckanext-sentry.git#egg=ckanext-sentry && \
     pip install -r https://raw.githubusercontent.com/climatesubak/ckanext-sentry/master/requirements.txt
 
+ARG SUBAK_EXT_GIT_BRANCH
 # subakdc plugins
-RUN pip install -e git+https://github.com/climatesubak/ckanext-subakdc-plugins.git#egg=ckanext-subakdc-plugins && \
-    pip install -r https://raw.githubusercontent.com/climatesubak/ckanext-subakdc-plugins/main/requirements.txt
+RUN pip install -e git+https://github.com/climatesubak/ckanext-subakdc-plugins.git@$SUBAK_EXT_GIT_BRANCH#egg=ckanext-subakdc-plugins && \
+    pip install -r https://raw.githubusercontent.com/climatesubak/ckanext-subakdc-plugins/$SUBAK_EXT_GIT_BRANCH/requirements.txt
 
 # subakdc theme
-RUN pip install -e git+https://github.com/climatesubak/ckanext-subakdc.git#egg=ckanext-subakdc && \
-    pip install -r https://raw.githubusercontent.com/climatesubak/ckanext-subakdc/main/requirements.txt
+RUN pip install -e git+https://github.com/climatesubak/ckanext-subakdc.git@$SUBAK_EXT_GIT_BRANCH#egg=ckanext-subakdc && \
+    pip install -r https://raw.githubusercontent.com/climatesubak/ckanext-subakdc/$SUBAK_EXT_GIT_BRANCH/requirements.txt
 
 # Apply any patches needed to CKAN core or any of the built extensions (not the
 # runtime mounted ones)
