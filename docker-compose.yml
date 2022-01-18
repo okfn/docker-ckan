@@ -9,6 +9,7 @@ services:
       dockerfile: Dockerfile
       args:
         - TZ=${TZ}
+        - SUBAK_EXT_GIT_BRANCH=${SUBAK_EXT_GIT_BRANCH:-main}
     env_file:
       - .env
     links:

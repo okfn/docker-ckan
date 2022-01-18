@@ -1,26 +1,26 @@
-name: Staging deploy
+name: Production deploy
 
 on: 
   # Trigger workflow on push (and pull request merge) on develop branch
   push:
-    branches: [develop]
+    branches: [main]
 
   # Trigger workflow manually via API request or Github UI
   workflow_dispatch:
 
   # Trigger workflow when it receives a repository dispatch API request (e.g. from subakdc theme or plugins repo)
   repository_dispatch:
-    types: [trigger-staging-deploy]
+    types: [trigger-prod-deploy]
 
 jobs:
   build_and_push:
     runs-on: ubuntu-latest
-    environment: staging
+    environment: production
     steps:
       - name: Checkout the repo
         uses: actions/checkout@v2
         with:
-          ref: develop
+          ref: main
           path: main
       
       - name: Checkout subak secrets
@@ -37,7 +37,7 @@ jobs:
           GIT_CRYPT_KEY: ${{ secrets.GIT_CRYPT_KEY }}
 
       - name: Copy .env
-        run: cp secrets/secrets/subakdc/staging/.env main/.env
+        run: cp secrets/secrets/subakdc/production/.env main/.env
 
       - name: Test output
         run: |
