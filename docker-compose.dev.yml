@@ -19,7 +19,17 @@ services:
     volumes:
       - ./src:/srv/app/src_extensions
       - ckan_storage:/var/lib/ckan
-    
+
+  caddy:
+    image: caddy:2.4.6-alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./caddy/Caddyfile.dev:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
 
   datapusher:
     container_name: datapusher
@@ -56,5 +66,7 @@ services:
 
 volumes:
   ckan_storage:
+  caddy_data:
+  caddy_config:
   pg_data:
   solr_data:
