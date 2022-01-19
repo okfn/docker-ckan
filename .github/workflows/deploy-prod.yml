@@ -47,12 +47,12 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
-          # rm: true
-          source: "main/*"
+          rm: true
+          source: "main/*,!.git"
           target: "docker-ckan"
           strip_components: 1
         
-      - name: Run restart script via ssh
+      - name: Run build & restart script via ssh
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.SSH_HOST }}
@@ -62,4 +62,5 @@ jobs:
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
           script: |
             cd ./docker-ckan
-            make rebuild.ckan
+            make build.ckan
+            make restart.ckan

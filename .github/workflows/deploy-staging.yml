@@ -47,8 +47,8 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
-          # rm: true
-          source: "main/*"
+          rm: true
+          source: "main/*,!.git"
           target: "docker-ckan"
           strip_components: 1
         
@@ -62,4 +62,5 @@ jobs:
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
           script: |
             cd ./docker-ckan
-            make rebuild.ckan
+            make build.ckan
+            make restart.ckan
