@@ -2,7 +2,7 @@ include $(PWD)/.env
 
 ifeq ($(ENVIRONMENT), dev)
 	COMPOSE_FILE_PATH := docker-compose.dev.yml
-else ifeq ($(ENVIRONMENT), staging)
+else
 	COMPOSE_FILE_PATH := docker-compose.yml
 endif
 
