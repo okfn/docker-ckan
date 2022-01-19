@@ -47,8 +47,8 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
-          rm: true
-          source: "main/*,!.git"
+          # rm: true
+          source: "main/*"
           target: "docker-ckan"
           strip_components: 1
         
