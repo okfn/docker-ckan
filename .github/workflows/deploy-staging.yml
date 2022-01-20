@@ -62,4 +62,5 @@ jobs:
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
           script: |
             cd ./docker-ckan
-            make rebuild.ckan
+            make build.ckan
+            make restart.ckan
