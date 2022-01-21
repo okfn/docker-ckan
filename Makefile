@@ -31,7 +31,16 @@ logs:
 
 ps: 
 	docker-compose -f $(COMPOSE_FILE_PATH) ps
-	
+
+harvest.gather:
+	docker-compose -f $(COMPOSE_FILE_PATH) exec ckan /bin/bash -c "ckan harvester gather_consumer"
+
+harvest.fetch:
+	docker-compose -f $(COMPOSE_FILE_PATH) exec ckan /bin/bash -c "ckan harvester fetch_consumer"
+
+harvest.run:
+	docker-compose -f $(COMPOSE_FILE_PATH) exec ckan /bin/bash -c "ckan harvester run"
+
 # WIP currently having issues running this locally
 test.plugins:
 	docker-compose -f $(COMPOSE_FILE_PATH) exec -it -w "/srv/app/src_extensions/ckanext-subakdc-plugins" ckan /bin/bash -c "pip install pytest-ckan requests_mock && pytest --ckan-ini=test.ini"
