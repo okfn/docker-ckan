@@ -2,6 +2,10 @@ staging.data.climatesubak.org
 
 reverse_proxy ckan:5000
 
+tls {
+	dns cloudflare {env.CF_API_TOKEN}
+}
+
 basicauth /* {
-	subak JDJhJDE0JHFwQjVpV0pTalZNVGpySFN0WnJSWHVpT1Z5YksvcGFiYW51UzF6M1prUVlwLnRETUNFbXJP
+	subak {env.CADDY_BASIC_AUTH_HASHED_PASSWORD}
 }
