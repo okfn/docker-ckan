@@ -1,0 +1,7 @@
+staging.data.climatesubak.org
+
+reverse_proxy ckan:5000
+
+basicauth /* {
+	subak JDJhJDE0JHFwQjVpV0pTalZNVGpySFN0WnJSWHVpT1Z5YksvcGFiYW51UzF6M1prUVlwLnRETUNFbXJP
+}
