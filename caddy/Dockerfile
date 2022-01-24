@@ -1,4 +1,8 @@
-FROM caddy:2.4.6-alpine
+FROM caddy:2.4.6-alpine as production
 
 COPY Caddyfile /etc/caddy/Caddyfile
-COPY site /srv
+
+
+FROM production AS staging
+
+COPY Caddyfile.staging /etc/caddy/Caddyfile
