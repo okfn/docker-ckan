@@ -3,20 +3,24 @@
 Taking as a starting point the [CKAN-in-docker repository](https://github.com/okfn/docker-ckan) by the Open Knowledge Foundation, the original README and setup instructions can now be found in [SETUP.md](/SETUP.md).
 
 ## Local / staging / prod
-Local using docker-desktop (for example).
-Staging and prod on AWS Elastic Container Service (ECS) so we can use the same dockerfiles.
-Deploy to staging: XXX  
-Deploy to prod: XXX  
+Docker Compose is used to manage building and running of the docker containers. 
 
-For staging and production:  
-environment variables will be set in EKS.
+- `docker-compose.yml` contains the build/run config for production
+- `docker-compose.staging.yml` extends the production build/run config for staging
+- `docker-compose.override.yml` extends the production build/run config for developing locally
+
+The `make` commands in `Makefile` read the `ENVIRONMENT` env var in `.env` and use the correct combination of docker-compose files for each environment
 
 ## Developing locally
-`cp .env.example .env`  
-`docker-compose -f docker-compose.dev.yml build`  
-`docker-compose -f docker-compose.dev.yml up`  
+`cp .env.example .env`
+`make build.all`  
+`make up`
 
-The CKAN web UI will now be running at `http://localhost:5000` by default
+View logs using:
+
+`make logs`
+
+The CKAN web UI will now be running at `http://localhost` by default
 
 ### Local theme development
 To load the subak CKAN theme for local development, first clone the [ckanext-subakdc](https://github.com/ClimateSubak/ckanext-subakdc) repo under the `/src` directory in this project. Secondly add `subakdc` as a plugin to the list of `CKAN__PLUGINS` in the `.env` file. Finally, restart the docker stack.
