@@ -1,3 +1,7 @@
 data.climatesubak.org
 
 reverse_proxy ckan:5000
+
+tls {
+	dns cloudflare {env.CF_API_TOKEN}
+}
