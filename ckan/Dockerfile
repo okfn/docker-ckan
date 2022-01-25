@@ -1,4 +1,4 @@
-FROM openknowledge/ckan-base:2.9-py2
+FROM openknowledge/ckan-base:2.9
 
 LABEL maintainer="Laurence Watson <laurence@subak.org>"
 
@@ -16,8 +16,6 @@ RUN pip install -e git+https://github.com/ckan/ckanext-pages.git#egg=ckanext-pag
     pip install -e git+https://github.com/ckan/ckanext-harvest.git#egg=ckanext-harvest && \
     pip install -r https://raw.githubusercontent.com/ckan/ckanext-harvest/master/pip-requirements.txt && \
     pip install -e git+https://github.com/ckan/ckanext-scheming.git#egg=ckanext-scheming && \
-    pip install -e git+https://github.com/alexkreidler/ckanext-datapackager.git#egg=ckanext-datapackager && \
-    pip install -r https://raw.githubusercontent.com/alexkreidler/ckanext-datapackager/main/requirements.txt && \
     pip install -e git+https://github.com/ckan/ckanext-googleanalytics.git#egg=ckanext-googleanalytics && \
     pip install -r https://raw.githubusercontent.com/ckan/ckanext-googleanalytics/master/requirements.txt && \
     pip install -e git+https://github.com/climatesubak/ckanext-sentry.git#egg=ckanext-sentry && \
