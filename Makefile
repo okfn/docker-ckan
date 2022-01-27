@@ -46,6 +46,9 @@ harvest.fetch:
 harvest.run:
 	docker-compose $(COMPOSE_FILE_PATH) exec ckan /bin/bash -c "ckan harvester run"
 
+xloader.submit:
+	docker-compose $(COMPOSE_FILE_PATH) exec ckan /bin/bash -c "ckan xloader submit all"
+
 # WIP currently having issues running this locally
 test.plugins:
 	docker-compose $(COMPOSE_FILE_PATH) exec -w "/srv/app/src_extensions/ckanext-subakdc-plugins" ckan /bin/bash -c "pip install pytest-ckan requests_mock && pytest --ckan-ini=test.ini"
