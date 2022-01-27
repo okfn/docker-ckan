@@ -15,7 +15,6 @@ services:
       - db
       - solr
       - redis
-      - datapusher
     volumes:
       - ckan_storage:/var/lib/ckan
 
@@ -34,13 +33,6 @@ services:
     volumes:
       - caddy_data:/data
       - caddy_config:/config
-
-  datapusher:
-    container_name: datapusher
-    build:
-      context: datapusher/
-    ports:
-      - "8800:8800"
 
   db:
     container_name: db
