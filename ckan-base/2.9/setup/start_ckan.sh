@@ -26,7 +26,10 @@ UWSGI_OPTS="--plugins http,python \
             --master --enable-threads \
             --lazy-apps \
             -p 2 -L -b 32768 --vacuum \
-            --harakiri $UWSGI_HARAKIRI"
+            --harakiri $UWSGI_HARAKIRI \
+            --ignore-sigpipe \
+            --ignore-write-errors \
+            --disable-write-exception"
 
 if [ $? -eq 0 ]
 then

@@ -17,7 +17,7 @@ then
 fi
 
 # Set the common uwsgi options
-UWSGI_OPTS="--socket /tmp/uwsgi.sock --wsgi-file /srv/app/wsgi.py --module wsgi:application --uid 92 --gid 92 --http 0.0.0.0:5000 --master --enable-threads --lazy-apps -p 2 -L -b 32768 --vacuum --harakiri 50"
+UWSGI_OPTS="--socket /tmp/uwsgi.sock --wsgi-file /srv/app/wsgi.py --module wsgi:application --uid 92 --gid 92 --http 0.0.0.0:5000 --master --enable-threads --lazy-apps -p 2 -L -b 32768 --vacuum --harakiri 50 --ignore-sigpipe --ignore-write-errors --disable-write-exception"
 
 
 if [ $? -eq 0 ]
