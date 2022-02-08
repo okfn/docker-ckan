@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   ckan:
-    container_name: ckan
+    # container_name: ckan
     build:
       context: ckan/
       dockerfile: Dockerfile
