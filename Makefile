@@ -20,6 +20,15 @@ rebuild.ckan:
 restart.ckan:
 	docker-compose $(COMPOSE_FILE_PATH) up -d --no-deps --force-recreate ckan
 
+replace.ckan:
+	./update_ckan_container.sh
+
+scaleup.ckan:
+	docker-compose $(COMPOSE_FILE_PATH) up -d --no-deps --scale ckan=2 --no-recreate ckan
+
+scaledown.ckan:
+	docker-compose $(COMPOSE_FILE_PATH) up -d --no-deps --scale ckan=1 --no-recreate ckan
+
 start: up logs
 
 up:

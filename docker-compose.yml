@@ -2,7 +2,9 @@ version: "3.8"
 
 services:
   ckan:
-    container_name: ckan
+    # Do not set the container_name property
+    # update_ckan_container.sh script requires Docker to set the container name dynamically
+    # container_name: ckan 
     build:
       context: ckan/
       dockerfile: Dockerfile
