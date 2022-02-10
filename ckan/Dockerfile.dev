@@ -19,7 +19,9 @@ RUN pip install -e git+https://github.com/ckan/ckanext-pages.git#egg=ckanext-pag
     pip install -r https://raw.githubusercontent.com/ckan/ckanext-xloader/master/requirements.txt && \
     pip install -e git+https://github.com/ckan/ckanext-googleanalytics.git#egg=ckanext-googleanalytics && \
     pip install -r https://raw.githubusercontent.com/ckan/ckanext-googleanalytics/master/requirements.txt && \
-    pip install -e git+https://github.com/climatesubak/ckanext-scheming.git#egg=ckanext-scheming
+    pip install -e git+https://github.com/climatesubak/ckanext-scheming.git#egg=ckanext-scheming && \
+    pip install -e git+https://github.com/ckan/ckanext-report.git#egg=ckanext-report && \
+    pip install -r https://raw.githubusercontent.com/ckan/ckanext-report/master/requirements.txt
 
 # Clone the extension(s) your are writing for your own project in the `src` folder
 # to get them mounted in this image at runtime
