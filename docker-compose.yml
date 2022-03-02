@@ -53,6 +53,8 @@ services:
   solr:
     container_name: solr
     image: solr:8.11.1
+    env_file:
+      - .env
     environment:
       - CKAN_CORE_NAME=ckan
       - CKAN_VERSION=2.9
