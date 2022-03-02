@@ -8,7 +8,7 @@
 
 set -e
 
-CKAN_SOLR_SCHEMA_URL=https://raw.githubusercontent.com/ckan/ckan/ckan-$CKAN_VERSION/ckan/config/solr/schema.solr8.xml 
+CKAN_SOLR_SCHEMA_URL=https://raw.githubusercontent.com/ckan/ckan/$CKAN_VERSION/ckan/config/solr/schema.solr8.xml 
 
 echo "Check whether managed schema exists for CKAN $CKAN_VERSION"
 if ! curl --output /dev/null --silent --head --fail "$CKAN_SOLR_SCHEMA_URL"; then
