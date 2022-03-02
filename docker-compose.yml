@@ -52,10 +52,13 @@ services:
 
   solr:
     container_name: solr
-    build:
-      context: solr/
+    image: solr:8.11.1
+    environment:
+      - CKAN_CORE_NAME=ckan
+      - CKAN_VERSION=2.9
     volumes:
-      - solr_data:/opt/solr/server/solr/ckan/data/index
+      - solr_data:/var/solr
+      - ${PWD}/solr8/ckan_init_solr.sh:/docker-entrypoint-initdb.d/ckan_init_solr.sh
 
   redis:
     container_name: redis
