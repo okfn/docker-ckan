@@ -4,7 +4,7 @@
 # Arguments are supplied via environment variables: CKAN_CORE_NAME CKAN_VERSION
 # Example:
 #   CKAN_CORE_NAME=ckan
-#   CKAN_VERSION=2.9.5
+#   CKAN_VERSION=2.9
 
 set -e
 
