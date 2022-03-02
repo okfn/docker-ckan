@@ -52,10 +52,10 @@ reload.caddy:
 	docker compose ${COMPOSE_FILE_PATH} exec -w /etc/caddy caddy caddy reload
 
 harvest.gather:
-	docker exec $(CKAN_CONTAINER) /bin/bash -c "ckan harvester gather_consumer"
+	docker exec $(CKAN_CONTAINER) /bin/bash -c "ckan harvester gather-consumer"
 
 harvest.fetch:
-	docker exec $(CKAN_CONTAINER) /bin/bash -c "ckan harvester fetch_consumer"
+	docker exec $(CKAN_CONTAINER) /bin/bash -c "ckan harvester fetch-consumer"
 
 harvest.run:
 	docker exec $(CKAN_CONTAINER) /bin/bash -c "ckan harvester run"
