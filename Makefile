@@ -51,6 +51,9 @@ ps:
 reload.caddy:
 	docker compose ${COMPOSE_FILE_PATH} exec -w /etc/caddy caddy caddy reload
 
+restart.redis:
+	docker compose $(COMPOSE_FILE_PATH) up -d --no-deps --force-recreate redis
+
 harvest.gather:
 	docker exec $(CKAN_CONTAINER) /bin/bash -c "ckan harvester gather-consumer"
 
@@ -62,6 +65,12 @@ harvest.run:
 
 xloader.submit:
 	docker exec $(CKAN_CONTAINER) /bin/bash -c "ckan xloader submit all"
+
+qa.run:
+	docker exec $(CKAN_CONTAINER) /bin/bash -c "ckan qa run"
+
+search.reindex:
+	docker exec $(CKAN_CONTAINER) /bin/bash -c "ckan search-index rebuild"
 
 
 # WIP currently having issues running this locally
