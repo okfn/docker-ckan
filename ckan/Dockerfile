@@ -20,6 +20,8 @@ RUN pip install -e git+https://github.com/ckan/ckanext-pages.git#egg=ckanext-pag
     pip install -e git+https://github.com/ckan/ckanext-googleanalytics.git#egg=ckanext-googleanalytics && \
     pip install -r https://raw.githubusercontent.com/ckan/ckanext-googleanalytics/master/requirements.txt && \
     pip install -e git+https://github.com/climatesubak/ckanext-scheming.git#egg=ckanext-scheming && \
+    pip install -e git+https://github.com/climatesubak/ckanext-report.git#egg=ckanext-report && \
+    pip install -r https://raw.githubusercontent.com/climatesubak/ckanext-report/master/requirements.txt && \
     pip install -e git+https://github.com/climatesubak/ckanext-sentry.git#egg=ckanext-sentry && \
     pip install -r https://raw.githubusercontent.com/climatesubak/ckanext-sentry/master/requirements.txt
 
