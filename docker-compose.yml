@@ -6,8 +6,8 @@ services:
     # update_ckan_container.sh script requires Docker to set the container name dynamically
     # container_name: ckan 
     build:
-      context: ckan/
-      dockerfile: Dockerfile
+      context: ./
+      dockerfile: ckan/Dockerfile
       args:
         - TZ=${TZ}
         - SUBAK_EXT_GIT_BRANCH=${SUBAK_EXT_GIT_BRANCH:-main}
