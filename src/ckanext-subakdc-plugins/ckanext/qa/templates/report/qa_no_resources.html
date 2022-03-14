@@ -1,0 +1,24 @@
+<ul class="font-body">
+    <li>Datasets with no resources: {{ table | length }} / {{ data.total_num_packages }} ({{ ((table | length) / data.total_num_packages * 100) | round(2) }}%)</li>
+</ul>
+
+<table class="table-auto w-full" id="report-table"">
+    <thead>
+      <tr class="border-b border-gray-200">
+        <th class="p-2 pl-0">Dataset</th>
+        <th class="p-2 pr-0"></th>
+      </tr>
+    </thead>
+    <tbody class="font-body">
+      {% for row in table %}
+        <tr class="{% if loop.index % 2 == 0 %} bg-gray-50 {% endif %}">
+          <td class="p-2 pl-0">
+            {{ row.title }}
+          </td>
+          <td class="p-2 pr-0">
+            <a href="{{ h.url_for('dataset.read', id=row.id) }}">View</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+</table>

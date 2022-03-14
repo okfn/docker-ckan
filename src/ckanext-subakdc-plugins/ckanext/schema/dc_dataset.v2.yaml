@@ -1,0 +1,342 @@
+scheming_version: 2
+dataset_type: dataset
+about: Custom schema for the Climate Subak Data Catalogue
+about_url: https://github.com/ClimateSubak/ckanext-subakdc-plugins/tree/main/ckanext/schema
+
+# Non-default CKAN fields are prefixed with `subak_` to avoid name/format conflicts with 
+# existing fields in the database and new ones that may be created due to harvest imports 
+dataset_fields:
+  - field_name: title
+    label: Title
+    required: true
+    preset: title
+    display_property: dct:title
+    form_placeholder: eg. UK Wholesale Electricity Prices
+
+  # This field is auto-populated by CKAN from the title field
+  - field_name: name
+    label: URI
+    required: true
+    preset: dataset_slug
+    display_property: dct:identifier
+    form_placeholder: eg. uk-wholesale-electricity-prices
+    
+  # Dropdown list populated with CKAN organisations
+  - field_name: owner_org
+    label: Organization
+    required: true
+    preset: dataset_organization
+    display_property: dct:publisher
+
+  # Will be used on the dataset list page if set
+  - field_name: subak_overview
+    label: Overview
+    required: false
+    form_placeholder: One or two sentences describing the purpose of the dataset
+    form_snippet: text.html
+
+  # If overview field is empty, the first two sentences of this field will be used on dataset list page
+  # On automated submissions, README.md file will populate this field if present
+  - field_name: notes
+    label: Description
+    required: true
+    preset: markdown
+    display_property: dct:description
+    help_text: A Detailed description of the dataset, including data quality and processing techniques.
+
+  # Tags will come from preset list
+  # TODO determine relevant climate-themed tag list
+  # TODO create custom preset that serves predefined tag list
+  - field_name: tag_string
+    label: Keywords
+    required: false
+    preset: tag_string_autocomplete
+    display_property: dcat:keyword
+    form_placeholder: eg. electricity, policy, land use
+
+  # Will be used to build a filter (e.g. by year)
+  - field_name: subak_temporal_start
+    label: Start date
+    required: false
+    preset: date
+    display_property: dcat:startDate
+    help_text: Earliest date the dataset covers e.g. 2016-01-01.
+    
+  # Will be used to build a filter (e.g. by year)
+  # Assume not set if temporal_start is also empty, otherwise assume end = present
+  - field_name: subak_temporal_end
+    label: End date
+    required: false
+    preset: date
+    display_property: dcat:endDate
+    help_text: Latest date the dataset covers e.g. 2019-01. Leave blank if dataset is updated to present day.
+
+  # Will be used to build a filter
+  - field_name: subak_temporal_resolution
+    label: Time resolution
+    required: false
+    preset: select
+    choices:
+    - value: year
+      label: Year
+    - value: quarter
+      label: Quarter
+    - value: month
+      label: Month
+    - value: week
+      label: Week
+    - value: day
+      label: Day
+    - value: hour
+      label: Hour
+    - value: minute
+      label: Minute
+    - value: second
+      label: Second
+    - value: sub_second
+      label: Sub-second
+    
+    display_property: dcat:temporalResolution
+    help_text: For time-series data, please select the smallest resolution represented in your dataset. If your dataset resolution falls between the values given here, please select the closest resolution (e.g. for readings every 30 seconds select minute).
+  
+  # Could be used to automate communication with publisher to update their dataset
+  # Could also feed into freshness or future data quality scores
+  - field_name: subak_update_frequency
+    label: Update frequency
+    required: false
+    preset: select
+    choices:
+    - value: hourly
+      label: Hourly
+    - value: daily
+      label: Daily
+    - value: weekly
+      label: Weekly
+    - value: monthly
+      label: Monthly
+    - value: quarterly
+      label: Quarterly
+    - value: annually
+      label: Annually
+    - value: never
+      label: Never
+    display_property: dcat:accrualPeriodicity
+    help_text: Select the closest value that reflects the frequency with which the dataset is updated.
+
+  # Will be used to build a filter
+  - field_name: subak_geo_region
+    label: Geographic region
+    required: false
+    preset: select
+    choices:
+    - value: world
+      label: World
+    - value: africa
+      label: Africa
+    - value: americas
+      label: Americas
+    - value: antarctica
+      label: Antarctica
+    - value: asia
+      label: Asia
+    - value: europe
+      label: Europe
+    - value: oceania
+      label: Oceania
+    display_property: dct:Location
+    help_text: Select the broad region that most closely represents your dataset's geographic coverage.
+
+  # Will be used to build a filter
+  # TODO Compile list of countries using ISO3166 standard
+  # TODO create scheming_countries_choices helper (see: https://github.com/ckan/ckanext-scheming#choices_helper)
+  - field_name: subak_countries
+    label: Countries
+    required: false
+    preset: multiple_select
+    choices_helper: scheming_countries_choices
+    display_property: dct:Location
+    help_text: Select the countries that your dataset covers.
+
+  # Will be used to build a filter
+  - field_name: subak_spatial_resolution
+    label: Spatial resolution
+    required: false
+    preset: select
+    choices:
+    - value: global
+      label: Global
+    - value: continent_region
+      label: Continent/Region
+    - value: country
+      label: Country
+    - value: state_county
+      label: State/County
+    - value: city_town
+      label: City/Town
+    - value: street_postcode
+      label: Street/Postcode
+    - value: building/residence
+      label: Building/Residence
+    - value: device_asset
+      label: Device/Asset
+
+    # These values are probably most useful for satellite data
+    - value: 100km-grid
+      label: 100km grid
+    - value: 10km-grid
+      label: 10km grid
+    - value: 1km-grid
+      label: 1km grid
+    - value: 100m-grid
+      label: 100m grid
+    - value: 10m-grid
+      label: 10m grid
+    - value: 1m-grid
+      label: 1m grid
+    help_text: For data with a spatial component, select the spatial resolution that most closely represents the samples or aggregations within your data.
+
+  - field_name: license_id
+    label: License
+    required: false
+    display_property: dct:license
+    form_snippet: license.html
+    help_text: License definitions and additional information can be found at http://opendefinition.org/.
+
+  - field_name: url
+    label: Source
+    required: false
+    display_property: dcat:accessURL
+    form_snippet: text.html
+    form_placeholder: http://example.com/project-url.html
+    help_text: A link to a project website related to the dataset.
+
+  # harvest_source not included here as it is added via ckanext-harvest plugin
+
+  - field_name: author
+    label: Contact
+    required: false
+    display_property: dcat:contactPoint
+    form_snippet: text.html
+    form_placeholder: Primary contact for this dataset (name and email address or contact form link)
+
+  - field_name: subak_data_applications
+    label: Data applications
+    required: false
+    help_text: List any known tutorials, tools, applications or publications associated with this dataset.
+    repeating_label: Application
+    form_blanks: 0
+    repeating_subfields:
+    - field_name: category
+      label: Category
+      required: true
+      preset: select
+      choices:
+      - value: tutorials
+        label: Tutorials
+      - value: tools_and_applications
+        label: Tools and Applications
+      - value: publications
+        label: Publications
+      
+    - field_name: title
+      label: Title
+      required: true
+      form_snippet: text.html
+
+    - field_name: url
+      label: URL
+      required: true
+      form_snippet: text.html
+
+    - field_name: author
+      label: Author
+      required: false
+      form_snippet: text.html
+
+  # On automated submissions, a SOURCES.md file will populate this field if present
+  - field_name: subak_data_sources
+    label: Data sources
+    required: false
+    preset: markdown
+    display_property: prov:qualifiedPrimarySource
+    help_text: List or table of sources used to created this dataset.
+
+  # TODO hide/disable this field in the update/create dataset form
+  - field_name: subak_qa
+    label: QA
+    required: false
+    preset: json_object
+    
+
+resource_fields:
+  - field_name: url
+    label: URL
+    required: true
+    preset: resource_url_upload
+    display_property: dcat:downloadURL
+
+  - field_name: name
+    label: Name
+    required: false
+    display_property: dct:title
+    form_snippet: text.html
+    form_placeholder: eg. 2021 UK Wholesale Electricity Prices
+
+  - field_name: description
+    label: Description
+    required: false
+    preset: markdown
+    display_property: dct:description
+    help_text: Add some useful notes about this data resource file.
+
+  # Will be inferred if empty
+  - field_name: format
+    label: File format
+    required: false
+    preset: resource_format_autocomplete
+    display_property: dct:format
+
+  # Could be inferred if empty
+  - field_name: subak_file_size
+    label: File size
+    required: false
+    display_property: dct:byteSize
+    form_snippet: text.html
+    help_text: File size in bytes.
+
+  # If filled in this will take precedence over the datastore data dictionaries
+  - field_name: subak_data_fields
+    label: Data fields
+    required: false
+    help_text: If the data file contains tabular data, detail the column/field definitions here.
+    repeating_label: Data field
+    form_blanks: 0
+    repeating_subfields:
+    - field_name: name
+      label: Field name
+      required: true
+      form_snippet: text.html
+
+    - field_name: type
+      label: Field type
+      required: false
+      preset: select
+      choices:
+      - value: numeric
+        label: Numeric
+      - value: text
+        label: Text
+      - value: date_time
+        label: Date and/or time
+
+    - field_name: description
+      label: Field description
+      required: false
+      preset: markdown
+      help_text: Describe what this field contains. Detail things like date formats, range of values and/or data quality issues.
+
+    - field_name: units
+      label: Field units
+      required: false
+      form_snippet: text.html
+      form_placeholder: optional, e.g. hours or kWh

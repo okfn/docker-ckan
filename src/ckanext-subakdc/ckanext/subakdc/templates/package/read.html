@@ -1,0 +1,25 @@
+{% ckan_extends %}
+
+
+{% block package_notes %}
+{% if pkg.notes %}
+  <div class="prose prose-sm prose-headings:font-heading font-body max-w-none">
+  {% set description = h.render_markdown(h.get_translated(pkg, 'notes')) %}
+  {% if description | length < 500 %}
+  <div class="notes embedded-content">
+    {{ description }}
+  </div>
+  {% else %}
+  <div x-data="{ more: false }" class="notes embedded-content">
+    <div :class="more ? 'h-auto' : 'overflow-hidden h-52'" class="mb-4 pt-px relative">
+      {{ description }}
+      <div x-show="!more" class="absolute bottom-0 left-0 z-1 h-24 w-full bg-gradient-to-t from-white"></div>
+    </div>
+    <p><a href="#"
+      @click="more = !more"
+      x-text="more ? 'Show less' : 'Show more...'"></a></p>
+  </div>
+  {% endif %}
+</div>
+{% endif %}
+{% endblock %}
