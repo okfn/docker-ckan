@@ -1,0 +1,39 @@
+{% ckan_extends %}
+
+{% block nums %}
+    {% if 'freshness_score' in h %}
+    {% set freshness_score = h.freshness_score(pkg) %}
+    {% set freshness_colour_classes = ['text-red-600', 'text-orange-600', 'text-yellow-600', 'text-lime-600', 'text-green-600'] %}
+    {% set freshness_tooltip = '<p class="break-normal">This score represents how recently one or more of the data resources was last updated.</p>
+                                <ul>
+                                    <li>5: &lt; 6 months</li>
+                                    <li>4: &lt; 12 months</li>
+                                    <li>3: &lt; 18months</li>
+                                    <li>2: &lt; 24 months</li>
+                                    <li>1: &gt; 24 months</li>
+                                </ul>' %}
+        {% if freshness_score > 0 %}
+            <div class="nums">
+                <dl class="w-full">
+                    <dt><span role="button"
+                              tabindex="0"
+                              title="Dataset freshness score" 
+                              data-target="popover" 
+                              data-content="{{ freshness_tooltip }}" 
+                              data-placement="right"
+                              data-html="true"
+                              data-trigger="hover">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="inline relative -top-px h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                            </svg> 
+                            <span class="underline decoration-dashed">{{ _('Dataset freshness') }}</span>
+                        </span>
+                    </dt>
+                    <dd><span class="{{ freshness_colour_classes[freshness_score - 1] }}">{{ freshness_score }}</span><span class="text-xl text-gray-400">/5</span></dd>
+                </dl>
+            </div>
+        {% endif %}
+    {% endif %}
+  
+  {{ super() }}
+{% endblock %}

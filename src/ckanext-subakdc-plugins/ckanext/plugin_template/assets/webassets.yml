@@ -1,0 +1,14 @@
+# subakdc_plugins-js:
+#   filter: rjsmin
+#   output: ckanext-subakdc_plugins/%(version)s-subakdc_plugins.js
+#   contents:
+#     - js/subakdc_plugins.js
+#   extra:
+#     preload:
+#       - base/main
+
+# subakdc_plugins-css:
+#   filter: cssrewrite
+#   output: ckanext-subakdc_plugins/%(version)s-subakdc_plugins.css
+#   contents:
+#     - css/subakdc_plugins.css

@@ -1,5 +1,8 @@
 .env
+
 src/*
+!src/README.md
+!src/ckanext-subakdc*
 
 .pyc
 .pyo

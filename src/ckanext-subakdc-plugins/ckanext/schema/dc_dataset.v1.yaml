@@ -1,0 +1,139 @@
+scheming_version: 2
+dataset_type: dataset
+about: A reimplementation of the default CKAN dataset schema
+about_url: http://github.com/ckan/ckanext-scheming
+
+dataset_fields:
+  - field_name: title
+    label: Title
+    preset: title
+    form_placeholder: eg. A descriptive title
+
+  - field_name: name
+    label: URL
+    preset: dataset_slug
+    form_placeholder: eg. my-dataset
+
+  - field_name: overview
+    label: Overview
+    form_placeholder: A short executive summary of the dataset
+    display_snippet: text.html
+
+  - field_name: notes
+    label: Description
+    form_snippet: markdown.html
+    form_placeholder: eg. Detailed description of the data contents
+
+  - field_name: tag_string
+    label: Tags
+    preset: tag_string_autocomplete
+    form_placeholder: eg. economy, mental health, government
+
+  - field_name: data_fields
+    label: Data Fields
+    form_placeholder: eg. List of fields in the dataset
+    display_snippet: markdown.html
+
+  - field_name: temporal_start
+    label: Start Date
+    display_property: schema:startDate
+    form_placeholder: Earliest date the dataset covers e.g. 2016-01-01
+    preset: date
+    display_snippet: date.html
+    
+  - field_name: temporal_end
+    label: End Date
+    display_property: schema:endDate
+    form_placeholder: Latest date the dataset covers e.g. 2019-01. Leave blank if dataset is updated to present day.
+    preset: date
+    display_snippet: date.html
+   
+  - field_name: data_quality
+    label: Data Quality
+    form_snippet: markdown.html
+    form_placeholder: eg. Description of data quality
+    display_snippet: markdown.html
+    
+  - field_name: change_log
+    label: Change Log
+    form_placeholder: eg. List of changes to the dataset over time
+    display_snippet: text.html
+
+  - field_name: data_sources
+    label: Data Sources
+    form_placeholder: eg. List of upstream data sources
+    display_snippet: markdown.html
+
+  - field_name: data_processing
+    label: Data Creation Process
+    form_snippet: markdown.html
+    form_placeholder: eg. Detailed description of process of data creation. Ideally with links to code.
+    display_snippet: markdown.html
+    
+  - field_name: data_applications
+    label: Data Applications
+    form_snippet: markdown.html
+    form_placeholder: e.g Things the data has been used for
+    display_snippet: markdown.html
+
+  - field_name: license_id
+    label: License
+    form_snippet: license.html
+    help_text: License definitions and additional information can be found at http://opendefinition.org/
+
+  - field_name: owner_org
+    label: Organization
+    preset: dataset_organization
+
+  - field_name: url
+    label: Source
+    form_placeholder: http://example.com/dataset.json
+    display_property: foaf:homepage
+    display_snippet: link.html
+
+  - field_name: version
+    label: Version
+    validators: ignore_missing unicode package_version_validator
+    form_placeholder: "1.0"
+
+  - field_name: author
+    label: Author
+    form_placeholder: Primary Author (Affiliation)
+    display_property: dc:creator
+    
+  - field_name: author_email
+    label: Author Email
+    form_placeholder: email@example.com
+    display_property: dc:author
+    display_snippet: email.html
+    display_email_name_field: maintainer
+
+  - field_name: maintainer
+    label: Maintainer
+    form_placeholder: Firstname Lastname
+    display_property: dc:contributor
+
+  - field_name: maintainer_email
+    label: Maintainer Email
+    form_placeholder: email@example.com
+    display_property: dc:contributor
+    display_snippet: email.html
+    display_email_name_field: maintainer
+
+resource_fields:
+  - field_name: url
+    label: URL
+    preset: resource_url_upload
+
+  - field_name: name
+    label: Name
+    form_placeholder: eg. January 2011 Gold Prices
+
+  - field_name: description
+    label: Description
+    form_snippet: markdown.html
+    form_placeholder: Some useful notes about the data
+
+  - field_name: format
+    label: Format
+    preset: resource_format_autocomplete

@@ -1,0 +1,164 @@
+<section class="flex flex-wrap gap-4 my-4">
+    {% set pkg_keys = pkg_dict.keys() %}
+
+    {############   TEMPORAL INFO   ############}
+    <div class="flex-1 bg-zinc-100 p-4">
+        <h3 class="mt-0">
+            <svg xmlns="http://www.w3.org/2000/svg" class="inline relative -top-px h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg> Temporal information
+        </h3>
+
+        {% if not('subak_temporal_start' in pkg_keys or 'subak_temporal_end' in pkg_keys or 'subak_temporal_resolution' in pkg_keys) %}
+        None
+        {% else %}
+        {% if pkg_dict.subak_temporal_start %}
+        <div>Start date: <span class="font-body">{{ pkg_dict.subak_temporal_start }}</span></div>
+        {% endif %}
+
+        {% if pkg_dict.subak_temporal_end %}
+        <div>End date: <span class="font-body">{{ pkg_dict.subak_temporal_end }}</span></div>
+        {% endif %}
+
+        {% if pkg_dict.subak_temporal_resolution %}
+        <div>Temporal resolution: <span class="font-body">{{ pkg_dict.subak_temporal_resolution.capitalize() }}</span></div>
+        {% endif %}
+        {% endif %}
+    </div>
+
+
+    {############   SPATIAL INFO   ############}
+    <div class="flex-1 bg-zinc-100 p-4">
+        <h3 class="mt-0">
+            <svg xmlns="http://www.w3.org/2000/svg" class="inline relative -top-px h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg> Spatial information
+        </h3>
+        
+        {% if not('subak_geo_region' in pkg_keys or 'subak_countries' in pkg_keys or 'subak_spatial_resolution' in pkg_keys) %}
+        None
+        {% else %}
+        {% if pkg_dict.subak_geo_region %}
+        <div>Geographic region: <span class="font-body">{{ pkg_dict.subak_geo_region.capitalize() }}</span></div>
+        {% endif %}
+
+        {% if pkg_dict.subak_countries %}
+        {% set countries = ', '.join(pkg_dict.subak_countries) %}
+        <div>Countries: <span class="font-body">{{ countries }}</span></div>
+        {% endif %}
+
+        {% if pkg_dict.subak_spatial_resolution %}
+        <div>Spatial resolution: <span class="font-body">{{ pkg_dict.subak_spatial_resolution.capitalize() }}</span></div>
+        {% endif %}
+        {% endif %}
+    </div>
+
+
+    {############   META DATA   ############}
+    <div class="w-full bg-zinc-100 p-4">
+        <h3 class="mt-0">
+            <svg xmlns="http://www.w3.org/2000/svg" class="inline relative -top-px h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg> Metadata
+        </h3>
+
+        {% if pkg_dict.url %}
+        <div>Source: <span class="font-body">{{ pkg_dict.url }}</span></div>
+        {% endif %}
+
+        {% if pkg_dict.author %}
+        <div>Contact: <span class="font-body">{{ pkg_dict.author }}</span></div>
+        {% endif %}
+
+        {% if pkg_dict.subak_update_frequency %}
+        <div>Update frequency: <span class="font-body">{{ pkg_dict.subak_update_frequency.capitalize() }}</span></div>
+        {% endif %}
+
+        {% if pkg_dict.metadata_modified %}
+        <div>{{ _("Last Updated") }}: <span class="font-body">{% snippet 'snippets/local_friendly_datetime.html', datetime_obj=pkg_dict.metadata_modified %}</span></div>
+        {% endif %}
+        {% if pkg_dict.metadata_created %}
+        <div>{{ _("Created") }}: <span class="font-body">{% snippet 'snippets/local_friendly_datetime.html', datetime_obj=pkg_dict.metadata_created %}</span></div>
+        {% endif %}
+    </div>
+
+    
+    {############   DATA APPLICATIONS   ############}
+    {% if pkg_dict.subak_data_applications %}
+    <div class="w-full bg-zinc-100 p-4">
+        <h3 class="mt-0">
+            <svg xmlns="http://www.w3.org/2000/svg" class="inline relative -top-px h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+            </svg> Data applications
+        </h3>
+        <div>
+            {% for app in pkg_dict.subak_data_applications %}
+            <div class="font-body">
+                <a href="{{ app.url }}">{{ app.title }}</a> - {{ app.author }}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+    
+
+    {############   DATA SOURCES    ############}
+    {% if pkg_dict.subak_data_sources %}
+    <div class="w-full bg-zinc-100 p-4">
+        <h3 class="mt-0">
+            <svg xmlns="http://www.w3.org/2000/svg" class="inline relative -top-px h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+            </svg> Data sources
+        </h3>
+        <div>
+            <span class="font-body">{{ h.render_markdown(pkg_dict.subak_data_sources) }}</span>
+        </div>
+    </div>
+    {% endif %}
+    
+
+    {############   OTHER/EXTRAS    ############}
+    {% if pkg_dict.extras %}
+    <div class="w-full bg-zinc-100 p-4">
+        <h3 class="mt-0">
+            <svg xmlns="http://www.w3.org/2000/svg" class="inline relative -top-px h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2" />
+            </svg> Extras
+        </h3>
+
+        {% for extra in h.sorted_extras(pkg_dict.extras, auto_clean=true) %}
+        {% set key, value = extra %}
+        <div>{{ _(key|e) }}: <span class="font-body">{{ value }}</span></div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    {############   QA (only show for sys admins)    ############}
+    {% if pkg_dict.subak_qa and c.userobj.sysadmin %}
+    <div class="w-full bg-zinc-100 p-4">
+        <h3 class="mt-0">
+            <svg xmlns="http://www.w3.org/2000/svg" class="inline relative -top-px h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+              </svg> QA
+        </h3>
+
+        {% for key, value in pkg_dict.subak_qa.items() %}
+        <div>{{ _(key|e) }}: <span class="font-body">{{ value }}</span></div>
+        {% endfor %}
+    </div>
+    {% endif %}
+        
+    {# This section is hidden with CSS but lists all the key/values on the package model. #}
+    {# This includes many custom fields from the old schema that we might want to manually copy to the new schema fields. #}
+    <table class="w-full hidden">
+        <tr><td class="pt-6" colspan="2">All metadata</td></tr>
+        {% for prop in pkg_dict.items() %}
+        {% set key, value = prop %}
+        <tr class="">
+            <th scope="row" class="dataset-label">{{ _(key|e) }}</th>
+            <td class="dataset-details">{{ value }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+</section>
