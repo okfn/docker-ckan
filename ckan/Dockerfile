@@ -27,10 +27,12 @@ RUN pip install -e git+https://github.com/ckan/ckanext-pages.git#egg=ckanext-pag
 
 # subakdc plugins
 COPY src/ckanext-subakdc ${SRC_DIR}/ckanext-subakdc-plugins
+RUN pip install -e ${SRC_DIR}/ckanext-subakdc-plugins
 RUN pip install -r ${SRC_DIR}/ckanext-subakdc-plugins/requirements.txt
 
 # subakdc theme
 COPY src/ckanext-subakdc ${SRC_DIR}/ckanext-subakdc
+RUN pip install -e ${SRC_DIR}/ckanext-subakdc
 RUN pip install -r ${SRC_DIR}/ckanext-subakdc/requirements.txt
 
 # Apply any patches needed to CKAN core or any of the built extensions (not the
