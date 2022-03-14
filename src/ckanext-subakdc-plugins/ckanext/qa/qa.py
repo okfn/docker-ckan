@@ -32,11 +32,12 @@ class QaTaskRunner():
         patch_package = tk.get_action('package_patch')
     
         for pkg in pkgs:
-            try:
-                patch_package({ 'ignore_auth': True, 'user': None },
-                              { 'id': pkg['id'] })
-            except Exception as e:
-                log.error(f"Could not patch package in run_tasks_as_job: {pkg['name']}, {e}")
+            self.run_on_single_package(pkg)
+            # try:
+            #     patch_package({ 'ignore_auth': True, 'user': None },
+            #                   { 'id': pkg['id'] })
+            # except Exception as e:
+            #     log.error(f"Could not patch package in run_tasks_as_job: {pkg['name']}, {e}")
     
     def run_on_single_package(self, pkg):
         """

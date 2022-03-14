@@ -1,6 +1,6 @@
 import logging
 
-from ckanext.qa.interfaces import IQaTask, IQaReport, IQaAction
+from ckanext.qa.interfaces import IQaTask, IQaReport
 
 log = logging.getLogger(__name__)
 

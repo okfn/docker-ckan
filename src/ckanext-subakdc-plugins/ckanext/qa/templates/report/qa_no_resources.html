@@ -16,7 +16,7 @@
             {{ row.title }}
           </td>
           <td class="p-2 pr-0">
-            <a href="{{ h.url_for('dataset_read', id=row.id) }}">View</a>
+            <a href="{{ h.url_for('dataset.read', id=row.id) }}">View</a>
           </td>
         </tr>
       {% endfor %}

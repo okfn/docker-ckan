@@ -1047,6 +1047,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-top: 0.5rem !important;
   margin-bottom: 0.5rem !important;
 }
+.my-6 {
+  margin-top: 1.5rem !important;
+  margin-bottom: 1.5rem !important;
+}
 .mx-2 {
   margin-left: 0.5rem !important;
   margin-right: 0.5rem !important;
@@ -1195,6 +1199,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .break-normal {
   overflow-wrap: normal !important;
   word-break: normal !important;
+}
+.rounded {
+  border-radius: 0.25rem !important;
 }
 .rounded-full {
   border-radius: 9999px !important;
@@ -1425,6 +1432,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 .leading-6 {
   line-height: 1.5rem !important;
 }
+.text-white {
+  --tw-text-opacity: 1 !important;
+  color: rgb(255 255 255 / var(--tw-text-opacity)) !important;
+}
 .text-subak-deep-ocean {
   --tw-text-opacity: 1 !important;
   color: rgb(15 43 67 / var(--tw-text-opacity)) !important;
@@ -1440,10 +1451,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .text-subak-marine-blue {
   --tw-text-opacity: 1 !important;
   color: rgb(27 101 143 / var(--tw-text-opacity)) !important;
-}
-.text-white {
-  --tw-text-opacity: 1 !important;
-  color: rgb(255 255 255 / var(--tw-text-opacity)) !important;
 }
 .text-red-600 {
   --tw-text-opacity: 1 !important;
@@ -1476,6 +1483,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 .underline {
   -webkit-text-decoration-line: underline !important;
           text-decoration-line: underline !important;
+}
+.no-underline {
+  -webkit-text-decoration-line: none !important;
+          text-decoration-line: none !important;
 }
 .decoration-dashed {
   -webkit-text-decoration-style: dashed !important;

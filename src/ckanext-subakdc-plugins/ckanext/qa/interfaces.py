@@ -22,7 +22,18 @@ class IQaReport(ABC):
     given QA task. e.g. Details a summary of all entities with 'Broken links'
     """
     @classmethod
-    def build(cls, qa_property_name, fields=None):
+    def build(cls, qa_property_name, fields=None, computed_fields=None):
+        """
+        Builds the report table
+
+        Args:
+            qa_property_name (string): The QA property to look for in pkg['subak_qa'] when determining whether to include pkg in report
+            fields (list, optional): The fields within each pkg to display in the report. Defaults to None.
+            computed_fields (dict, optional): Extra fields that are computed when the report is run - dict key is field title/label, dict value is callable (which is passed a pkg dict). Defaults to None.
+
+        Returns:
+            dict: report table dict
+        """
         # Get all packages
         pkgs = get_all_pkgs()
         
@@ -34,7 +45,12 @@ class IQaReport(ABC):
         for pkg in pkgs:
             if 'subak_qa' in pkg:
                 if qa_property_name in pkg['subak_qa'] and cls.should_show_in_report(pkg['subak_qa'][qa_property_name]):
-                    report_table.append({ k: pkg[k] for k in fields})
+                    report_fields = { k: pkg[k] for k in fields}
+                    if computed_fields is not None:
+                        for title, field in computed_fields.items():
+                            report_fields[title] = field(pkg)
+                        
+                    report_table.append(report_fields)
                 
         return {
             'table': list(report_table),
