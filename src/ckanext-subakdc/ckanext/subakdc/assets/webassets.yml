@@ -1,0 +1,17 @@
+subakdc_js:
+  contents:
+    - js/alpine-3.8.1.min.js
+    - js/cookie-banner.js
+  filters: rjsmin
+  output: ckanext-subakdc/%(version)s_subakdc.js
+  extra:
+    preload:
+      - base/main
+
+subakdc_css:
+  contents:
+    - css/subak-fonts.css
+    - css/subak-styles.css
+    - css/tailwind.css
+  filter: cssrewrite
+  output: ckanext-subakdc/%(version)s_subakdc.css

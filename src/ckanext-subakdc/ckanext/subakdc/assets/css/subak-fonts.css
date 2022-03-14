@@ -1,0 +1,14 @@
+@font-face {
+    font-family: 'Ubuntu Mono';
+    src: url('/fonts/UbuntuMono-Regular.ttf') format('truetype')
+}
+
+@font-face {
+    font-family: 'TeX Gyre Heros';
+    src: url('/fonts/texgyreheros-bold.otf') format('opentype')
+}
+
+@font-face {
+    font-family: 'Comfortaa';
+    src: url('/fonts/Comfortaa-VariableFont_wght.ttf') format('truetype')
+}

@@ -1,0 +1,26 @@
+{
+  "name": "ckanext-subakdc",
+  "version": "1.0.0",
+  "description": "Subak CKAN theme",
+  "main": "tailwind.config.js",
+  "scripts": {
+    "build:tailwind": "postcss ./src/input.css --output ./ckanext/subakdc/assets/css/tailwind.css",
+    "dev:sync": "browser-sync start --proxy 'https://localhost/' -f 'ckanext/subakdc/**/*' -f '../ckanext-subakdc-plugins/**/*' --no-inject-changes --reload-delay 2000",
+    "dev:watch": "nodemon --watch ./ --watch ../ckanext-subakdc-plugins -e js,html,css --ignore ckanext/subakdc/assets/css/tailwind.css -x npm run build:tailwind",
+    "dev": "concurrently 'npm:dev:watch' 'npm:dev:sync'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ClimateSubak/ckanext-subakdc.git"
+  },
+  "keywords": [],
+  "author": "",
+  "devDependencies": {
+    "@tailwindcss/typography": "^0.5.0",
+    "browser-sync": "^2.27.7",
+    "concurrently": "^7.0.0",
+    "nodemon": "^2.0.15",
+    "postcss-cli": "^9.1.0",
+    "tailwindcss": "^3.0.15"
+  }
+}

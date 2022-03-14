@@ -1,0 +1,19 @@
+<div class="container relative p-0">
+    <div class="pt-36 pb-60">
+        {% block search %}
+        {% snippet 'home/snippets/search.html' %}
+        {% endblock %}
+    </div>
+</div>
+<div>
+    <div class="container-fluid full-width">
+        <div class="row full-width">
+            {% snippet 'home/snippets/welcome.html' %}
+            {% snippet 'home/snippets/faq.html' %}
+            {% block stats %}
+            {% snippet 'home/snippets/stats.html' %}
+            {% endblock %}
+            {% snippet 'home/snippets/case_studies.html' %}
+        </div>
+    </div>
+</div>

@@ -29,7 +29,7 @@ RUN pip install -e git+https://github.com/ckan/ckanext-pages.git#egg=ckanext-pag
 # Apply any patches needed to CKAN core or any of the built extensions (not the
 # runtime mounted ones)
 # See https://github.com/okfn/docker-ckan#applying-patches
-COPY patches ${APP_DIR}/patches
+COPY ckan/patches ${APP_DIR}/patches
 
 RUN for d in $APP_DIR/patches/*; do \
         if [ -d $d ]; then \
