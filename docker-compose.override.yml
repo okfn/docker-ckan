@@ -3,7 +3,7 @@ version: "3.8"
 services:
   ckan:
     build:
-      dockerfile: Dockerfile.dev
+      dockerfile: ckan/Dockerfile.dev
     volumes:
       - ./src:/srv/app/src_extensions
 
