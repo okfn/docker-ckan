@@ -26,7 +26,7 @@ RUN pip install -e git+https://github.com/ckan/ckanext-pages.git#egg=ckanext-pag
     pip install -r https://raw.githubusercontent.com/climatesubak/ckanext-sentry/master/requirements.txt
 
 # subakdc plugins
-COPY src/ckanext-subakdc ${SRC_DIR}/ckanext-subakdc-plugins
+COPY src/ckanext-subakdc-plugins ${SRC_DIR}/ckanext-subakdc-plugins
 RUN pip install -e ${SRC_DIR}/ckanext-subakdc-plugins
 RUN pip install -r ${SRC_DIR}/ckanext-subakdc-plugins/requirements.txt
 
