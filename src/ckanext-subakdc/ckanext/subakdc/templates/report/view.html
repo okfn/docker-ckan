@@ -1,0 +1,87 @@
+{% ckan_extends %}
+
+{% block title %}{{ report.title }} - {{ _('Reports') }} - {{ super() }}{% endblock %}
+
+{% block breadcrumb_content %}
+    <li>{{ h.nav_link(_('Reports'), named_route='report.index') }}</li>
+    <li>{{ h.nav_link(report.title, named_route='report-org' if '/organization' in request.environ.get('PATH_INFO', '') else 'report.view', report_name=report_name) }}</li>
+{% endblock%}
+
+{% block main_content %}
+    {% block flash %}{{ super() }}{% endblock %}
+    {% block toolbar %}{{ super() }}{% endblock %}
+    
+    <section class="module">
+        <div class="module-content">
+            <h1>{{ report.title }}</h1>
+            <p>{{ report.description }}</p>
+            <p>
+                {{ _('Generated') }}: {{ h.report__render_datetime(report_date, '%d/%m/%Y %H:%M') }}
+            </p>
+            {% if c.userobj.sysadmin %}
+            <div class="panel panel-info" style="width=700px">
+                <div class="panel-heading"><strong>{% trans %}Refresh report{% endtrans %}</strong></div>
+                <div class="panel-body">
+                    <form action="" method="POST">
+                    <input type="submit" value="{% trans %}Refresh{% endtrans %}" class="btn btn-info pull-right" style="margin-left: 15px"/>
+                    </form>
+                    <p>{{ _('As a system administrator you are able to refresh this report on demand by clicking the \'Refresh\' button.') }}</p>
+                </div>
+            </div>
+            {% endif %}
+
+            {% if options %}
+                <h3>{{ _('Options') }}</h3>
+                <form action="">
+                {% for key, value in options.items() %}
+                    {% if key in options_html %}
+                    {{ options_html[key]|safe }}
+                    {% else %}
+                    {{ key }}: {{ value }}
+                    <input type="hidden" name="{{ key }}" value="{{ value }}"/>
+                    {% endif %}
+                    <br/>
+                {% endfor %}
+                </form>
+            {% endif %}
+
+            {% if are_some_results %}
+                <div class="pull-right">
+                    {{ _('Download') }}:
+                    <a class="btn btn-primary" href="{{ h.report__relative_url_for(format='csv') }}">CSV</a>
+                    <a class="btn btn-primary" href="{{ h.report__relative_url_for(format='json') }}">JSON</a>
+                </div>
+            {% endif %}
+            <h3>{{ _('Results') }}</h3>
+            {% if not are_some_results %}
+                <p>{{ _('No results found.') }}</p>
+            {% else %}
+                <div>
+                {% snippet report_template, table=data['table'], data=data, report_name=report_name, options=options %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock%}
+
+{% block scripts %}
+    {{ super() }}
+    <!--! Tablesorter allows table sorting by clicking on each column -->
+    <script type="text/javascript" src="/scripts/vendor/jquery.tablesorter.min.js"></script>
+    <script type="text/javascript">
+      //<![CDATA[
+      $(document).ready(function()
+        {
+          $("#report-table").tablesorter({
+              dateFormat: "uk",
+          });
+          $(".js-auto-submit").change(function () {
+              $(this).closest("form").submit();
+          });
+        }
+      );
+    // ]]>
+    </script>
+{% endblock%}
+
