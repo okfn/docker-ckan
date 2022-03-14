@@ -1,0 +1,33 @@
+{% ckan_extends %}
+
+{% block resource_content %}
+    {% block package_archive_notice %}
+    {% if is_activity_archive %}
+        <div id="activity-archive-notice" class="alert alert-danger">
+        {% trans url=h.url_for(pkg.type ~ '.read', id=pkg.id) %}
+        You're currently viewing an old version of this dataset.
+        Data files may not match the old version of the metadata.
+        <a href="{{ url }}">View the current version</a>.
+        {% endtrans %}
+        </div>
+    {% endif %}
+    {% endblock %}
+    {% block resource_read_title %}<h1 class="page-heading">{{ h.resource_display_name(res) | truncate(50) }}</h1>{% endblock %}
+    {% block resource_read_url %}
+    {% if res.url and h.is_url(res.url) %}
+        <p class="text-muted ellipsis">{{ _('URL:') }} <a class="resource-url-analytics" href="{{ res.url }}" title="{{ res.url }}">{{ res.url }}</a></p>
+    {% elif res.url %}
+        <p class="text-muted break-word">{{ _('URL:') }} {{ res.url }}</p>
+    {% endif %}
+    {% endblock %}
+    <div class="notes" property="rdfs:label">
+    {% if res.description %}
+        {{ h.render_markdown(res.description) }}
+    {% endif %}
+    {% if not res.description and package.notes %}
+        <h3>{{ _('Dataset description:') }}</h3>
+        <blockquote>{{ h.markdown_extract(h.get_translated(package, 'notes')) }}</blockquote>
+        <p>{% trans dataset=h.get_translated(package, 'title'), url=h.url_for(package.type ~ '.read', id=package.id if is_activity_archive else package.name) %}Source: <a href="{{ url }}">{{ dataset }}</a>{% endtrans %}
+    {% endif %}
+    </div>
+{% endblock %}

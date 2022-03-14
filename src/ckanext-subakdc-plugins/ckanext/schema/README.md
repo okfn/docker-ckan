@@ -1,0 +1,3 @@
+# Schema plugin
+
+This plugin works in conjunction with the [ckanext-scheming](https://github.com/ckan/ckanext-scheming) plugin to customise the CKAN dataset and resource schemas for Climate Subak's requirements. The additional fields will help in building filters and aid searching for datasets within the catalogue as well as providing more useful information on the dataset list and dataset view pages.

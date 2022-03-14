@@ -1,0 +1,45 @@
+{% set tags = h.get_facet_items_dict('tags', c.search_facets, limit=7) %}
+{% set stats = h.get_site_statistics() %}
+
+<div class="float-none col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+    <form class="relative group border-b-2 border-subak-stone-grey" method="get" action="{% url_for 'dataset.search' %}">
+        <input aria-label="{% block header_site_search_label %}{{ _('Search datasets') }}{% endblock %}"
+               id="field-main-search" 
+               type="text" 
+               class="w-full pr-32 font-black text-6xl text-white focus:text-subak-deep-ocean bg-transparent font-heading placeholder:opacity-50 focus:bg-white focus:pl-4 peer" 
+               name="q" 
+               value="" 
+               autocomplete="off"
+               size="1"
+               placeholder="Search data" />
+        <button class="bg-transparent absolute right-0 top-4 text-white peer-focus:text-subak-deep-ocean peer-focus:right-4" type="submit" aria-labelledby="search-label">
+            <i class="fa fa-search text-[50px]"></i>
+            <span class="sr-only" id="search-label">{{ _('Search') }}</span>
+        </button>
+    </form>
+    <div>
+        <h2 class="font-mono text-base font-normal">
+            <span class="text-white">{{ h.SI_number_span(stats.dataset_count) }} DATASETS</span>
+            <span class="ml-2 mr-2 text-white">|</span>
+            <span class="text-subak-burnt-copper">
+                <img src="{{ 'images/search.svg' }}" class="inline mr-2">SEARCHABLE
+            </span>
+            <span class="text-subak-burnt-copper">
+                <img src="{{ 'images/connect.svg' }}" class="inline mx-2">CONNECTED
+            </span>
+            <span class="text-subak-burnt-copper">
+                <img src="{{ 'images/trust.svg' }}" class="inline mx-2">TRUSTED
+            </span>
+        </h2>
+    </div>
+    <div class="mt-6">
+        <h3 class="mb-3 text-xl text-white">{{ _('Quick explore by theme') }}</h3>
+        {% for tag in tags %}
+        <a href="{% url_for 'dataset.search', tags=tag.name %}">
+            <button type="button" class="px-5 mb-2 mr-1 font-mono text-white uppercase transition duration-150 border-white border-solid btn btn-outline-light hover:bg-white hover:text-subak-deep-ocean hover:transition-all">
+                {{ h.truncate(tag.display_name, 22) }}
+            </button>
+        </a>
+        {% endfor %}
+    </div>
+</div>

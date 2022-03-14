@@ -1,0 +1,90 @@
+html {
+  height: 100%;
+  font-size: revert !important;
+}
+
+body {
+  background: linear-gradient(90deg, rgba(2,0,36,0.6) 0%, rgba(1,59,92,0.6) 0%, rgba(0,53,82,0.6) 100%), url(/images/subak_tributaries_bg_min.jpg) no-repeat !important;
+  background-size: cover !important;
+}
+
+.masthead .nav > li > a:focus,
+.masthead .nav > li > a:hover,
+.masthead .nav > .active > a:hover,
+.masthead .nav > .active > a:focus,
+.masthead .navigation .nav-pills li.active a {
+  background-color: transparent !important;
+  text-decoration: underline 2px solid white !important;
+  text-underline-offset: 3px !important;
+}
+
+.control-order-by {
+  border: none;
+  float: right;
+  max-width: 245px;
+  margin: 0px;
+  padding: 0px;
+  width: auto;
+}
+
+.main {
+  min-height: 95vh !important;
+  background: #fff !important;
+}
+
+.wrapper {
+  border: none !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+  background-color: #fff !important;
+}
+
+@media (min-width: 768px) {
+  .hero {
+    background: transparent !important;
+    padding-top: 200px !important;
+    padding-bottom: 200px !important;
+  }
+}
+
+.masthead {
+  background: transparent !important;
+}
+
+.user-image {
+  display: inline;
+}
+.hero-search-bar {
+  font-size: 58px;
+  line-height: 67px;
+  color: #fff;
+  font-family: Helvetica;
+  border:none;
+  background-color: transparent;
+}
+
+.hero-search-bar::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #FFF;
+  opacity: 1; /* Firefox */
+}
+  
+.hero-search-bar::-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: #FFF;
+}
+  
+.hero-search-bar::-ms-input-placeholder { /* Microsoft Edge */
+  color: #FFF;
+}
+
+.full-width {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* Hide the QA field in the dataset create/update form */
+#field-subak_qa,
+label[for="field-subak_qa"] {
+  display: none;
+}

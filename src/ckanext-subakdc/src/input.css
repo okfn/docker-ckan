@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/**
+
+Until certain templates are extended and modified to be able
+to add tailwind classes, some classes coming from CKAN can 
+be overridden here using tailwind @apply directives and 
+the theme() function
+
+**/
+@layer components {
+    .read-more,
+    .dataset-content > div,
+    .notes,
+    .description,
+    p,
+    .tag {
+        font-family: theme('fontFamily.body');
+    }
+}
