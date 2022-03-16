@@ -9,6 +9,7 @@ else # Production
 endif
 
 CKAN_CONTAINER := $(shell docker ps --filter "name=ckan" --latest --format "{{.Names}}")
+DATETIME := $(shell date +%Y-%m-%d"T"%H:%M:%S)
 
 build.all:
 	docker compose $(COMPOSE_FILE_PATH) build --no-cache
@@ -71,6 +72,10 @@ qa.run:
 
 search.reindex:
 	docker exec $(CKAN_CONTAINER) /bin/bash -c "ckan search-index rebuild"
+
+db.backup:
+	./backup_db.sh $(ENVIRONMENT) db ckan && \
+	./backup_db.sh $(ENVIRONMENT) db datastore
 
 
 # WIP currently having issues running this locally
