@@ -9,7 +9,6 @@ else # Production
 endif
 
 CKAN_CONTAINER := $(shell docker ps --filter "name=ckan" --latest --format "{{.Names}}")
-DATETIME := $(shell date +%Y-%m-%d"T"%H:%M:%S)
 
 build.all:
 	docker compose $(COMPOSE_FILE_PATH) build --no-cache
