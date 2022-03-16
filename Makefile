@@ -72,6 +72,10 @@ qa.run:
 search.reindex:
 	docker exec $(CKAN_CONTAINER) /bin/bash -c "ckan search-index rebuild"
 
+db.backup:
+	./backup_db.sh $(ENVIRONMENT) db ckan && \
+	./backup_db.sh $(ENVIRONMENT) db datastore
+
 
 # WIP currently having issues running this locally
 test.plugins:

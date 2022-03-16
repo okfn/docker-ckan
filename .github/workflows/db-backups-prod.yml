@@ -1,0 +1,26 @@
+name: Production DB backup
+
+on: 
+  # Trigger workflow At 2AM every day
+  schedule:
+    - cron: '0 2 * * *'
+
+  # Trigger workflow manually via API request or Github UI
+  workflow_dispatch:
+
+jobs:
+  run_cron:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Run DB backup script
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          port: ${{ secrets.SSH_PORT }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}
+          script: |
+            cd ./docker-ckan
+            make db.backup
