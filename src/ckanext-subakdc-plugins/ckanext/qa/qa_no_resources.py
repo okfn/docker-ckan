@@ -36,8 +36,7 @@ class QaNoResourcesReport(IQaReport):
         
     @classmethod
     def get_qa_actions(cls):
-        # TODO add some actions (e.g. remove dataset or set to private visibility)
-        return []
+        return [{ "button_label": "Hide selected datasets", "button_value": "hideDatasets" }]
     
 qa_no_resources_report_info = {
     'name': 'datasets-with-no-resources',

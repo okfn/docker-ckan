@@ -55,6 +55,7 @@ class IQaReport(ABC):
         return {
             'table': list(report_table),
             'total_num_packages': len(pkgs),
+            'qa_actions': cls.get_qa_actions()
         }
         
     @classmethod
