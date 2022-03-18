@@ -2,6 +2,19 @@
   {% block qa_stats %}{% endblock %}
 </ul>
 
+{% if data.action_is_running %}
+<div class="mb-2 border rounded border-amber-200">
+  <div class="p-3 bg-amber-100 text-amber-600">
+    <svg xmlns="http://www.w3.org/2000/svg" class="inline w-6 h-6 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+    </svg> QA Action running!
+  </div>
+  <div class="p-3 font-body">
+    <p>A QA action is running in the background. The results below may not be accurate until the action has finished running. Please return later and refresh the report to see the updated results.</p>
+  </div>
+</div>
+{% endif %}
+
 <form x-data="SelectAll()" action="" method="post">
     {% block qa_report_table %}{% endblock %}
     <div id="qa-actions" class="flex items-center justify-between my-2">
@@ -19,7 +32,8 @@
                 disabled
                 class="float-right px-3 py-2 text-white rounded bg-subak-burnt-copper disabled:bg-opacity-50" 
                 type="submit"
-                value="{{ action.button_value }}">{{ action.button_label }}</button>
+                name="{{ action.name }}"
+                value="1">{{ action.form_button_text }}</button>
         {% endfor %}
       </div>
     </div>

@@ -1062,6 +1062,9 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-top: 1rem !important;
   margin-bottom: 1rem !important;
 }
+.mb-2 {
+  margin-bottom: 0.5rem !important;
+}
 .ml-3 {
   margin-left: 0.75rem !important;
 }
@@ -1095,9 +1098,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .mb-3 {
   margin-bottom: 0.75rem !important;
 }
-.mb-2 {
-  margin-bottom: 0.5rem !important;
-}
 .mb-10 {
   margin-bottom: 2.5rem !important;
 }
@@ -1119,6 +1119,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .hidden {
   display: none !important;
 }
+.h-6 {
+  height: 1.5rem !important;
+}
 .h-full {
   height: 100% !important;
 }
@@ -1136,6 +1139,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .h-7 {
   height: 1.75rem !important;
+}
+.w-6 {
+  width: 1.5rem !important;
 }
 .w-full {
   width: 100% !important;
@@ -1212,6 +1218,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .rounded-sm {
   border-radius: 0.125rem !important;
 }
+.border {
+  border-width: 1px !important;
+}
 .border-2 {
   border-width: 2px !important;
 }
@@ -1224,6 +1233,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 .border-solid {
   border-style: solid !important;
 }
+.border-amber-200 {
+  --tw-border-opacity: 1 !important;
+  border-color: rgb(253 230 138 / var(--tw-border-opacity)) !important;
+}
 .border-gray-200 {
   --tw-border-opacity: 1 !important;
   border-color: rgb(229 231 235 / var(--tw-border-opacity)) !important;
@@ -1235,6 +1248,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 .border-white {
   --tw-border-opacity: 1 !important;
   border-color: rgb(255 255 255 / var(--tw-border-opacity)) !important;
+}
+.bg-amber-100 {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(254 243 199 / var(--tw-bg-opacity)) !important;
 }
 .bg-subak-burnt-copper {
   --tw-bg-opacity: 1 !important;
@@ -1296,6 +1313,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .to-cyan-400 {
   --tw-gradient-to: #22d3ee !important;
 }
+.p-3 {
+  padding: 0.75rem !important;
+}
 .p-2 {
   padding: 0.5rem !important;
 }
@@ -1307,9 +1327,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .p-16 {
   padding: 4rem !important;
-}
-.p-3 {
-  padding: 0.75rem !important;
 }
 .p-4 {
   padding: 1rem !important;
@@ -1436,6 +1453,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .leading-6 {
   line-height: 1.5rem !important;
+}
+.text-amber-600 {
+  --tw-text-opacity: 1 !important;
+  color: rgb(217 119 6 / var(--tw-text-opacity)) !important;
 }
 .text-white {
   --tw-text-opacity: 1 !important;
