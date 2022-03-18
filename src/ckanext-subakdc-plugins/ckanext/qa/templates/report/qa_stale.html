@@ -8,16 +8,16 @@ Stale datasets: {{ table | length }} / {{ data.total_num_packages }} ({{ ((table
 <table class="w-full table-auto" id="report-table"">
   <thead>
     <tr class="border-b border-gray-200">
-      <th class="p-2"></th>
+      <th class="w-2 p-2 pr-1"></th>
       <th class="p-2">Dataset</th>
       <th class="p-2">Age</th>
-      <th class="p-2"></th>
+      <th class="w-10 p-2"></th>
     </tr>
   </thead>
   <tbody class="font-body">
     {% for row in table %}
       <tr class="{% if loop.index % 2 == 0 %} bg-gray-50 {% endif %}">
-        <td class="p-2">
+        <td class="p-2 pr-1">
           {% snippet "report/snippets/qa_checkbox.html", id=row.id %}
         </td>
         <td class="p-2">

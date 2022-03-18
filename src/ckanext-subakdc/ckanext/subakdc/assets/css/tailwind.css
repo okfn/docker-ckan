@@ -1146,6 +1146,12 @@ Ensure the default browser behavior of the `hidden` attribute.
 .w-full {
   width: 100% !important;
 }
+.w-2 {
+  width: 0.5rem !important;
+}
+.w-10 {
+  width: 2.5rem !important;
+}
 .w-5 {
   width: 1.25rem !important;
 }
@@ -1366,6 +1372,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .py-px {
   padding-top: 1px !important;
   padding-bottom: 1px !important;
+}
+.pr-1 {
+  padding-right: 0.25rem !important;
 }
 .pt-8 {
   padding-top: 2rem !important;

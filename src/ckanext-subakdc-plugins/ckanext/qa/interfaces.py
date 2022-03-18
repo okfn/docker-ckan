@@ -76,26 +76,31 @@ class IQaReport(ABC):
         
     @classmethod
     def run_action(cls):
+        """
+        Determine which QA action to run based on the button that was clicked in the 
+        report and run the QA action as a background job. This should be called by 
+        the generate method in this class before building the report table. 
+        """
         actions = list(filter(lambda item: item.startswith('action.'), tk.request.form))
         if len(actions) == 0:
             return False
         
-        dataset_ids = tk.request.form.getlist('id')
-        if len(dataset_ids) == 0:
+        pkg_ids = tk.request.form.getlist('id')
+        if len(pkg_ids) == 0:
             return False
         
         action_name = actions[0].split('.', 1)[1]
         for action in cls.qa_actions:
             if action.name == action_name:
-                action.run_job(dataset_ids)
+                action.run_job(pkg_ids)
                 return True
         
     @classmethod
     @abstractmethod
     def generate(cls):
         """
-        This method gets called from ckanext-report when generting report. It should define some fields
-        and call cls.build
+        This method gets called from ckanext-report when generting report. 
+        It should define some fields and call cls.build
         """
         pass
 
@@ -103,20 +108,28 @@ class IQaReport(ABC):
     @abstractmethod
     def should_show_in_report(cls, value):
         """
-        Evaluate value against some condition and return True if item should show in the report, False if not
+        Evaluate value against some condition and return True if item should show 
+        in the report, False if not
         """
         pass
 
 
 class IQaAction(ABC):
     """
-    An action that can be taken using information in the QA report to modify the entities for a given QA task. e.g. Remove the links, or mark the datasets as 'stale'. A QA action should also be able to be run from the command line as a ckan command
+    An action that can be taken using information in the QA report to modify the 
+    entities for a given QA task. e.g. Remove the links, or mark the datasets as 
+    'stale'. A QA action should also be able to be run from the command line as 
+    a CKAN command
     """
     name = ""
     form_button_text = ""
     
     @classmethod
     def get_action(cls):
+        """
+        Returns a dict of the name and form_button_text to be used in the report 
+        template
+        """
         return { "name": f"action.{cls.name}", 
                  "form_button_text": cls.form_button_text }
     
@@ -128,4 +141,7 @@ class IQaAction(ABC):
     @classmethod
     @abstractmethod
     def run(cls, pkg_ids):
+        """
+        Runs an action over the pkg_ids (e.g. deleting all packages in the list)
+        """
         pass

@@ -14,6 +14,6 @@ reports = [ qa_no_resources_report_info,
 def is_sysadmin(user, _):
     return user is not None and user.sysadmin
 
-# Force all reports to only be availale to superadmins
+# Force all reports to be availale only to superadmins
 for report in reports:
     report['authorize'] = is_sysadmin

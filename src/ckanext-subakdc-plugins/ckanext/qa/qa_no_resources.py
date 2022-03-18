@@ -6,7 +6,6 @@ from ckanext.qa.qa_actions import QaHideDatasetsAction
 log = logging.getLogger(__name__)
 
 QA_PROPERTY_NAME = 'qa_no_resources'
-
 QA_ACTIONS = [ QaHideDatasetsAction ]
 
 
