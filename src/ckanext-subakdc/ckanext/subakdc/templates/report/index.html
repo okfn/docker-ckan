@@ -13,6 +13,9 @@
     <section class="module">
         <div class="module-content">
             <h1>Reports</h1>
+            {% if reports | length == 0 %}
+                <p>There are no reports available.</p>
+            {% endif %}
             {% for report in reports %}                    
             {% set report_url=h.url_for('report.view', report_name=report.name, **h.report__explicit_default_options(report.name)) %}
             <div class="border-b-2">
@@ -20,7 +23,7 @@
                 <p class="font-body">{{ report.description }}</p>
                 
                 <div class="my-6">
-                    <a class="bg-subak-marine-blue text-white p-2 rounded no-underline " href="{{ report_url }}">
+                    <a class="p-2 text-white no-underline rounded bg-subak-marine-blue " href="{{ report_url }}">
                         {{ _('View Report') }}
                     </a>
                 </div>

@@ -1,28 +1,36 @@
-<ul class="font-body">
-    <li>Stale datasets: {{ table | length }} / {{ data.total_num_packages }} ({{ ((table | length) / data.total_num_packages * 100) | round(2) }}%)</li>
-</ul>
+{% extends "report/qa_base.html" %}
 
-<table class="table-auto w-full" id="report-table"">
-    <thead>
-      <tr class="border-b border-gray-200">
-        <th class="p-2 pl-0">Dataset</th>
-        <th class="p-2 pl-0">Age</th>
-        <th class="p-2 pr-0"></th>
+{% block qa_stats %}
+Stale datasets: {{ table | length }} / {{ data.total_num_packages }} ({{ ((table | length) / data.total_num_packages * 100) | round(2) }}%)
+{% endblock %}
+
+{% block qa_report_table %}
+<table class="w-full table-auto" id="report-table"">
+  <thead>
+    <tr class="border-b border-gray-200">
+      <th class="w-2 p-2 pr-1"></th>
+      <th class="p-2">Dataset</th>
+      <th class="p-2">Age</th>
+      <th class="w-10 p-2"></th>
+    </tr>
+  </thead>
+  <tbody class="font-body">
+    {% for row in table %}
+      <tr class="{% if loop.index % 2 == 0 %} bg-gray-50 {% endif %}">
+        <td class="p-2 pr-1">
+          {% snippet "report/snippets/qa_checkbox.html", id=row.id %}
+        </td>
+        <td class="p-2">
+          {{ row.title }}
+        </td>
+        <td class="p-2">
+          &gt; {{ (row.age / 365) | round(0, 'floor') | int }} years
+        </td>
+        <td class="p-2">
+          <a href="{{ h.url_for('dataset.read', id=row.id) }}">View</a>
+        </td>
       </tr>
-    </thead>
-    <tbody class="font-body">
-      {% for row in table %}
-        <tr class="{% if loop.index % 2 == 0 %} bg-gray-50 {% endif %}">
-          <td class="p-2 pl-0">
-            {{ row.title }}
-          </td>
-          <td class="p-2 pl-0">
-            &gt; {{ (row.age / 365) | round(0, 'floor') | int }} years
-          </td>
-          <td class="p-2 pr-0">
-            <a href="{{ h.url_for('dataset.read', id=row.id) }}">View</a>
-          </td>
-        </tr>
-      {% endfor %}
-    </tbody>
+    {% endfor %}
+  </tbody>
 </table>
+{% endblock %}

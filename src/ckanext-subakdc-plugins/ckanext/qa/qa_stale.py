@@ -3,10 +3,12 @@ import logging
 import math
 
 from ckanext.qa.interfaces import IQaTask, IQaReport
+from ckanext.qa.qa_actions import QaHideDatasetsAction
 
 log = logging.getLogger(__name__)
 
 QA_PROPERTY_NAME = 'qa_stale'
+QA_ACTIONS = [ QaHideDatasetsAction ]
 QA_STALESNESS_THRESHOLD = 720 # in days
 
 
@@ -65,15 +67,20 @@ class QaStaleTask(IQaTask):
             
             
 class QaStaleReport(IQaReport):
+    qa_property_name = QA_PROPERTY_NAME
+    qa_actions = QA_ACTIONS
+    
     @classmethod
     def generate(cls):
-       fields = ['id', 'title', 'num_resources']
-       computed_fields = { 'age': cls.get_age}
+        action_is_running = cls.run_action()
+        
+        fields = ['id', 'title', 'num_resources']
+        computed_fields = { 'age': cls.get_age}
        
-       report = cls.build(QA_PROPERTY_NAME, fields, computed_fields)
+        report = cls.build(fields, computed_fields, action_is_running=action_is_running)
        
-       report['table'].sort(key=lambda x: x['age'], reverse=True)
-       return report
+        report['table'].sort(key=lambda x: x['age'], reverse=True)
+        return report
    
     @classmethod
     def get_age(cls, pkg):
@@ -86,12 +93,8 @@ class QaStaleReport(IQaReport):
     def should_show_in_report(cls, value):
         # Only show in report if value `is_stale` item is set to true
         return value.get('is_stale', False)
-        
-    @classmethod
-    def get_qa_actions(cls):
-        # TODO add some actions (e.g. remove dataset or set to private visibility)
-        return []
-    
+
+
 qa_stale_report_info = {
     'name': 'stale-datasets',
     'description': f"This report lists stale datasets where the newest resource was added/updated more than {math.ceil(QA_STALESNESS_THRESHOLD / 365)} years ago",

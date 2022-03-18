@@ -1,10 +1,12 @@
 import logging
 
 from ckanext.qa.interfaces import IQaTask, IQaReport
+from ckanext.qa.qa_actions import QaHideDatasetsAction
 
 log = logging.getLogger(__name__)
 
 QA_PROPERTY_NAME = 'qa_no_resources'
+QA_ACTIONS = [ QaHideDatasetsAction ]
 
 
 class QaNoResourcesTask(IQaTask):
@@ -20,11 +22,16 @@ class QaNoResourcesTask(IQaTask):
             return False
             
             
-class QaNoResourcesReport(IQaReport):    
+class QaNoResourcesReport(IQaReport):
+    qa_property_name = QA_PROPERTY_NAME
+    qa_actions = QA_ACTIONS
+    
     @classmethod
     def generate(cls):
-       fields = ['id', 'title', 'num_resources']
-       return cls.build(QA_PROPERTY_NAME, fields)
+        action_is_running = cls.run_action()
+        
+        fields = ['id', 'title', 'num_resources']
+        return cls.build(fields, action_is_running=action_is_running)
     
     @classmethod
     def should_show_in_report(cls, value):
@@ -33,17 +40,12 @@ class QaNoResourcesReport(IQaReport):
             return False
         else:
             return value
-        
-    @classmethod
-    def get_qa_actions(cls):
-        # TODO add some actions (e.g. remove dataset or set to private visibility)
-        return []
-    
+
 qa_no_resources_report_info = {
     'name': 'datasets-with-no-resources',
     'description': 'Datasets with no resources',
     'option_defaults': None,
     'option_combinations': None,
     'generate': QaNoResourcesReport.generate,
-    'template': 'report/qa_no_resources.html'
+    'template': 'report/qa_no_resources.html',
 }
