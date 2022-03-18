@@ -42,12 +42,11 @@ class QaNoResourcesReport(IQaReport):
         else:
             return value
 
-
 qa_no_resources_report_info = {
     'name': 'datasets-with-no-resources',
     'description': 'Datasets with no resources',
     'option_defaults': None,
     'option_combinations': None,
     'generate': QaNoResourcesReport.generate,
-    'template': 'report/qa_no_resources.html'
+    'template': 'report/qa_no_resources.html',
 }

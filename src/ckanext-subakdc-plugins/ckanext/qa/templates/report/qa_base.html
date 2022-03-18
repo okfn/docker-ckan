@@ -26,15 +26,17 @@
                autocomplete="off" />
         <label for="selectAll" class="after:content-['']">Select all</label>
       </div>
-      <div id="qa-buttons">
-        {% for action in data.qa_actions %}
-        <button :disabled="selectedItems.length == 0" 
-                disabled
-                class="float-right px-3 py-2 text-white rounded bg-subak-burnt-copper disabled:bg-opacity-50" 
-                type="submit"
-                name="{{ action.name }}"
-                value="1">{{ action.form_button_text }}</button>
-        {% endfor %}
+      {% if c.userobj.sysadmin %}
+        <div id="qa-buttons">
+          {% for action in data.qa_actions %}
+          <button :disabled="selectedItems.length == 0" 
+                  disabled
+                  class="float-right px-3 py-2 text-white rounded bg-subak-burnt-copper disabled:bg-opacity-50" 
+                  type="submit"
+                  name="{{ action.name }}"
+                  value="1">{{ action.form_button_text }}</button>
+          {% endfor %}
+        {% endif %}
       </div>
     </div>
   </form>

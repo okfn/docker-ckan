@@ -121,12 +121,11 @@ class IQaAction(ABC):
                  "form_button_text": cls.form_button_text }
     
     @classmethod
-    def run_job(cls, dataset_ids):
+    def run_job(cls, pkg_ids):
         func = cls.run
-        # tk.enqueue_job(func, [ dataset_ids ], rq_kwargs={ 'timeout': 3600 })
-        func(dataset_ids)
+        tk.enqueue_job(func, [ pkg_ids ], rq_kwargs={ 'timeout': 3600 })
     
     @classmethod
     @abstractmethod
-    def run(cls, dataset_ids):
+    def run(cls, pkg_ids):
         pass
