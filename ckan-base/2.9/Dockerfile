@@ -10,7 +10,7 @@ ENV GIT_URL=https://github.com/ckan/ckan.git
 # CKAN version to build
 ENV GIT_BRANCH=ckan-2.9.5
 # Customize these on the .env file if needed
-ENV CKAN__SITE_URL=http://localhost:5000
+ENV CKAN_SITE_URL=http://localhost:5000
 ENV CKAN__PLUGINS image_view text_view recline_view datastore datapusher envvars
 
 # UWSGI options
@@ -75,8 +75,7 @@ RUN pip3 install -e git+${GIT_URL}@${GIT_BRANCH}#egg=ckan && \
     pip3 install -e git+https://github.com/okfn/ckanext-envvars.git#egg=ckanext-envvars && \
     # Create and update CKAN config
     ckan generate config ${CKAN_INI} && \
-    ckan config-tool ${CKAN_INI} "ckan.plugins = ${CKAN__PLUGINS}" && \
-    ckan config-tool ${CKAN_INI} "ckan.site_url = ${CKAN__SITE_URL}"
+    ckan config-tool ${CKAN_INI} "ckan.plugins = ${CKAN__PLUGINS}"
 
 # Create a local user and group to run the app
 RUN addgroup -g 92 -S ckan && \
