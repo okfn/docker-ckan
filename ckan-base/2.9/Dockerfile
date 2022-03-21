@@ -75,8 +75,7 @@ RUN pip3 install -e git+${GIT_URL}@${GIT_BRANCH}#egg=ckan && \
     pip3 install -e git+https://github.com/okfn/ckanext-envvars.git#egg=ckanext-envvars && \
     # Create and update CKAN config
     ckan generate config ${CKAN_INI} && \
-    ckan config-tool ${CKAN_INI} "ckan.plugins = ${CKAN__PLUGINS}" && \
-    ckan config-tool ${CKAN_INI} "ckan.site_url = ${CKAN__SITE_URL}"
+    ckan config-tool ${CKAN_INI} "ckan.plugins = ${CKAN__PLUGINS}"
 
 # Create a local user and group to run the app
 RUN addgroup -g 92 -S ckan && \
