@@ -1083,6 +1083,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .mb-4 {
   margin-bottom: 1rem !important;
 }
+.mt-8 {
+  margin-top: 2rem !important;
+}
 .mt-2 {
   margin-top: 0.5rem !important;
 }
@@ -1134,6 +1137,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .h-24 {
   height: 6rem !important;
 }
+.h-8 {
+  height: 2rem !important;
+}
 .h-5 {
   height: 1.25rem !important;
 }
@@ -1151,6 +1157,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .w-10 {
   width: 2.5rem !important;
+}
+.w-8 {
+  width: 2rem !important;
 }
 .w-5 {
   width: 1.25rem !important;
@@ -1211,6 +1220,9 @@ Ensure the default browser behavior of the `hidden` attribute.
   text-overflow: ellipsis !important;
   white-space: nowrap !important;
 }
+.whitespace-nowrap {
+  white-space: nowrap !important;
+}
 .break-normal {
   overflow-wrap: normal !important;
   word-break: normal !important;
@@ -1247,6 +1259,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-border-opacity: 1 !important;
   border-color: rgb(229 231 235 / var(--tw-border-opacity)) !important;
 }
+.border-sky-200 {
+  --tw-border-opacity: 1 !important;
+  border-color: rgb(186 230 253 / var(--tw-border-opacity)) !important;
+}
 .border-subak-stone-grey {
   --tw-border-opacity: 1 !important;
   border-color: rgb(238 238 236 / var(--tw-border-opacity)) !important;
@@ -1274,6 +1290,14 @@ Ensure the default browser behavior of the `hidden` attribute.
 .bg-subak-marine-blue {
   --tw-bg-opacity: 1 !important;
   background-color: rgb(27 101 143 / var(--tw-bg-opacity)) !important;
+}
+.bg-sky-100 {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(224 242 254 / var(--tw-bg-opacity)) !important;
+}
+.bg-sky-600 {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(2 132 199 / var(--tw-bg-opacity)) !important;
 }
 .bg-subak-sky-blue {
   --tw-bg-opacity: 1 !important;
@@ -1328,14 +1352,14 @@ Ensure the default browser behavior of the `hidden` attribute.
 .p-0 {
   padding: 0px !important;
 }
+.p-4 {
+  padding: 1rem !important;
+}
 .p-1 {
   padding: 0.25rem !important;
 }
 .p-16 {
   padding: 4rem !important;
-}
-.p-4 {
-  padding: 1rem !important;
 }
 .px-3 {
   padding-left: 0.75rem !important;
@@ -1415,6 +1439,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 .font-heading {
   font-family: TeX Gyre Heros, Helvetica, Arial, sans-serif !important;
 }
+.text-lg {
+  font-size: 1.125rem !important;
+  line-height: 1.75rem !important;
+}
 .text-xl {
   font-size: 1.25rem !important;
   line-height: 1.75rem !important;
@@ -1470,6 +1498,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 .text-white {
   --tw-text-opacity: 1 !important;
   color: rgb(255 255 255 / var(--tw-text-opacity)) !important;
+}
+.text-sky-600 {
+  --tw-text-opacity: 1 !important;
+  color: rgb(2 132 199 / var(--tw-text-opacity)) !important;
 }
 .text-subak-deep-ocean {
   --tw-text-opacity: 1 !important;

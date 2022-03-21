@@ -1,0 +1,18 @@
+{% ckan_extends %}
+
+{% block package_search_results_list %}
+    {{ super() }}
+
+    <div class="mt-8 border rounded border-sky-200">
+        <div class="p-3 text-lg bg-sky-100 text-sky-600">
+            <svg class="relative inline w-8 h-8 -top-px" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg> Can't find the dataset you're looking for?
+        </div>
+        <div class="flex items-center justify-between gap-4 p-4 font-body">
+            <p class="m-0">We aim to constantly improve the data catalogue to help you find climate-related datasets. If you can't find a dataset that fits your needs, please file a request and we will try our best to find and index one or more suitable datasets.</p>
+            <a class="px-3 py-2 text-white rounded bg-sky-600 font-default whitespace-nowrap" 
+               href="https://github.com/ClimateSubak/dc-schema/issues/new?assignees=&labels=enhancement&template=request-a-dataset.md&title=%5BDataset+Request%5D">
+                Request a dataset
+            </a>
+        </div>
+      </div>
+{% endblock %}
