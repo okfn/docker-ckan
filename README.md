@@ -20,10 +20,12 @@
 
 This is a set of Docker images and configuration files to run a CKAN site.
 
-It is largely based on two existing projects:
-
-* Keitaro's [CKAN Docker images](https://github.com/keitaroinc/docker-ckan)
-* Docker Compose setup currently included in [CKAN core](https://github.com/ckan/ckan)
+| CKAN version | Docker tag production | Docker tag development | Notes |
+| --- | --- | --- | --- |
+| 2.7 | `openknowledge/ckan-base:2.7` | `openknowledge/ckan-dev:2.7` | |
+| 2.8 | `openknowledge/ckan-base:2.8` | `openknowledge/ckan-dev:2.8` | |
+| 2.9 | `openknowledge/ckan-base:2.9` | `openknowledge/ckan-dev:2.9` | If you need Python 2 images use the `2.9-py2` tags (not recommended) |
+| master | `openknowledge/ckan-base:master` | `openknowledge/ckan-dev:master` | The `master` images are updated daily so they might be slightly out of date |
 
 
 It includes the following images, all based on [Alpine Linux](https://alpinelinux.org/):
