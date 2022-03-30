@@ -41,8 +41,7 @@ services:
 
   solr:
     container_name: solr
-    build:
-      context: solr/
+    image: ckan/ckan-solr:2.9-solr8
     ports:
       - "8983:8983"
     volumes:

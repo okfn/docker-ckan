@@ -44,8 +44,7 @@ services:
 
   solr:
     container_name: solr
-    build:
-      context: solr/
+    image: ckan/ckan-solr:2.9-solr8
     volumes:
       - solr_data:/opt/solr/server/solr/ckan/data/index
 
