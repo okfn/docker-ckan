@@ -1,6 +1,6 @@
 FROM openknowledge/ckan-base:2.9
 
-MAINTAINER Open Knowledge International <info@okfn.org>
+MAINTAINER Open Knowledge Foundation <info@okfn.org>
 
 ENV APP_DIR=/srv/app
 ENV SRC_EXTENSIONS_DIR=/srv/app/src_extensions
