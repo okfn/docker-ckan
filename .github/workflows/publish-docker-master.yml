@@ -1,5 +1,5 @@
 name: Build and publish the master docker-ckan image
-on: 
+on:
   schedule:
     - cron: '15 5 * * *'
 
@@ -16,17 +16,22 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+      # TODO: remove 2.10 tags once it gets branched
       - name: Build ckan-base master
         uses: docker/build-push-action@v2
         with:
           context: ckan-base
           file: ckan-base/master/Dockerfile
           push: true
-          tags: openknowledge/ckan-base:master
+          tags:
+            - openknowledge/ckan-base:master
+            - openknowledge/ckan-base:2.10
       - name: Build ckan-dev master
         uses: docker/build-push-action@v2
         with:
           context: ckan-dev
           file: ckan-dev/master/Dockerfile
           push: true
-          tags: openknowledge/ckan-dev:master
+          tags:
+            - openknowledge/ckan-dev:master
+            - openknowledge/ckan-dev:2.10
