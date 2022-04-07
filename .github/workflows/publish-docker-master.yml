@@ -23,15 +23,15 @@ jobs:
           context: ckan-base
           file: ckan-base/master/Dockerfile
           push: true
-          tags:
-            - openknowledge/ckan-base:master
-            - openknowledge/ckan-base:2.10
+          tags: |
+            openknowledge/ckan-base:master
+            openknowledge/ckan-base:2.10
       - name: Build ckan-dev master
         uses: docker/build-push-action@v2
         with:
           context: ckan-dev
           file: ckan-dev/master/Dockerfile
           push: true
-          tags:
-            - openknowledge/ckan-dev:master
-            - openknowledge/ckan-dev:2.10
+          tags: |
+            openknowledge/ckan-dev:master
+            openknowledge/ckan-dev:2.10
