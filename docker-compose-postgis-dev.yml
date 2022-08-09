@@ -2,10 +2,9 @@ version: "3"
 
 services:
   ckan-dev:
-    container_name: ckan
     build:
       context: ckan/
-      dockerfile: Dockerfile-postgis.dev
+      dockerfile: Dockerfile.dev
       args:
         - TZ=${TZ}
     env_file:
@@ -20,6 +19,7 @@ services:
     volumes:
       - ./src:/srv/app/src_extensions
       - ckan_storage:/var/lib/ckan
+    
 
   datapusher:
     container_name: datapusher
@@ -33,7 +33,7 @@ services:
     env_file:
       - .env
     build:
-      context: postgis/
+      context: postgresql/
     environment:
       - PGDATA=/var/lib/postgresql/data/db
     volumes:

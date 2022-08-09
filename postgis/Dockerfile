@@ -1,4 +1,4 @@
-FROM postgis/postgis:latest
+FROM postgres:12-alpine
 MAINTAINER Open Knowledge Foundation
 
 # Allow connections; we don't map out any ports so only linked docker containers can connect
