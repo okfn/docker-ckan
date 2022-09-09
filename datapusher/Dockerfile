@@ -1,4 +1,4 @@
-FROM alpine:3.13
+FROM alpine:3.14
 
 MAINTAINER Open Knowledge Foundation
 
@@ -48,8 +48,7 @@ RUN apk del .build-deps && \
     rm -rf ${APP_DIR}/src
 
 # Create a local user and group to run the app
-RUN addgroup -g 92 -S www-data && \
-    adduser -u 92 -h /srv/app -H -D -S -G www-data www-data
+RUN adduser -u 92 -h /srv/app -H -D -S -G www-data www-data
 
 EXPOSE 8800
 
