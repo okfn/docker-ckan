@@ -81,8 +81,6 @@ def check_solr_connection(retry=None):
         print("[prerun] Unable to connect to solr, waiting...")
         time.sleep(10)
         check_solr_connection(retry=retry - 1)
-    else:
-        eval(connection.read())
 
 
 def init_db():
