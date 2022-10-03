@@ -9,7 +9,9 @@ ENV SRC_EXTENSIONS_DIR=/srv/app/src_extensions
 RUN apk add --no-cache libffi-dev
 
 # Install CKAN dev requirements
-RUN pip install --no-binary :all: -r https://raw.githubusercontent.com/ckan/ckan/${GIT_BRANCH}/dev-requirements.txt
+
+ADD https://raw.githubusercontent.com/ckan/ckan/${GIT_BRANCH}/dev-requirements.txt /tmp/dev-requirements.txt
+RUN sed -i '/coveralls/d' /tmp/dev-requirements.txt && pip install --no-binary :all: -r /tmp/dev-requirements.txt
 
 # Create folder for local extensions sources
 RUN mkdir $SRC_EXTENSIONS_DIR
