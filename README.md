@@ -22,9 +22,10 @@ This is a set of Docker images and configuration files to run a CKAN site.
 
 | CKAN version | Docker tag production | Docker tag development | Notes |
 | --- | --- | --- | --- |
-| 2.7 | `openknowledge/ckan-base:2.7` | `openknowledge/ckan-dev:2.7` | |
-| 2.8 | `openknowledge/ckan-base:2.8` | `openknowledge/ckan-dev:2.8` | |
-| 2.9 | `openknowledge/ckan-base:2.9` | `openknowledge/ckan-dev:2.9` | If you need Python 2 images use the `2.9-py2` tags (not recommended) |
+| 2.8    | `openknowledge/ckan-base:2.8`    | `openknowledge/ckan-dev:2.8` | |
+| 2.8.x  | `openknowledge/ckan-base:2.8.x`  | `openknowledge/ckan-dev:2.8.x` | |
+| 2.9    | `openknowledge/ckan-base:2.9`    | `openknowledge/ckan-dev:2.9` | If you need Python 2 images use the `2.9-py2` tags (not recommended) |
+| 2.9.x  | `openknowledge/ckan-base:2.9.x`  | `openknowledge/ckan-dev:2.9.x` | No image `2.9.x-py2` |
 | master | `openknowledge/ckan-base:master` | `openknowledge/ckan-dev:master` | The `master` images are updated daily so they might be slightly out of date |
 
 
