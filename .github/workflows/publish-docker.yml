@@ -6,6 +6,7 @@ on:
 
 env:
   # Build minor version images
+  # Do not forget to update before merging to master
   CKAN_2_9_MINOR: "6"
   CKAN_2_8_MINOR: "11"
 
