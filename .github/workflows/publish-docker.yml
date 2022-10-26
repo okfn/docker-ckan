@@ -27,39 +27,51 @@ jobs:
           context: ckan-base
           file: ckan-base/2.8/Dockerfile
           push: true
-          tags: openknowledge/ckan-base:2.8,openknowledge/ckan-base:2.8.${{ env.CKAN_v2_8 }}
+          tags: |
+            openknowledge/ckan-base:2.8
+            openknowledge/ckan-base:2.8.${{ env.CKAN_v2_8 }}
       - name: Build ckan-base 2.9
         uses: docker/build-push-action@v2
         with:
           context: ckan-base
           file: ckan-base/2.9/Dockerfile
           push: true
-          tags: openknowledge/ckan-base:2.9,openknowledge/ckan-base:2.9.${{ env.CKAN_v2_9 }}
+          tags: |
+            openknowledge/ckan-base:2.9
+            openknowledge/ckan-base:2.9.${{ env.CKAN_v2_9 }}
       - name: Build ckan-base 2.9-py2
         uses: docker/build-push-action@v2
         with:
           context: ckan-base
           file: ckan-base/2.9/Dockerfile.py2
           push: true
-          tags: openknowledge/ckan-base:2.9-py2,openknowledge/ckan-base:2.9.${{ env.CKAN_v2_9 }}-py2
+          tags: |
+            openknowledge/ckan-base:2.9-py2
+            openknowledge/ckan-base:2.9.${{ env.CKAN_v2_9 }}-py2
       - name: Build ckan-dev 2.8
         uses: docker/build-push-action@v2
         with:
           context: ckan-dev
           file: ckan-dev/2.8/Dockerfile
           push: true
-          tags: openknowledge/ckan-dev:2.8,openknowledge/ckan-dev:2.8.${{ env.CKAN_v2_8 }}
+          tags: |
+            openknowledge/ckan-dev:2.8
+            openknowledge/ckan-dev:2.8.${{ env.CKAN_v2_8 }}
       - name: Build ckan-dev 2.9
         uses: docker/build-push-action@v2
         with:
           context: ckan-dev
           file: ckan-dev/2.9/Dockerfile
           push: true
-          tags: openknowledge/ckan-dev:2.9,openknowledge/ckan-dev:2.9.${{ env.CKAN_v2_9 }}
+          tags: |
+            openknowledge/ckan-dev:2.9
+            openknowledge/ckan-dev:2.9.${{ env.CKAN_v2_9 }}
       - name: Build ckan-dev 2.9-py2
         uses: docker/build-push-action@v2
         with:
           context: ckan-dev
           file: ckan-dev/2.9/Dockerfile.py2
           push: true
-          tags: openknowledge/ckan-dev:2.9-py2,openknowledge/ckan-dev:2.9.${{ env.CKAN_v2_9 }}-py2
+          tags: |
+            openknowledge/ckan-dev:2.9-py2
+            openknowledge/ckan-dev:2.9.${{ env.CKAN_v2_9 }}-py2
