@@ -24,6 +24,7 @@ RUN apk add --no-cache tzdata \
         apache2-utils \
         libxml2 \
         libxslt \
+        mailcap \
         musl-dev \
         libmagic \
         curl \
