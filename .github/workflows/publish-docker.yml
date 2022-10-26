@@ -21,7 +21,7 @@ jobs:
         run: |
           echo CKAN_v2_8=$(grep 'ENV GIT_BRANCH' ckan-base/2.8/Dockerfile | cut -d '-' -f 2) >> $GITHUB_ENV
           echo CKAN_v2_9=$(grep 'ENV GIT_BRANCH' ckan-base/2.9/Dockerfile | cut -d '-' -f 2) >> $GITHUB_ENV
-      - name: Build ckan-base 2.8
+      - name: Build ckan-base 2.8 and ${{ env.CKAN_v2_8 }}
         uses: docker/build-push-action@v2
         with:
           context: ckan-base
@@ -30,7 +30,7 @@ jobs:
           tags: |
             openknowledge/ckan-base:2.8
             openknowledge/ckan-base:${{ env.CKAN_v2_8 }}
-      - name: Build ckan-base 2.9
+      - name: Build ckan-base 2.9 and ${{ env.CKAN_v2_9 }}
         uses: docker/build-push-action@v2
         with:
           context: ckan-base
@@ -39,7 +39,7 @@ jobs:
           tags: |
             openknowledge/ckan-base:2.9
             openknowledge/ckan-base:${{ env.CKAN_v2_9 }}
-      - name: Build ckan-base 2.9-py2
+      - name: Build ckan-base 2.9-py2 and ${{ env.CKAN_v2_8 }}-py2
         uses: docker/build-push-action@v2
         with:
           context: ckan-base
@@ -48,7 +48,7 @@ jobs:
           tags: |
             openknowledge/ckan-base:2.9-py2
             openknowledge/ckan-base:${{ env.CKAN_v2_9 }}-py2
-      - name: Build ckan-dev 2.8
+      - name: Build ckan-dev 2.8 and and ${{ env.CKAN_v2_8 }}
         uses: docker/build-push-action@v2
         with:
           context: ckan-dev
@@ -57,7 +57,7 @@ jobs:
           tags: |
             openknowledge/ckan-dev:2.8
             openknowledge/ckan-dev:${{ env.CKAN_v2_8 }}
-      - name: Build ckan-dev 2.9
+      - name: Build ckan-dev 2.9 and ${{ env.CKAN_v2_9 }}
         uses: docker/build-push-action@v2
         with:
           context: ckan-dev
@@ -66,7 +66,7 @@ jobs:
           tags: |
             openknowledge/ckan-dev:2.9
             openknowledge/ckan-dev:${{ env.CKAN_v2_9 }}
-      - name: Build ckan-dev 2.9-py2
+      - name: Build ckan-dev 2.9-py2 and ${{ env.CKAN_v2_9 }}-py2
         uses: docker/build-push-action@v2
         with:
           context: ckan-dev
