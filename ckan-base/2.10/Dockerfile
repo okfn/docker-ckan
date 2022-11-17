@@ -36,6 +36,7 @@ RUN apk add --no-cache tzdata \
         libmagic \
         curl \
         patch \
+        bash \
         sudo && \
     # Packages to build CKAN requirements and plugins
     apk add --no-cache --virtual .build-deps \
