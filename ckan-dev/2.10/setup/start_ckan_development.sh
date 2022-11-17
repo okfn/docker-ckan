@@ -45,6 +45,10 @@ done
 echo "Enabling debug mode"
 ckan config-tool $CKAN_INI -s DEFAULT "debug = true"
 
+# Put a placeholder value for ckan.datapusher.api_token to be able to run commands,
+# will be updated later
+ckan config-tool $CKAN_INI ckan.datapusher.api_token=xxx
+
 # Update the plugins setting in the ini file with the values defined in the env var
 echo "Loading the following plugins: $CKAN__PLUGINS"
 ckan config-tool $CKAN_INI "ckan.plugins = $CKAN__PLUGINS"
@@ -60,6 +64,10 @@ ckan config-tool $SRC_DIR/ckan/test-core.ini \
 
 # Run the prerun script to init CKAN and create the default admin user
 sudo -u ckan -EH python3 prerun.py
+
+# Set a proper value for ckan.datapusher.api_token now that that an admin user exists
+echo "Set up ckan.datapusher.api_token"
+ckan config-tool $CKAN_INI "ckan.datapusher.api_token=$(ckan -c $CKAN_INI user token add ckan_admin datapusher | tail -n 1 | tr -d '\t')"
 
 # Run any startup scripts provided by images extending this one
 if [[ -d "/docker-entrypoint.d" ]]
