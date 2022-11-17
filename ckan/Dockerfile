@@ -1,3 +1,4 @@
+# TODO: switch to 2.10 when it's out
 FROM openknowledge/ckan-base:2.9
 
 MAINTAINER Your Name Here <you@example.com>
