@@ -22,7 +22,7 @@ jobs:
           echo CKAN_v2_8=$(grep 'ENV GIT_BRANCH' ckan-base/2.8/Dockerfile | cut -d '-' -f 2) >> $GITHUB_ENV
           echo CKAN_v2_9=$(grep 'ENV GIT_BRANCH' ckan-base/2.9/Dockerfile | cut -d '-' -f 2) >> $GITHUB_ENV
           # TODO Update when there's an actual 2.10 released tag
-          echo CKAN_V2_10=2.10.0 >> $GITHUB_ENV
+          echo CKAN_v2_10=2.10.0 >> $GITHUB_ENV
       - name: Build ckan-base 2.8 and ${{ env.CKAN_v2_8 }}
         uses: docker/build-push-action@v2
         with:
