@@ -4,8 +4,10 @@
 # This can be overriden using a CKAN___BEAKER__SESSION__SECRET env var
 if grep -E "beaker.session.secret ?= ?$" ckan.ini
 then
-    echo "Setting beaker.session.secret in ini file"
+    echo "Setting secrets in ini file"
     ckan config-tool $CKAN_INI "beaker.session.secret=$(python -c 'import secrets; print(secrets.token_urlsafe())')"
+    ckan config-tool $CKAN_INI "api_token.jwt.encode.secret=$(python3 -c 'import secrets; print("string:" + secrets.token_urlsafe())')"
+    ckan config-tool $CKAN_INI "api_token.jwt.decode.secret=$(python3 -c 'import secrets; print("string:" + secrets.token_urlsafe())')"
 fi
 
 # Run the prerun script to init CKAN and create the default admin user
