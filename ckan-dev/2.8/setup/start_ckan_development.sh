@@ -45,6 +45,14 @@ done
 echo "Enabling debug mode"
 paster --plugin=ckan config-tool $CKAN_INI -s DEFAULT "debug = true"
 
+# Set up the Secret key used by Beaker and Flask
+# This can be overriden using a CKAN___BEAKER__SESSION__SECRET env var
+if grep -E "beaker.session.secret ?= ?$" ckan.ini
+then
+    echo "Setting beaker.session.secret in ini file"
+    paster --plugin=ckan config-tool $CKAN_INI "beaker.session.secret=$(python -c 'import secrets; print(secrets.token_urlsafe())')"
+fi
+
 # Update the plugins setting in the ini file with the values defined in the env var
 echo "Loading the following plugins: $CKAN__PLUGINS"
 paster --plugin=ckan config-tool $CKAN_INI "ckan.plugins = $CKAN__PLUGINS"

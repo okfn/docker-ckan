@@ -1,5 +1,13 @@
 #!/bin/bash
 
+# Set up the Secret key used by Beaker and Flask
+# This can be overriden using a CKAN___BEAKER__SESSION__SECRET env var
+if grep -E "beaker.session.secret ?= ?$" ckan.ini
+then
+    echo "Setting beaker.session.secret in ini file"
+    paster --plugin=ckan config-tool $CKAN_INI "beaker.session.secret=$(python -c 'import secrets; print(secrets.token_urlsafe())')"
+fi
+
 # Run the prerun script to init CKAN and create the default admin user
 sudo -u ckan -EH python prerun.py
 

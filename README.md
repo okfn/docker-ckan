@@ -42,7 +42,7 @@ The site is configured via env vars (the base CKAN image loads [ckanext-envvars]
 
 Copy the included `.env.example` and rename it to `.env` to modify it depending on your own needs.
 
-Using the default values on the `.env.example` file will get you a working CKAN instance. There is a sysadmin user created by default with the values defined in `CKAN_SYSADMIN_NAME` and `CKAN_SYSADMIN_PASSWORD`(`ckan_admin` and `test1234` by default). I shouldn't be telling you this but obviously don't run any public CKAN instance with the default settings.
+Using the default values on the `.env.example` file will get you a working CKAN instance. There is a sysadmin user created by default with the values defined in `CKAN_SYSADMIN_NAME` and `CKAN_SYSADMIN_PASSWORD`(`ckan_admin` and `test1234` by default). I shouldn't be telling you this but obviously don't run any public CKAN instance with the default settings. Make sure to set up proper passwords and secret keys in your `.env` file.
 
 To build the images:
 

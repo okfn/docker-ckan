@@ -64,6 +64,7 @@ RUN pip install -e git+${GIT_URL}@${GIT_BRANCH}#egg=ckan && \
     pip install -e git+https://github.com/okfn/ckanext-envvars.git#egg=ckanext-envvars && \
     # Create and update CKAN config
     paster --plugin=ckan make-config ckan ${CKAN_INI} && \
+    paster --plugin=ckan config-tool ${CKAN_INI} "beaker.session.secret = " && \
     paster --plugin=ckan config-tool ${CKAN_INI} "ckan.plugins = ${CKAN__PLUGINS}" && \
     paster --plugin=ckan config-tool ${CKAN_INI} "ckan.site_url = ${CKAN__SITE_URL}"
 
