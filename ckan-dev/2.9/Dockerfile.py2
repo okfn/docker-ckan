@@ -6,7 +6,8 @@ ENV APP_DIR=/srv/app
 ENV SRC_EXTENSIONS_DIR=/srv/app/src_extensions
 
 # Install packages needed by the dev requirements
-RUN apk add --no-cache libffi-dev
+RUN apk add --no-cache libffi-dev jpeg-dev zlib-dev
+
 
 # Install CKAN dev requirements
 RUN pip2 install -r https://raw.githubusercontent.com/ckan/ckan/${GIT_BRANCH}/dev-requirements.txt
