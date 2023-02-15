@@ -1,6 +1,6 @@
 # Docker Compose setup for CKAN
 
-[![CKAN Versions](https://img.shields.io/badge/CKAN%20Versions-2.8.12%20|%202.9.7%20|%202.10.0|%20master%20-success.svg)](https://docs.ckan.org/en/latest/changelog.html)
+[![CKAN Versions](https://img.shields.io/badge/CKAN%20Versions-2.8.12%20|%202.9.8%20|%202.10.0|%20master%20-success.svg)](https://docs.ckan.org/en/latest/changelog.html)
 [![Docker Pulls](https://img.shields.io/docker/pulls/openknowledge/ckan-base.svg)](https://hub.docker.com/r/openknowledge/ckan-base)
 
 
@@ -23,7 +23,7 @@ This is a set of Docker images and configuration files to run a CKAN site.
 | CKAN version | Docker tag production | Docker tag development | Notes |
 | --- | --- | --- | --- |
 | 2.8    | `openknowledge/ckan-base:2.8`,  `openknowledge/ckan-base:2.8.12`   | `openknowledge/ckan-dev:2.8`,  `openknowledge/ckan-dev:2.8.12` | |
-| 2.9    | `openknowledge/ckan-base:2.9`, `openknowledge/ckan-base:2.9.7`    | `openknowledge/ckan-dev:2.9`, `openknowledge/ckan-dev:2.9.7`  | If you need Python 2 images use the `2.9-py2` tags (not recommended) |
+| 2.9    | `openknowledge/ckan-base:2.9`, `openknowledge/ckan-base:2.9.8`    | `openknowledge/ckan-dev:2.9`, `openknowledge/ckan-dev:2.9.8`  | If you need Python 2 images use the `2.9-py2` tags (not recommended) |
 | 2.10b    | `openknowledge/ckan-base:2.10`, `openknowledge/ckan-base:2.10.0`    | `openknowledge/ckan-dev:2.10`, `openknowledge/ckan-dev:2.10.0`  |CKAN 2.10 is currently in beta |
 | master | `openknowledge/ckan-base:master` | `openknowledge/ckan-dev:master` | The `master` images are updated daily so they might be slightly out of date |
 
