@@ -9,3 +9,6 @@ src/*
 ._*
 .Spotlight-V100
 .Trashes
+
+./*.override.yml
+.idea
