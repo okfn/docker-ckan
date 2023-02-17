@@ -91,7 +91,7 @@ def init_db():
         subprocess.check_output(db_command, stderr=subprocess.STDOUT)
         print("[prerun] Initializing or upgrading db - end")
     except subprocess.CalledProcessError as e:
-        if "OperationalError" in e.output:
+        if "OperationalError" in str(e.output):
             print(e.output)
             print("[prerun] Database not ready, waiting a bit before exit...")
             time.sleep(5)
