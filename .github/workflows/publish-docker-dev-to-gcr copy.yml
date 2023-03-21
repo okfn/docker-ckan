@@ -6,6 +6,8 @@ on:
     workflows: [Create and publish BASE Docker images to Google Cloud Registry]
     types:
       - completed
+    branches:
+      - 116_deploy_images_to
 
 env:
   GAR_ZONE: europe-southwest1
@@ -14,7 +16,7 @@ env:
   G_SERVICE_ACCOUT: sa-gh-action-registry
 
 jobs:
-  publish_to_gcr:
+  publish_dev_to_gcr:
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     # Add "id-token" with the intended permissions.

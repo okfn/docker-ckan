@@ -13,7 +13,7 @@ env:
   G_SERVICE_ACCOUT: sa-gh-action-registry
 
 jobs:
-  publish_to_gcr:
+  publish_base_to_gcr:
     runs-on: ubuntu-latest
     # Add "id-token" with the intended permissions.
     permissions:
