@@ -1,10 +1,11 @@
-name: Create and publish Docker images to Google Cloud Registry
+name: Create and publish DEV Docker images to Google Cloud Registry
 # READ https://gist.github.com/palewire/12c4b2b974ef735d22da7493cf7f4d37
 
-on: 
-  push:
-    branches:
-      - 116_deploy_images_to-github_packages
+on:
+  workflow_run:
+    workflows: [Create and publish BASE Docker images to Google Cloud Registry]
+    types:
+      - completed
 
 env:
   GAR_ZONE: europe-southwest1
@@ -15,6 +16,7 @@ env:
 jobs:
   publish_to_gcr:
     runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     # Add "id-token" with the intended permissions.
     permissions:
       contents: 'read'
@@ -33,7 +35,7 @@ jobs:
           workload_identity_provider: projects/3555635429/locations/global/workloadIdentityPools/gh-action-registry-pool/providers/gh-provider
           service_account: ${{ env.G_SERVICE_ACCOUT }}@${{ env.G_PROJECT_ID }}.iam.gserviceaccount.com
           # Wait for all builds ...
-          access_token_lifetime: 6000s
+          access_token_lifetime: 3600s
 
       - name: Login to Artifact Registry
         uses: docker/login-action@v1
@@ -49,45 +51,6 @@ jobs:
           # TODO Update when there's an actual 2.10 released tag
           echo CKAN_v2_10=2.10.0 >> $GITHUB_ENV
 
-      - name: Build ckan-base 2.8 and ${{ env.CKAN_v2_8 }}
-        uses: docker/build-push-action@v4
-        with:
-          context: ckan-base
-          file: ckan-base/2.8/Dockerfile
-          push: true
-          tags: |
-            ${{ env.GAR_ZONE }}-docker.pkg.dev/${{ env.G_PROJECT_ID }}/${{ env.GAR_REPO_NAME }}/openknowledge/ckan-base:2.8
-            ${{ env.GAR_ZONE }}-docker.pkg.dev/${{ env.G_PROJECT_ID }}/${{ env.GAR_REPO_NAME }}/openknowledge/ckan-base:${{ env.CKAN_v2_8 }}
-
-      - name: Build ckan-base 2.9 and ${{ env.CKAN_v2_9 }}
-        uses: docker/build-push-action@v4
-        with:
-          context: ckan-base
-          file: ckan-base/2.9/Dockerfile
-          push: true
-          tags: |
-            ${{ env.GAR_ZONE }}-docker.pkg.dev/${{ env.G_PROJECT_ID }}/${{ env.GAR_REPO_NAME }}/openknowledge/ckan-base:2.9
-            ${{ env.GAR_ZONE }}-docker.pkg.dev/${{ env.G_PROJECT_ID }}/${{ env.GAR_REPO_NAME }}/openknowledge/ckan-base:${{ env.CKAN_v2_9 }}
-
-      - name: Build ckan-base 2.9-py2 and ${{ env.CKAN_v2_9 }}-py2
-        uses: docker/build-push-action@v4
-        with:
-          context: ckan-base
-          file: ckan-base/2.9/Dockerfile.py2
-          push: true
-          tags: |
-            ${{ env.GAR_ZONE }}-docker.pkg.dev/${{ env.G_PROJECT_ID }}/${{ env.GAR_REPO_NAME }}/openknowledge/ckan-base:2.9-py2
-            ${{ env.GAR_ZONE }}-docker.pkg.dev/${{ env.G_PROJECT_ID }}/${{ env.GAR_REPO_NAME }}/openknowledge/ckan-base:${{ env.CKAN_v2_9 }}-py2
-
-      - name: Build ckan-base 2.10 and ${{ env.CKAN_v2_10 }}
-        uses: docker/build-push-action@v4
-        with:
-          context: ckan-base
-          file: ckan-base/2.10/Dockerfile
-          push: true
-          tags: |
-            ${{ env.GAR_ZONE }}-docker.pkg.dev/${{ env.G_PROJECT_ID }}/${{ env.GAR_REPO_NAME }}/openknowledge/ckan-base:2.10
-            ${{ env.GAR_ZONE }}-docker.pkg.dev/${{ env.G_PROJECT_ID }}/${{ env.GAR_REPO_NAME }}/openknowledge/ckan-base:${{ env.CKAN_v2_10 }}
       - name: Build ckan-dev 2.8 and and ${{ env.CKAN_v2_8 }}
         uses: docker/build-push-action@v4
         with:
