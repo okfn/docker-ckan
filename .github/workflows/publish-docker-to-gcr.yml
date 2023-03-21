@@ -58,68 +58,68 @@ jobs:
             ${{ env.GAR_ZONE }}-docker.pkg.dev/${{ env.G_PROJECT_ID }}/${{ env.GAR_REPO_NAME }}/openknowledge/ckan-base:2.8
             ${{ env.GAR_ZONE }}-docker.pkg.dev/${{ env.G_PROJECT_ID }}/${{ env.GAR_REPO_NAME }}/openknowledge/ckan-base:${{ env.CKAN_v2_8 }}
 
-      # - name: Build ckan-base 2.9 and ${{ env.CKAN_v2_9 }}
-      #   uses: docker/build-push-action@v4
-      #   with:
-      #     context: ckan-base
-      #     file: ckan-base/2.9/Dockerfile
-      #     push: true
-      #     tags: |
-      #       ${{ env.REGISTRY }}/openknowledge/ckan-base:2.9
-      #       ${{ env.REGISTRY }}/openknowledge/ckan-base:${{ env.CKAN_v2_9 }}
+      - name: Build ckan-base 2.9 and ${{ env.CKAN_v2_9 }}
+        uses: docker/build-push-action@v4
+        with:
+          context: ckan-base
+          file: ckan-base/2.9/Dockerfile
+          push: true
+          tags: |
+            ${{ env.GAR_ZONE }}-docker.pkg.dev/${{ env.G_PROJECT_ID }}/${{ env.GAR_REPO_NAME }}/openknowledge/ckan-base:2.9
+            ${{ env.GAR_ZONE }}-docker.pkg.dev/${{ env.G_PROJECT_ID }}/${{ env.GAR_REPO_NAME }}/openknowledge/ckan-base:${{ env.CKAN_v2_9 }}
 
-      # - name: Build ckan-base 2.9-py2 and ${{ env.CKAN_v2_9 }}-py2
-      #   uses: docker/build-push-action@v4
-      #   with:
-      #     context: ckan-base
-      #     file: ckan-base/2.9/Dockerfile.py2
-      #     push: true
-      #     tags: |
-      #       ${{ env.REGISTRY }}/openknowledge/ckan-base:2.9-py2
-      #       ${{ env.REGISTRY }}/openknowledge/ckan-base:${{ env.CKAN_v2_9 }}-py2
+      - name: Build ckan-base 2.9-py2 and ${{ env.CKAN_v2_9 }}-py2
+        uses: docker/build-push-action@v4
+        with:
+          context: ckan-base
+          file: ckan-base/2.9/Dockerfile.py2
+          push: true
+          tags: |
+            ${{ env.GAR_ZONE }}-docker.pkg.dev/${{ env.G_PROJECT_ID }}/${{ env.GAR_REPO_NAME }}/openknowledge/ckan-base:2.9-py2
+            ${{ env.GAR_ZONE }}-docker.pkg.dev/${{ env.G_PROJECT_ID }}/${{ env.GAR_REPO_NAME }}/openknowledge/ckan-base:${{ env.CKAN_v2_9 }}-py2
 
-      # - name: Build ckan-base 2.10 and ${{ env.CKAN_v2_10 }}
-      #   uses: docker/build-push-action@v4
-      #   with:
-      #     context: ckan-base
-      #     file: ckan-base/2.10/Dockerfile
-      #     push: true
-      #     tags: |
-      #       ${{ env.REGISTRY }}/openknowledge/ckan-base:2.10
-      #       ${{ env.REGISTRY }}/openknowledge/ckan-base:${{ env.CKAN_v2_10 }}
-      # - name: Build ckan-dev 2.8 and and ${{ env.CKAN_v2_8 }}
-      #   uses: docker/build-push-action@v4
-      #   with:
-      #     context: ckan-dev
-      #     file: ckan-dev/2.8/Dockerfile
-      #     push: true
-      #     tags: |
-      #       ${{ env.REGISTRY }}/openknowledge/ckan-dev:2.8
-      #       ${{ env.REGISTRY }}/openknowledge/ckan-dev:${{ env.CKAN_v2_8 }}
-      # - name: Build ckan-dev 2.9 and ${{ env.CKAN_v2_9 }}
-      #   uses: docker/build-push-action@v4
-      #   with:
-      #     context: ckan-dev
-      #     file: ckan-dev/2.9/Dockerfile
-      #     push: true
-      #     tags: |
-      #       ${{ env.REGISTRY }}/openknowledge/ckan-dev:2.9
-      #       ${{ env.REGISTRY }}/openknowledge/ckan-dev:${{ env.CKAN_v2_9 }}
-      # - name: Build ckan-dev 2.9-py2 and ${{ env.CKAN_v2_9 }}-py2
-      #   uses: docker/build-push-action@v4
-      #   with:
-      #     context: ckan-dev
-      #     file: ckan-dev/2.9/Dockerfile.py2
-      #     push: true
-      #     tags: |
-      #       ${{ env.REGISTRY }}/openknowledge/ckan-dev:2.9-py2
-      #       ${{ env.REGISTRY }}/openknowledge/ckan-dev:${{ env.CKAN_v2_9 }}-py2
-      # - name: Build ckan-dev 2.10 and ${{ env.CKAN_v2_10 }}
-      #   uses: docker/build-push-action@v4
-      #   with:
-      #     context: ckan-dev
-      #     file: ckan-dev/2.10/Dockerfile
-      #     push: true
-      #     tags: |
-      #       ${{ env.REGISTRY }}/openknowledge/ckan-dev:2.10
-      #       ${{ env.REGISTRY }}/openknowledge/ckan-dev:${{ env.CKAN_v2_10 }}
+      - name: Build ckan-base 2.10 and ${{ env.CKAN_v2_10 }}
+        uses: docker/build-push-action@v4
+        with:
+          context: ckan-base
+          file: ckan-base/2.10/Dockerfile
+          push: true
+          tags: |
+            ${{ env.GAR_ZONE }}-docker.pkg.dev/${{ env.G_PROJECT_ID }}/${{ env.GAR_REPO_NAME }}/openknowledge/ckan-base:2.10
+            ${{ env.GAR_ZONE }}-docker.pkg.dev/${{ env.G_PROJECT_ID }}/${{ env.GAR_REPO_NAME }}/openknowledge/ckan-base:${{ env.CKAN_v2_10 }}
+      - name: Build ckan-dev 2.8 and and ${{ env.CKAN_v2_8 }}
+        uses: docker/build-push-action@v4
+        with:
+          context: ckan-dev
+          file: ckan-dev/2.8/Dockerfile
+          push: true
+          tags: |
+            ${{ env.GAR_ZONE }}-docker.pkg.dev/${{ env.G_PROJECT_ID }}/${{ env.GAR_REPO_NAME }}/openknowledge/ckan-dev:2.8
+            ${{ env.GAR_ZONE }}-docker.pkg.dev/${{ env.G_PROJECT_ID }}/${{ env.GAR_REPO_NAME }}/openknowledge/ckan-dev:${{ env.CKAN_v2_8 }}
+      - name: Build ckan-dev 2.9 and ${{ env.CKAN_v2_9 }}
+        uses: docker/build-push-action@v4
+        with:
+          context: ckan-dev
+          file: ckan-dev/2.9/Dockerfile
+          push: true
+          tags: |
+            ${{ env.GAR_ZONE }}-docker.pkg.dev/${{ env.G_PROJECT_ID }}/${{ env.GAR_REPO_NAME }}/openknowledge/ckan-dev:2.9
+            ${{ env.GAR_ZONE }}-docker.pkg.dev/${{ env.G_PROJECT_ID }}/${{ env.GAR_REPO_NAME }}/openknowledge/ckan-dev:${{ env.CKAN_v2_9 }}
+      - name: Build ckan-dev 2.9-py2 and ${{ env.CKAN_v2_9 }}-py2
+        uses: docker/build-push-action@v4
+        with:
+          context: ckan-dev
+          file: ckan-dev/2.9/Dockerfile.py2
+          push: true
+          tags: |
+            ${{ env.GAR_ZONE }}-docker.pkg.dev/${{ env.G_PROJECT_ID }}/${{ env.GAR_REPO_NAME }}/openknowledge/ckan-dev:2.9-py2
+            ${{ env.GAR_ZONE }}-docker.pkg.dev/${{ env.G_PROJECT_ID }}/${{ env.GAR_REPO_NAME }}/openknowledge/ckan-dev:${{ env.CKAN_v2_9 }}-py2
+      - name: Build ckan-dev 2.10 and ${{ env.CKAN_v2_10 }}
+        uses: docker/build-push-action@v4
+        with:
+          context: ckan-dev
+          file: ckan-dev/2.10/Dockerfile
+          push: true
+          tags: |
+            ${{ env.GAR_ZONE }}-docker.pkg.dev/${{ env.G_PROJECT_ID }}/${{ env.GAR_REPO_NAME }}/openknowledge/ckan-dev:2.10
+            ${{ env.GAR_ZONE }}-docker.pkg.dev/${{ env.G_PROJECT_ID }}/${{ env.GAR_REPO_NAME }}/openknowledge/ckan-dev:${{ env.CKAN_v2_10 }}
