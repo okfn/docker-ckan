@@ -33,7 +33,7 @@ jobs:
           workload_identity_provider: projects/3555635429/locations/global/workloadIdentityPools/gh-action-registry-pool/providers/gh-provider
           service_account: ${{ env.G_SERVICE_ACCOUT }}@${{ env.G_PROJECT_ID }}.iam.gserviceaccount.com
           # Wait for all builds ...
-          access_token_lifetime: 3000s
+          access_token_lifetime: 6000s
 
       - name: Login to Artifact Registry
         uses: docker/login-action@v1
