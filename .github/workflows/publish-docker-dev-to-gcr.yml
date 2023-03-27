@@ -3,7 +3,7 @@ name: Create and publish DEV Docker images to Google Cloud Registry
 
 on:
   workflow_run:
-    workflows: [Create and publish BASE Docker images to Google Cloud Registry]
+    workflows: [Publish BASE Docker images]
     types:
       - completed
     branches:

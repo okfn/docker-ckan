@@ -1,4 +1,4 @@
-name: Create and publish BASE Docker images to Google Cloud Registry
+name: Publish BASE Docker images
 # READ https://gist.github.com/palewire/12c4b2b974ef735d22da7493cf7f4d37
 
 on: 
