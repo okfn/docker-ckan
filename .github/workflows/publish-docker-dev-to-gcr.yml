@@ -1,13 +1,10 @@
-name: Create and publish DEV Docker images to Google Cloud Registry
+name: Publish DEV Docker images
 # READ https://gist.github.com/palewire/12c4b2b974ef735d22da7493cf7f4d37
 
 on:
   workflow_run:
     workflows: [Publish BASE Docker images]
-    types:
-      - completed
-    branches:
-      - 116_deploy_images_to
+    types: [completed]
 
 env:
   GAR_ZONE: europe-southwest1

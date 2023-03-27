@@ -4,7 +4,7 @@ name: Publish BASE Docker images
 on: 
   push:
     branches:
-      - 116_deploy_images_to-github_packages
+      - master
 
 env:
   GAR_ZONE: europe-southwest1

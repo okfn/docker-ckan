@@ -1,7 +1,9 @@
-name: Publish daily master docker-ckan image
+name: 'Remove untagged images'
+
 on:
   schedule:
-    - cron: '15 5 * * *'
+    - cron: '0 20 * * *' # runs daily
+  workflow_dispatch: # allows for manual invocation
 
 env:
   GAR_ZONE: europe-southwest1
@@ -10,13 +12,10 @@ env:
   G_SERVICE_ACCOUT: sa-gh-action-registry
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: 'read'
-      id-token: 'write'
-
+  gcr-cleaner:
+    runs-on: 'ubuntu-latest'
     steps:
+
       - name: Checkout repository
         uses: actions/checkout@v3
 
@@ -27,7 +26,8 @@ jobs:
           token_format: access_token
           workload_identity_provider: projects/3555635429/locations/global/workloadIdentityPools/gh-action-registry-pool/providers/gh-provider
           service_account: ${{ env.G_SERVICE_ACCOUT }}@${{ env.G_PROJECT_ID }}.iam.gserviceaccount.com
-          access_token_lifetime: 600s
+          # Wait for all builds ...
+          access_token_lifetime: 3600s
 
       - name: Login to Artifact Registry
         uses: docker/login-action@v1
@@ -36,20 +36,10 @@ jobs:
           username: oauth2accesstoken
           password: ${{ steps.auth.outputs.access_token }}
 
-      - name: Build ckan-base master
-        uses: docker/build-push-action@v4
+      # customize based on the gcr-cleaner flags
+      - uses: 'docker://us-docker.pkg.dev/gcr-cleaner/gcr-cleaner/gcr-cleaner-cli'
         with:
-          context: ckan-base
-          file: ckan-base/master/Dockerfile
-          push: true
-          tags: |
-            ${{ env.GAR_ZONE }}-docker.pkg.dev/${{ env.G_PROJECT_ID }}/${{ env.GAR_REPO_NAME }}/openknowledge/ckan-base:master
-
-      - name: Build ckan-dev master
-        uses: docker/build-push-action@v4
-        with:
-          context: ckan-dev
-          file: ckan-dev/master/Dockerfile
-          push: true
-          tags: |
-            ${{ env.GAR_ZONE }}-docker.pkg.dev/${{ env.G_PROJECT_ID }}/${{ env.GAR_REPO_NAME }}/openknowledge/ckan-dev:master
+          args: >-
+            -repo=${{ env.GAR_ZONE }}-docker.pkg.dev/${{ env.G_PROJECT_ID }}/${{ env.GAR_REPO_NAME }}/openknowledge/ckan-base
+            -repo=${{ env.GAR_ZONE }}-docker.pkg.dev/${{ env.G_PROJECT_ID }}/${{ env.GAR_REPO_NAME }}/openknowledge/ckan-dev
+            -grace=48h
