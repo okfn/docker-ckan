@@ -1,4 +1,5 @@
-FROM openknowledge/ckan-dev:2.10
+ARG BASE_IMG=europe-southwest1-docker.pkg.dev/oki-cloud/docker-ckan-images
+FROM ${BASE_IMG}/openknowledge/ckan-dev:2.10
 
 MAINTAINER Your Name Here <you@example.com>
 

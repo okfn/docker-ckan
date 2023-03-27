@@ -120,6 +120,17 @@ The Docker images used to build your CKAN project are located in the `ckan/` fol
 
 From these two base images you can build your own customized image tailored to your project, installing any extensions and extra requirements needed.
 
+### Pulling images
+
+Docker CKAN images lives at Google Artifact Registry. You can pull them using the following command:
+
+```
+docker pull europe-southwest1-docker.pkg.dev/oki-cloud/docker-ckan-images/openknowledge/ckan-base:2.8
+```
+
+You can change the last part `ckan-base:2.8` for any of the available images.  
+
+
 ### Extending the base images
 
 To perform extra initialization steps you can add scripts to your custom images and copy them to the `/docker-entrypoint.d` folder (The folder should be created for you when you build the image). Any `*.sh` and `*.py` file in that folder will be executed just after the main initialization script ([`prerun.py`](https://github.com/okfn/docker-ckan/blob/master/ckan-base/setup/prerun.py)) is executed and just before the web server and supervisor processes are started.
@@ -147,7 +158,7 @@ paster --plugin=ckanext-validation validation init-db -c $CKAN_INI
 And then in our `Dockerfile` we install the extension and copy the initialization scripts:
 
 ```Dockerfile
-FROM openknowledge/ckan-dev:2.9
+FROM europe-southwest1-docker.pkg.dev/oki-cloud/docker-ckan-images/openknowledge/ckan-dev:2.9
 
 RUN pip install -e git+https://github.com/frictionlessdata/ckanext-validation.git#egg=ckanext-validation && \
     pip install -r https://raw.githubusercontent.com/frictionlessdata/ckanext-validation/master/requirements.txt

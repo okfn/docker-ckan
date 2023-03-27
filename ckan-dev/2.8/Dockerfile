@@ -1,4 +1,5 @@
-FROM openknowledge/ckan-base:2.8
+ARG BASE_IMG=europe-southwest1-docker.pkg.dev/oki-cloud/docker-ckan-images
+FROM ${BASE_IMG}/openknowledge/ckan-base:2.8
 
 MAINTAINER Open Knowledge Foundation <info@okfn.org>
 
