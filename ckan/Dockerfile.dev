@@ -1,4 +1,4 @@
-FROM openknowledge/ckan-dev:2.10
+FROM openknowledge/ckan-dev:2.9
 
 MAINTAINER Your Name Here <you@example.com>
 
@@ -7,15 +7,34 @@ ARG TZ
 RUN cp /usr/share/zoneinfo/$TZ /etc/localtime
 RUN echo $TZ > /etc/timezone
 
-# Install any extensions needed by your CKAN instance
-# (Make sure to add the plugins to CKAN__PLUGINS in the .env file)
-# For instance:
-#RUN pip install -e git+https://github.com/ckan/ckanext-pages.git#egg=ckanext-pages && \
-#    pip install -e git+https://github.com/ckan/ckanext-dcat.git@v0.0.6#egg=ckanext-dcat && \
-#    pip install -r https://raw.githubusercontent.com/ckan/ckanext-dcat/v0.0.6/requirements.txt
+# Install extensions
+### DCAT ###
+RUN  pip3 install -e git+https://github.com/ckan/ckanext-dcat.git#egg=ckanext-dcat && \
+     pip3 install -r ${APP_DIR}/src/ckanext-dcat/requirements.txt
 
-# Clone the extension(s) your are writing for your own project in the `src` folder
-# to get them mounted in this image at runtime
+### Harvester ###
+RUN pip3 install -e 'git+https://github.com/ckan/ckanext-harvest.git@master#egg=ckanext-harvest' && \
+    pip3 install -r ${APP_DIR}/src/ckanext-harvest/pip-requirements.txt
+
+### Scheming ###
+RUN  pip3 install -e 'git+https://github.com/ckan/ckanext-scheming.git@master#egg=ckanext-scheming'
+
+### PDF View ###
+RUN pip3 install ckanext-pdfview
+
+### Geoview ###
+RUN pip3 install -e git+https://github.com/ckan/ckanext-geoview.git#egg=ckanext-geoview
+
+### Office Docs ###
+RUN pip3 install -e git+https://github.com/jqnatividad/ckanext-officedocs.git#egg=ckanext-officedocs
+
+### Featured Views ###
+RUN pip3 install -e git+https://github.com/OpenGov-OpenData/ckanext-featuredviews.git#egg=ckanext-featuredviews
+
+### DataJSON ###
+RUN pip3 install -e git+https://github.com/GSA/ckanext-datajson.git#egg=ckanext-datajson && \
+    pip3 install -r ${APP_DIR}/src/ckanext-datajson/requirements.txt
+
 
 # Apply any patches needed to CKAN core or any of the built extensions (not the
 # runtime mounted ones)
