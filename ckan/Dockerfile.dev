@@ -35,6 +35,16 @@ RUN pip3 install -e git+https://github.com/OpenGov-OpenData/ckanext-featuredview
 RUN pip3 install -e git+https://github.com/GSA/ckanext-datajson.git#egg=ckanext-datajson && \
     pip3 install -r ${APP_DIR}/src/ckanext-datajson/requirements.txt
 
+### Report ###
+RUN pip3 install -e git+https://github.com/ckan/ckanext-report.git#egg=ckanext-report
+
+### Fluent ###
+RUN pip3 install -e git+https://github.com/ckan/ckanext-fluent.git#egg=ckanext-fluent && \
+    pip3 install -r ${APP_DIR}/src/ckanext-fluent/requirements.txt
+
+
+
+COPY docker-entrypoint.d/* /docker-entrypoint.d/
 
 # Apply any patches needed to CKAN core or any of the built extensions (not the
 # runtime mounted ones)

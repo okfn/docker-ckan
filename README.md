@@ -3,7 +3,7 @@
 [![CKAN Versions](https://img.shields.io/badge/CKAN%20Versions-2.8.12%20|%202.9.8%20|%202.10.0|%20master%20-success.svg)](https://docs.ckan.org/en/latest/changelog.html)
 [![Docker Pulls](https://img.shields.io/docker/pulls/openknowledge/ckan-base.svg)](https://hub.docker.com/r/openknowledge/ckan-base)
 
-
+* [WPRDC Deployment](#wprdc-deployment)
 * [Overview](#overview)
 * [Quick start](#quick-start)
 * [Development mode](#development-mode)
@@ -14,6 +14,11 @@
    * [Applying patches](#applying-patches)
 * [Known Issues](#known-issues)
 * [License](#license)
+
+## WPRDC Deployment
+
+### Datapusher+
+Docker configuration based on https://github.com/dathere/datapusher-plus-docker/tree/main/datapusher-plus/0.10.1. 
 
 
 ## Overview
