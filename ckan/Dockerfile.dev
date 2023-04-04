@@ -1,6 +1,6 @@
-FROM openknowledge/ckan-dev:2.9
+FROM openknowledge/ckan-dev:2.10
 
-MAINTAINER Your Name Here <you@example.com>
+MAINTAINER Western Pennsylvania Regional Data Center <wprdc@pitt.edu>
 
 # Set timezone
 ARG TZ
@@ -32,6 +32,7 @@ RUN pip3 install -e git+https://github.com/jqnatividad/ckanext-officedocs.git#eg
 RUN pip3 install -e git+https://github.com/OpenGov-OpenData/ckanext-featuredviews.git#egg=ckanext-featuredviews
 
 ### DataJSON ###
+### TODO: fork this repo and update it to work with 2.10
 RUN pip3 install -e git+https://github.com/GSA/ckanext-datajson.git#egg=ckanext-datajson && \
     pip3 install -r ${APP_DIR}/src/ckanext-datajson/requirements.txt
 
@@ -42,9 +43,7 @@ RUN pip3 install -e git+https://github.com/ckan/ckanext-report.git#egg=ckanext-r
 RUN pip3 install -e git+https://github.com/ckan/ckanext-fluent.git#egg=ckanext-fluent && \
     pip3 install -r ${APP_DIR}/src/ckanext-fluent/requirements.txt
 
-
-
-COPY docker-entrypoint.d/* /docker-entrypoint.d/
+#COPY docker-entrypoint.d/* /docker-entrypoint.d/
 
 # Apply any patches needed to CKAN core or any of the built extensions (not the
 # runtime mounted ones)

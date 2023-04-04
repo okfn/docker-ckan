@@ -16,7 +16,6 @@ services:
       - db
       - solr
       - redis
-      - datapusher-plus
     ports:
       - "0.0.0.0:${CKAN_PORT}:5000"
     volumes:
@@ -24,20 +23,21 @@ services:
       - ckan_storage:/var/lib/ckan
 
   datapusher-plus:
-      container_name: datapusher-plus
-      build:
-        context: ./datapusher-plus
-        dockerfile: Dockerfile
-      ports:
-        - "8800:8800"
-      links:
-        - db
-        - redis
-      env_file:
-        - datapusher-plus/.env
-      environment:
-        - SQLALCHEMY_DATABASE_URI=postgresql://datapusher_jobs:${DATAPUSHER_PASSWORD}@db/datapusher_jobs
-        - WRITE_ENGINE_URL=postgresql://datapusher:${DATAPUSHER_JOBS_PASSWORD}@db/datastore_default
+    container_name: datapusher-plus
+    platform: linux/amd64
+    build:
+      context: ./datapusher-plus
+      dockerfile: Dockerfile
+    ports:
+      - "8800:8800"
+    links:
+      - ckan-dev
+      - db
+    depends_on:
+      - db
+      - ckan-dev
+    env_file:
+      - ./datapusher-plus/.env
 
   db:
     container_name: db
@@ -45,6 +45,7 @@ services:
       - .env
     build:
       context: postgresql/
+#    command: ["postgres", "-c", "log_statement=all"]
     ports:
       - "5432:5432"
     environment:
