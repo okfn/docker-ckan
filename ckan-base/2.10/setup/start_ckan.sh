@@ -20,8 +20,21 @@ fi
 sudo -u ckan -EH python3 prerun.py
 
 # Set a proper value for ckan.datapusher.api_token now that that an admin user exists
+
+# If the expire_api_token plugin is enabled you will need to define
+# "expires_in" and "unit" parameters. If required, add
+# DATAPUSHER_TOKEN_EXPIRES_IN and DATAPUSHER_TOKEN_EXPIRES_UNIT as env
+# variables.
+if [[ -n "$DATAPUSHER_TOKEN_EXPIRES_IN" ]]
+then
+    EXTRAS="expires_in=$DATAPUSHER_TOKEN_EXPIRES_IN unit=$DATAPUSHER_TOKEN_EXPIRES_UNIT"
+else
+    EXTRAS=""
+fi
+
+expires_in=30 unit=4
 echo "Set up ckan.datapusher.api_token"
-ckan config-tool $CKAN_INI "ckan.datapusher.api_token=$(ckan -c $CKAN_INI user token add ckan_admin datapusher | tail -n 1 | tr -d '\t')"
+ckan config-tool $CKAN_INI "ckan.datapusher.api_token=$(ckan -c $CKAN_INI user token add ckan_admin datapusher $EXTRAS | tail -n 1 | tr -d '\t')"
 
 # Run any startup scripts provided by images extending this one
 if [[ -d "/docker-entrypoint.d" ]]
