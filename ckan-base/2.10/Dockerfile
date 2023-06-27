@@ -17,8 +17,8 @@ ENV CKAN__PLUGINS image_view text_view recline_view datastore datapusher envvars
 ENV UWSGI_HARAKIRI=50
 
 # optional. If the "expire_api_token" is enabled you will need this.
-# ENV DATAPUSHER_TOKEN_EXPIRES_IN=365
-# ENV DATAPUSHER_TOKEN_EXPIRES_UNIT=4
+ENV DATAPUSHER_TOKEN_EXPIRES_IN=
+ENV DATAPUSHER_TOKEN_EXPIRES_UNIT=
 
 WORKDIR ${APP_DIR}
 
