@@ -32,7 +32,6 @@ else
     TOKEN_EXTRAS=""
 fi
 
-expires_in=30 unit=4
 echo "Set up ckan.datapusher.api_token"
 ckan config-tool $CKAN_INI "ckan.datapusher.api_token=$(ckan -c $CKAN_INI user token add ckan_admin datapusher $TOKEN_EXTRAS | tail -n 1 | tr -d '\t')"
 
