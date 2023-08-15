@@ -78,7 +78,7 @@ sudo -u ckan -EH python3 prerun.py
 
 # Set a proper value for ckan.datapusher.api_token now that that an admin user exists
 echo "Set up ckan.datapusher.api_token"
-ckan config-tool $CKAN_INI "ckan.datapusher.api_token=$(ckan -c $CKAN_INI user token add ckan_admin datapusher | tail -n 1 | tr -d '\t')"
+ckan config-tool $CKAN_INI "ckan.datapusher.api_token=$(ckan -c $CKAN_INI user token add ckan_admin datapusher expires_in=365 unit=4 | tail -n 1 | tr -d '\t')"
 
 # Run any startup scripts provided by images extending this one
 if [[ -d "/docker-entrypoint.d" ]]
