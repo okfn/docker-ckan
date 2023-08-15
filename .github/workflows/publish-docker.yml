@@ -7,7 +7,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    continue-on-error: true
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -24,6 +23,7 @@ jobs:
           echo CKAN_v2_9=$(grep 'ENV GIT_BRANCH' ckan-base/2.9/Dockerfile | cut -d '-' -f 2) >> $GITHUB_ENV
           echo CKAN_v2_10=$(grep 'ENV GIT_BRANCH' ckan-base/2.10/Dockerfile | cut -d '-' -f 2) >> $GITHUB_ENV
       - name: Build ckan-base 2.8 and ${{ env.CKAN_v2_8 }}
+        continue-on-error: true
         uses: docker/build-push-action@v2
         with:
           context: ckan-base
@@ -33,6 +33,7 @@ jobs:
             openknowledge/ckan-base:2.8
             openknowledge/ckan-base:${{ env.CKAN_v2_8 }}
       - name: Build ckan-base 2.9 and ${{ env.CKAN_v2_9 }}
+        continue-on-error: true
         uses: docker/build-push-action@v2
         with:
           context: ckan-base
@@ -42,6 +43,7 @@ jobs:
             openknowledge/ckan-base:2.9
             openknowledge/ckan-base:${{ env.CKAN_v2_9 }}
       - name: Build ckan-base 2.9-py2 and ${{ env.CKAN_v2_9 }}-py2
+        continue-on-error: true
         uses: docker/build-push-action@v2
         with:
           context: ckan-base
@@ -51,6 +53,7 @@ jobs:
             openknowledge/ckan-base:2.9-py2
             openknowledge/ckan-base:${{ env.CKAN_v2_9 }}-py2
       - name: Build ckan-base 2.10 and ${{ env.CKAN_v2_10 }}
+        continue-on-error: true
         uses: docker/build-push-action@v2
         with:
           context: ckan-base
@@ -60,6 +63,7 @@ jobs:
             openknowledge/ckan-base:2.10
             openknowledge/ckan-base:${{ env.CKAN_v2_10 }}
       - name: Build ckan-dev 2.8 and and ${{ env.CKAN_v2_8 }}
+        continue-on-error: true
         uses: docker/build-push-action@v2
         with:
           context: ckan-dev
@@ -69,6 +73,7 @@ jobs:
             openknowledge/ckan-dev:2.8
             openknowledge/ckan-dev:${{ env.CKAN_v2_8 }}
       - name: Build ckan-dev 2.9 and ${{ env.CKAN_v2_9 }}
+        continue-on-error: true
         uses: docker/build-push-action@v2
         with:
           context: ckan-dev
@@ -78,6 +83,7 @@ jobs:
             openknowledge/ckan-dev:2.9
             openknowledge/ckan-dev:${{ env.CKAN_v2_9 }}
       - name: Build ckan-dev 2.9-py2 and ${{ env.CKAN_v2_9 }}-py2
+        continue-on-error: true
         uses: docker/build-push-action@v2
         with:
           context: ckan-dev
@@ -87,6 +93,7 @@ jobs:
             openknowledge/ckan-dev:2.9-py2
             openknowledge/ckan-dev:${{ env.CKAN_v2_9 }}-py2
       - name: Build ckan-dev 2.10 and ${{ env.CKAN_v2_10 }}
+        continue-on-error: true
         uses: docker/build-push-action@v2
         with:
           context: ckan-dev
