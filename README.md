@@ -1,7 +1,11 @@
-# Docker Compose setup for CKAN
+# Docker Compose setup for CKAN [Not Maintained]
 
-[![CKAN Versions](https://img.shields.io/badge/CKAN%20Versions-2.8.12%20|%202.9.9%20|%202.10.1|%20master%20-success.svg)](https://docs.ckan.org/en/latest/changelog.html)
-[![Docker Pulls](https://img.shields.io/docker/pulls/openknowledge/ckan-base.svg)](https://hub.docker.com/r/openknowledge/ckan-base)
+| ⚠️ Not maintained :warning: |
+| --- | 
+| These images are deprecated and are no longer maintained. Please use the official CKAN Docker images instead: |
+| https://github.com/ckan/ckan-docker|
+| For more information see: https://github.com/okfn/docker-ckan/issues/129 |
+
 
 
 * [Overview](#overview)
