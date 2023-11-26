@@ -70,6 +70,19 @@ To start the containers:
 
 See [CKAN Images](#ckan-images) for more details of what happens when using development mode.
 
+## Postgis Development mode
+
+To develop with a `postgis` + `ckanext-spaqtial` local environment
+using the `solr-spatial-field` search backend use
+the `docker-compose-postgis-dev.yml` file:
+
+To build the images:
+
+	docker-compose -f docker-compose-postgis-dev.yml build
+
+To start the containers:
+
+	docker-compose -f docker-compose-postgis-dev.yml up
 
 ### Create an extension
 
